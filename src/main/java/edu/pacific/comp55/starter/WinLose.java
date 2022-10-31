@@ -2,13 +2,14 @@ package edu.pacific.comp55.starter;
 
 public class WinLose {
     private boolean win;
-    public void checkForWin() {
-    	
+    public void setWin(boolean w) {
+    	w = win;
     }
-    public void checkForLose() {
-    	
+    public boolean checkForWin() {
+    	return true;
     }
-    public void setWin() {
-    	
+    public boolean checkForLose() {
+    	return false;
     }
+    
 }
