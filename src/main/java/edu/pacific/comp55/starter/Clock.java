@@ -9,23 +9,32 @@ import java.awt.event.ActionListener;
 
 //Brendon Amino
 public class Clock {
-	private String s;
+	private static final string clockTitle = "Time: ";
+	ActionListener clock = new ActionListener();
+	
+	private Timer timer;
+	private String clockString;
 	private GLabel label;
 	private int time;
+	//private Integer t;
 	
-	public void setClock(String s) {
+	public void createClock() { 
+		timer = new Timer(getTime(), this);
+	}
+	public void setClockText(String s) {
 		this.s = s;
 	}
 	public void setTime(int time) {
 		this.time = time;
 	}
 	
-	public String getClock() {
+	public String getClockText() {
 		return s;
 	}
 	
 	public int getTime() {
 		return time;
 	}
+		
 	//Timer someTimerVar = new Timer(1000);
 }
