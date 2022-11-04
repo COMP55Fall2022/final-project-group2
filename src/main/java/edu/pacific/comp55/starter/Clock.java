@@ -11,9 +11,13 @@ import java.awt.event.ActionListener;
 public class Clock {
 	private String s;
 	private GLabel label;
+	private int time;
 	
 	public void setClock(String s) {
 		this.s = s;
+	}
+	public void setTime(int time) {
+		this.time = time;
 	}
 	//Timer someTimerVar = new Timer(1000);
 }
