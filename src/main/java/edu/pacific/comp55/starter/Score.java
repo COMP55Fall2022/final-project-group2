@@ -9,12 +9,12 @@ public class Score {
 	JLabel scoreLabel = new JLabel("Score: 0");
 	
 	//TODO SetScore
-	public void setScore(int score) {
+	//public void setScore(int score) {}
+	
+	
+	//TODO updateScore() - finish
+	public void updateScore(int score) {
 		score++;
 		scoreLabel.setText("Score: 0");
-	}
-	//TODO updateScore() - finish
-	public void updateScore() {
-		
 	}
 }
