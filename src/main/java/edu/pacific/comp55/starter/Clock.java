@@ -19,5 +19,9 @@ public class Clock {
 	public void setTime(int time) {
 		this.time = time;
 	}
+	
+	public String getClock() {
+		return s;
+	}
 	//Timer someTimerVar = new Timer(1000);
 }
