@@ -23,5 +23,9 @@ public class Clock {
 	public String getClock() {
 		return s;
 	}
+	
+	public int getTime() {
+		return time;
+	}
 	//Timer someTimerVar = new Timer(1000);
 }
