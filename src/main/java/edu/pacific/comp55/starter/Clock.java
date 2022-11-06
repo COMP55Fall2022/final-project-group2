@@ -1,16 +1,15 @@
 package edu.pacific.comp55.starter;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 import acm.graphics.GLabel;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-
 //Brendon Amino
-public class Clock {
-	private static final string clockTitle = "Time: ";
-	ActionListener clock = new ActionListener();
+public class Clock implements ActionListener {
+	private static final String clockTitle = "Time: ";
+	ActionListener clock;
 	
 	private Timer timer;
 	private String clockString;
@@ -19,21 +18,26 @@ public class Clock {
 	//private Integer t;
 	
 	public void createClock() { 
-		timer = new Timer(getTime(), this);
+		timer = new Timer(getTime(), clock);
 	}
-	public void setClockText(String s) {
-		this.s = s;
+	public void setClockText(String clockString) {
+		this.clockString = clockString;
 	}
 	public void setTime(int time) {
 		this.time = time;
 	}
 	
 	public String getClockText() {
-		return s;
+		return clockString;
 	}
 	
 	public int getTime() {
 		return time;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 		
 	//Timer someTimerVar = new Timer(1000);
