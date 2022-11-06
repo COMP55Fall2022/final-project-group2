@@ -15,10 +15,11 @@ public class Clock implements ActionListener {
 	private String clockString;
 	private GLabel label;
 	private int time;
-	//private Integer t;
 	
 	public void createClock() { 
 		timer = new Timer(getTime(), clock);
+		label = new GLabel(clockTitle + clockString + getTime());
+		
 	}
 	public void setClockText(String clockString) {
 		this.clockString = clockString;
@@ -40,5 +41,4 @@ public class Clock implements ActionListener {
 		
 	}
 		
-	//Timer someTimerVar = new Timer(1000);
 }
