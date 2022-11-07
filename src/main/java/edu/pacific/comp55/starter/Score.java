@@ -6,13 +6,13 @@ import javax.swing.*;
 
 //TODO Make a score that increments - maybe using JLabel
 public class Score {
-	JLabel scoreLabel = new JLabel("Score: 0");
+	JLabel scoreLabel;
 	
-	//TODO SetScore
-	//public void setScore(int score) {}
+	public void setScore(int score) {
+		scoreLabel = new JLabel("Score: 0");
+	}
 	
 	
-	//TODO updateScore() - finish
 	public void updateScore(int score) {
 		score++;
 		scoreLabel.setText("Score: 0");
