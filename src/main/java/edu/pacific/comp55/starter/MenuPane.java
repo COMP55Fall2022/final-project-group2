@@ -15,15 +15,15 @@ public class MenuPane extends GraphicsPane {
 	public MenuPane(MainApplication app) {
 		super();
 		program = app;
-		rect = new GButton("Next", 200, 200, 200, 200);
-		rect.setFillColor(Color.RED);
+		rect = new GButton("Start", 730, 650, 150, 100);
+		rect.setFillColor(Color.GREEN);
 		background = new GImage("2.png", 0, 0);
 	}
 
 	@Override
 	public void showContents() {
-		//program.add(rect);
 		program.add(background);
+		program.add(rect);
 	}
 
 	@Override
