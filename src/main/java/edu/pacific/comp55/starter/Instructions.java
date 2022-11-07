@@ -1,68 +1,50 @@
 package edu.pacific.comp55.starter;
+import java.awt.Color;
+
 import javax.swing.JOptionPane;
 
 import acm.graphics.GImage;
+import acm.graphics.GLabel;
+import acm.program.GraphicsProgram;
 
 public class Instructions extends GraphicsProgram {
 	private MainApplication program;
-	private GParagraph Instructions1;
-	private GParagraph Instructions2;
-	private GParagraph Instructions3; 
-	private GParagraph Instructions4;
-       
+	private GLabel Instructions1;
+
 	
-	//public void minigame1instructions() {
-	//removeObjects();
-	//OptionPane.showMessageDialog(null, "Instuctions1", "Play game1", JOptionPane.INFORMATION_MESSAGE);
-		
-		
-	public Instructions(MainApplication app, MiniGameType type) {
+	public Instructions(MainApplication app) {
 		this.program = app;
 		
-		Instructions1 = new GParagraph("Click on as many mice as possible in 30 seconds to win the game!", 150, 300);
+		Instructions1 = new GLabel("Click on as many mice as possible in 30 seconds to win the game!", 150, 300);
 		Instructions1.setFont("Arial-24");
+		Instructions1.setColor(null);
 		
-
-		Instructions2 = new GParagraph("Move Saaya left and right to protect her from the crow", 150, 300);
-		Instructions2.setFont("Arial-24");
-		
-		Instructions3 = new GParagraph("Are you ready to play Tic Tac Toe with Doug?", 150, 300);
-		Instructions3.setFont("Arial-24");
-		
-		
-		Instructions4 = new GParagraph("Move left and right to collect as many apples as you can before you reach home ", 150, 300);
-		Instructions4.setFont("Arial-24");
 	}
 
 	
-	
 	//adds instructions to the screen 
 	public void showInstructions() {
-		
+		program.add(Instructions1);
 	}
 	
 	//removes instructions from the screen 
 	public void hideInstructions() {
+		program.remove(Instructions1);
+	}
+	
+	public GLabel getinstructions1() {
+		return Instructions1;
+	}
+
+
+
+	@Override
+	public void run() {
+		showInstructions();
 		
 	}
 	
-	public GParagraph getinstructions1() {
-		return Instructions1;
-	}
-	
-	public GParagraph getinstrutions2() {
-		return Instructions2;
-	}
-	
-	public GParagraph getinstrutions3() {
-		return Instructions3;
-	}
-	
-	public GParagraph getinstrutions4() {
-		return Instructions4;
-	}
-	
-	
+
 	
 	
 }
