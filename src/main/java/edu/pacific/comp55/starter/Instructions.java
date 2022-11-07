@@ -32,6 +32,7 @@ public class Instructions extends GraphicsProgram {
 		program.remove(Instructions1);
 	}
 	
+	//getter for instructions
 	public GLabel getinstructions1() {
 		return Instructions1;
 	}
