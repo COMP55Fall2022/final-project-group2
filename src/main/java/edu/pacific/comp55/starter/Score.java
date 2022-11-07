@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 import javax.swing.*;
 
-//TODO Make a score that increments - maybe using JLabel
+//Displays the players score
 public class Score {
 	JLabel scoreLabel;
 	
