@@ -17,8 +17,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	private int time;
 	
 	public void createClock() { 
-		
-		add(label);
+		new Clock().start();
 	}
 	public void setClockText(String clockString) {
 		this.clockString = clockString;
@@ -35,35 +34,45 @@ public class Clock extends GraphicsProgram implements ActionListener {
 		return time;
 	}
 	
-	
+	private boolean checkIfClockStringNull() {
+		if(clockString == null) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		label.setLabel(clockTitle + getTime());
+		if(checkIfClockStringNull) {
+			label.setLabel(clockTitle + getTime());
+		}
+		else {
+			label.setLabel(clockString + getTime());
+		}
 		time--;
 		if(time == 0) {
 			timer.stop();
 		}
 	}
 	public void init() {
-		setSize(600, 800);
+		setSize(800, 600);
 		requestFocus();
 	}
 	@Override
 	public void run() {
-		label = new GLabel(clockTitle + getTime(), 0, 100);
-		// TODO Auto-generated method stub
-		setTime(60);
-		createClock();
+		if(checkIfClockStringNull) {
+			label = new GLabel(clockTitle + getTime(), 0, 100);
+		}
+		else {
+			label = new GLabel(clockString + getTime(), 0, 100);
+		}
 		add(label);
 		timer.start();
-		
-		
 	}
 	public static void main(String[] args) {
+		setTime(60);
 		new Clock().start();
 	}
 		
