@@ -49,7 +49,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(checkIfClockStringNull) {
+		if(checkIfClockStringNull()) {
 			label.setLabel(clockTitle + getTime());
 		}
 		else {
@@ -66,7 +66,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	}
 	@Override
 	public void run() {
-		if(checkIfClockStringNull) {
+		if(checkIfClockStringNull()) {
 			label = new GLabel(clockTitle + getTime(), 0, 100);
 		}
 		else {
