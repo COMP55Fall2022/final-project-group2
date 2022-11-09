@@ -44,6 +44,7 @@ public class MenuPane extends GraphicsPane {
 	public void hideContents() {
 		program.remove(rect);
 		program.remove(rect2);
+		program.remove(title);
 	}
 
 	@Override
