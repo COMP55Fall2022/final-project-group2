@@ -1,13 +1,13 @@
 package edu.pacific.comp55.starter;
 import java.awt.event.ActionEvent;
+import acm.graphics.*;
+import acm.program.*;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
 import acm.graphics.GLabel;
 
 //Brendon Amino
-public class Clock implements ActionListener {
+public class Clock extends GraphicsProgram implements ActionListener {
 	private static final String clockTitle = "Time: ";
 	ActionListener clock;
 	
@@ -37,6 +37,11 @@ public class Clock implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void run() {
 		// TODO Auto-generated method stub
 		
 	}
