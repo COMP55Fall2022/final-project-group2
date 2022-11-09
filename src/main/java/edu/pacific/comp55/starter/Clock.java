@@ -26,6 +26,10 @@ public class Clock extends GraphicsProgram implements ActionListener {
 		this.time = time;
 	}
 	
+	public void moveLabel(int x, int y) {
+		label.setLocation(x, y);
+	}
+
 	public String getClockText() {
 		return clockString;
 	}
