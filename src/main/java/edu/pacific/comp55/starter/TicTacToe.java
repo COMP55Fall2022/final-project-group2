@@ -37,6 +37,7 @@ public class TicTacToe {
     	 TicTacToe t = new TicTacToe(3,3);
     	 t.setupBoard();
     	 t.printBoard();
+    	 
      }
      
 }   
