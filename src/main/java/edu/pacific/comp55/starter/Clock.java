@@ -17,8 +17,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	private int time;
 	
 	public void createClock() { 
-		
-		add(label);
+		new Clock().start();
 	}
 	public void setClockText(String clockString) {
 		this.clockString = clockString;
@@ -49,7 +48,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 		}
 	}
 	public void init() {
-		setSize(600, 800);
+		setSize(800, 600);
 		requestFocus();
 	}
 	@Override
