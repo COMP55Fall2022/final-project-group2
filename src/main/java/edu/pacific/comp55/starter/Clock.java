@@ -75,9 +75,10 @@ public class Clock extends GraphicsProgram implements ActionListener {
 		add(label);
 		timer.start();
 	}
+	/*
 	public static void main(String[] args) {
 		setTime(60);
 		new Clock().start();
-	}
+	}*/
 		
 }
