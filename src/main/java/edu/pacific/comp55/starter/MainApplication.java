@@ -8,6 +8,7 @@ public class MainApplication extends GraphicsApplication {
 	private SomePane somePane;
 	private MenuPane menu;
 	private int count;
+	private Crow crowGame;
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -17,8 +18,15 @@ public class MainApplication extends GraphicsApplication {
 		System.out.println("Hello, world!");
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
+		crowGame = new Crow(this);
 		setupInteractions();
 		switchToMenu();
+	}
+	
+	public void switchToCrow() {
+		playRandomSound();
+		count++;
+		switchToScreen(crowGame);
 	}
 
 	public void switchToMenu() {
