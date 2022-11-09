@@ -9,17 +9,16 @@ import acm.graphics.GLabel;
 //Brendon Amino
 public class Clock extends GraphicsProgram implements ActionListener {
 	private static final String clockTitle = "Time: ";
-	ActionListener clock;
+	private static int timerTime = 1000;
 	
-	private Timer timer;
+	private Timer timer = new Timer(timerTime, this);;
 	private String clockString;
 	private GLabel label;
 	private int time;
 	
 	public void createClock() { 
-		timer = new Timer(getTime(), clock);
-		label = new GLabel(clockTitle + clockString + getTime());
 		
+		add(label);
 	}
 	public void setClockText(String clockString) {
 		this.clockString = clockString;
@@ -35,15 +34,37 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	public int getTime() {
 		return time;
 	}
+	
+	
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		label.setLabel(clockTitle + getTime());
+		time--;
+		if(time == 0) {
+			timer.stop();
+		}
+	}
+	public void init() {
+		setSize(600, 800);
+		requestFocus();
 	}
 	@Override
 	public void run() {
+		label = new GLabel(clockTitle + getTime(), 0, 100);
 		// TODO Auto-generated method stub
+		setTime(60);
+		createClock();
+		add(label);
+		timer.start();
 		
+		
+	}
+	public static void main(String[] args) {
+		new Clock().start();
 	}
 		
 }
