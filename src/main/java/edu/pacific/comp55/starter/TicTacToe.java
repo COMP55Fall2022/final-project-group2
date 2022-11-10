@@ -28,9 +28,9 @@ public class TicTacToe {
     	 for(int i = 0; i < rows; i++) {
     		 
     		 for(int j = 0; j < cols; j++) {
-    			 System.out.println(board[i][j]);
+    			 System.out.print(board[i][j]);
     		 }
-    		 System.out.println("\n");
+    		 System.out.print("\n");
     	 }
      }
      public static void main(String[] args) {
