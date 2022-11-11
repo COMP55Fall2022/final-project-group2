@@ -1,14 +1,14 @@
 package edu.pacific.comp55.starter;
 import javax.swing.*;
-
+import java.util.Scanner;
 
 public class TicTacToe {
      public char[][] board;
      private int rows;
      private int cols;
      
-     //private char xPlayer;
-     //private char yPlayer;
+     private String xPlayer;
+     private String yPlayer;
      
      public TicTacToe(int rows, int cols) {
     	 this.rows = rows;
@@ -24,6 +24,10 @@ public class TicTacToe {
     	 }
     	 
      }
+     public void setupPlayers(String xPlayer, String yPlayer) {
+    	 this.xPlayer = xPlayer;
+    	 this.yPlayer = yPlayer;
+     }
      public void printBoard() {
     	 for(int i = 0; i < rows; i++) {
     		 
@@ -33,10 +37,12 @@ public class TicTacToe {
     		 System.out.print("\n");
     	 }
      }
+     
      public static void main(String[] args) {
     	 TicTacToe t = new TicTacToe(3,3);
     	 t.setupBoard();
     	 t.printBoard();
+    	 t.setupPlayers("Saaya", "Doggy");
     	 
      }
      
