@@ -69,9 +69,54 @@ public class TicTacToe {
 		}
 	 }
 
-	public void checkForWin() {
-		
+	public boolean checkForWin() {
+		if(checkHorizontalWin()) {
+			return checkHorizontalWin();
+		}
+		if(checkVerticalWin()) {
+			return checkVerticalWin();
+		}
 	}
+
+	 public boolean checkHorizontalWin() {
+		char array[] = new char[3];
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				array[j] = board[i][j];
+			}
+			if(array[0] == 'c' && array[1] == 'c' && array[2] == 'c') {
+				System.out.println("You win!");
+				return true;
+			}
+			else if(array[0] == 'd' && array[1] == 'd' && array[2] == 'd') {
+				System.out.println("You lose!");
+				break;
+			}
+		}
+		return false;
+	 }
+
+	 public boolean checkVerticalWin() {
+		char array[] = new char[3];
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				array[j] = board[j][i];
+			}
+			if(array[0] == 'c' && array[1] == 'c' && array[2] == 'c') {
+				System.out.println("You win!");
+				return true;
+			}
+			else if(array[0] == 'd' && array[1] == 'd' && array[2] == 'd') {
+				System.out.println("You lose!");
+				break;
+			}
+		}
+		return false;
+	 }
+
+	 public boolean checkDiagonalWin() {
+
+	 }
      
      public static void main(String[] args) {
     	 TicTacToe t = new TicTacToe(3,3);
