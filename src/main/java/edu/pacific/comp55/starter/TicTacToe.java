@@ -15,6 +15,7 @@ public class TicTacToe {
     	 this.cols = cols;
     	 this.board = new char[rows][cols];
      }
+     
      public void setupBoard() {
     	 for (int i = 0; i < rows; i++) {
     		 for(int j = 0; j < cols; j++) {
@@ -22,12 +23,13 @@ public class TicTacToe {
     			 
     		 }
     	 }
-    	 
      }
+     
      public void setupPlayers(String xPlayer, String yPlayer) {
     	 this.xPlayer = xPlayer;
     	 this.yPlayer = yPlayer;
      }
+     
      public void printBoard() {
     	 for(int i = 0; i < rows; i++) {
     		 
@@ -37,6 +39,8 @@ public class TicTacToe {
     		 System.out.print("\n");
     	 }
      }
+     
+     
      
      public static void main(String[] args) {
     	 TicTacToe t = new TicTacToe(3,3);
