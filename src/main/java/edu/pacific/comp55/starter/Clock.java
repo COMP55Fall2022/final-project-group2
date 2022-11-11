@@ -16,6 +16,11 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	private GLabel label;
 	private int time;
 	
+	public Clock() { 
+		time = 60;
+		clockString = null;
+	}
+	
 	public void createClock() { 
 		new Clock().start();
 	}
@@ -49,7 +54,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(checkIfClockStringNull()) {
+		if(!checkIfClockStringNull()) {
 			label.setLabel(clockTitle + getTime());
 		}
 		else {
@@ -66,7 +71,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	}
 	@Override
 	public void run() {
-		if(checkIfClockStringNull()) {
+		if(!checkIfClockStringNull()) {
 			label = new GLabel(clockTitle + getTime(), 0, 100);
 		}
 		else {
@@ -75,10 +80,11 @@ public class Clock extends GraphicsProgram implements ActionListener {
 		add(label);
 		timer.start();
 	}
-	/*
+	
 	public static void main(String[] args) {
-		setTime(60);
+		Clock clock = new Clock();
+		clock.setTime(60);
 		new Clock().start();
-	}*/
+	}
 		
 }
