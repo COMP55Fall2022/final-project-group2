@@ -1,4 +1,4 @@
-package group2.project;
+package edu.pacific.comp55.starter;
 
 import javax.swing.Timer;
 import java.awt.Color;
@@ -9,8 +9,6 @@ import java.awt.event.KeyListener;
 
 import acm.graphics.GImage;
 import acm.graphics.GOval;
-import edu.pacific.comp55.starter.GraphicsPane;
-import edu.pacific.comp55.starter.MainApplication;
 
 public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private static final int SAAYASIZE_Y = 100;
@@ -22,7 +20,8 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private GOval saaya; // will change GOval to Gimage of cat later
 	public static final int WINDOW_WIDTH = 1220;
 
-	Timer crowtimer = new Timer(5, this);
+	Timer crowtimerleft = new Timer(50, this);
+	Timer crowtimeright = new Timer(50, this);
 	int x = 15, y = 0, velx = 0, vely = 0;
 
 	public Crow(MainApplication app) {
@@ -80,21 +79,33 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		x = x + velx;
 		y = y + vely;
-
+		if(!isOutOfBoundsleft()) {
+			saaya.move(-15, 0);
+		}
+		else {
+			crowtimerleft.stop();
+		}
+		
+	
 		System.out.print(x);
 		x++;
 	}
 
+	
+	
+	
+	
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int c = e.getKeyCode();
 
 		if (c == KeyEvent.VK_LEFT) {
-
 			if (!isOutOfBoundsleft()) {
+				crowtimerleft.start();
 				velx = -1;
 				vely = 0;
-				saaya.move(-15, 0);
+			
 			}
 
 		}
@@ -108,17 +119,13 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		if (c == KeyEvent.VK_RIGHT) {
 
 			if (!isOutOfBoundsright()) {
+				crowtimeright.start();
 				velx = 1;
 				vely = 0;
-				saaya.move(15, 0);
+			
 			}
 		}
 
-		if (c == KeyEvent.VK_DOWN) {
-			velx = 0;
-			vely = 1;
-			saaya.move(0, 1);
-		}
 
 	}
 
@@ -126,6 +133,8 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 
 	public void keyReleased(KeyEvent e) {
+		crowtimerleft.stop();
+		crowtimeright.stop();
 	}
 
 }
