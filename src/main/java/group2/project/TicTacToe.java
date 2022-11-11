@@ -124,11 +124,10 @@ public class TicTacToe {
 		return false;
 	 }
 
-	 public void playGame() {
-		TicTacToe t = new TicTacToe(3,3);
+	 public void playGame(TicTacToe t) {
 		t.setupBoard();
 		t.printBoard();
-		t.setupPlayers();
+		t.setupPlayers("Saaya", "Doggy");
 		boolean win = false;
 		while(!win) {
 			win = checkForWin();
