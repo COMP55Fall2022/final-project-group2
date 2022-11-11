@@ -76,6 +76,7 @@ public class TicTacToe {
 		if(checkVerticalWin()) {
 			return checkVerticalWin();
 		}
+		return false;
 	}
 
 	 public boolean checkHorizontalWin() {
@@ -115,7 +116,13 @@ public class TicTacToe {
 	 }
 
 	 public boolean checkDiagonalWin() {
-
+        if((board[0][0] == 'c' && board[1][1] == 'c' && board[2][2] == 'c')|| (board[0][2] == 'c' && board[1][1] == 'c' && board[2][0] == 'c')) {
+        	System.out.println("You win!");
+        	return true;
+        }else if((board[0][0] == 'd' && board[1][1] == 'd' && board[2][2] == 'd')|| (board[0][2] == 'd' && board[1][1] == 'd' && board[2][0] == 'd')) {
+        	System.out.println("You lose!");
+        }
+        return false;
 	 }
      
      public static void main(String[] args) {
