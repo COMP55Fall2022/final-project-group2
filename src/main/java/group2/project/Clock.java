@@ -1,4 +1,4 @@
-package edu.pacific.comp55.starter;
+package group2.project;
 import java.awt.event.ActionEvent;
 import acm.graphics.*;
 import acm.program.*;
