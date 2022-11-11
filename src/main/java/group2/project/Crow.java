@@ -12,108 +12,120 @@ import acm.graphics.GOval;
 import edu.pacific.comp55.starter.GraphicsPane;
 import edu.pacific.comp55.starter.MainApplication;
 
-
 public class Crow extends GraphicsPane implements ActionListener, KeyListener {
+	private static final int SAAYASIZE_Y = 100;
+	private static final int SAAYASIZE_X = 100;
 	private static final int START_Y = 675;
 	private static final int START_X = 550;
 	private MainApplication program;
 	private GImage crowgamebackground;
-	private GOval saaya;  //will change GOval to Gimage of cat later
-	
-	
-	
+	private GOval saaya; // will change GOval to Gimage of cat later
+	public static final int WINDOW_WIDTH = 1220;
+
 	Timer crowtimer = new Timer(5, this);
-	int x=15, y=0, velx=0, vely=0;
-	
-	
+	int x = 15, y = 0, velx = 0, vely = 0;
+
 	public Crow(MainApplication app) {
 		this.program = app;
-		crowgamebackground = new GImage("7.png", 0, 0); 
-		saaya = new GOval(START_X, START_Y, 100, 100);  //making start position static
+		crowgamebackground = new GImage("7.png", 0, 0);
+		saaya = new GOval(START_X, START_Y, SAAYASIZE_X, SAAYASIZE_Y); // making start position static
 		saaya.setFilled(true);
 		saaya.setColor(Color.green);
-	
-		
-		
+
 	}
 
-	
-	//public void OutOfBounds() {
-		//double rightarea =  crowgamebackground.getWidth()- saaya.getSize();
-		
-//}
+	public boolean isOutOfBoundsright() {
+		double rightarea = WINDOW_WIDTH - SAAYASIZE_X;
 
+		if (saaya.getX() > rightarea) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 
-	//public Crow() {
-		//crowtimer.start();
-		//addKeyListener(this);
-		//setFocusable(true);
-		//setFocusTraversalKeysEnabled(false);
-	//}
 	
+	public boolean isOutOfBoundsleft() {
+		double leftarea = 0;
+
+		if (saaya.getX() < leftarea) {
+			return true;
+		}
+		return false;
+	}
 	
+
+	// public Crow() {
+	// crowtimer.start();
+	// addKeyListener(this);
+	// setFocusable(true);
+	// setFocusTraversalKeysEnabled(false);
+	// }
+
 	@Override
 	public void showContents() {
 		program.add(crowgamebackground);
 		program.add(saaya);
-		
-		
-		
+
 	}
 
 	@Override
 	public void hideContents() {
 		program.remove(crowgamebackground);
-		
+
 	}
-
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		x = x + velx;
 		y = y + vely;
-	
-		
-	} 
-	
+
+		System.out.print(x);
+		x++;
+	}
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-		int c= e.getKeyCode();
-		
+		int c = e.getKeyCode();
+
 		if (c == KeyEvent.VK_LEFT) {
-			
-			velx = -1;
-			vely=0;
-			saaya.move(-15, 0); 
-	
+
+			if (!isOutOfBoundsleft()) {
+				velx = -1;
+				vely = 0;
+				saaya.move(-15, 0);
+			}
+
 		}
-		
-		
-		if (c== KeyEvent.VK_UP) {
-			velx =0;
-			vely= -1;
+
+		if (c == KeyEvent.VK_UP) {
+			velx = 0;
+			vely = -1;
 			saaya.move(0, -1);
 		}
-		
+
 		if (c == KeyEvent.VK_RIGHT) {
-			velx = 1;
-			vely =0;
-			saaya.move(15, 0);
+
+			if (!isOutOfBoundsright()) {
+				velx = 1;
+				vely = 0;
+				saaya.move(15, 0);
+			}
 		}
-		
+
 		if (c == KeyEvent.VK_DOWN) {
 			velx = 0;
 			vely = 1;
 			saaya.move(0, 1);
 		}
-		
-		 
+
 	}
-	
-	public void keyTyped(KeyEvent e) {}
-	public void keyReleased(KeyEvent e) {}
-	
+
+	public void keyTyped(KeyEvent e) {
+	}
+
+	public void keyReleased(KeyEvent e) {
+	}
 
 }
