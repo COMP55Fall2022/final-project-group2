@@ -69,7 +69,9 @@ public class TicTacToe {
 		}
 	 }
 
-	
+	public void checkForWin() {
+		
+	}
      
      public static void main(String[] args) {
     	 TicTacToe t = new TicTacToe(3,3);
