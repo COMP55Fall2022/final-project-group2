@@ -6,6 +6,7 @@ public class TicTacToe {
      public char[][] board;
      private int rows;
      private int cols;
+	 private boolean dogWin = false;
      
      private String xPlayer;
      private String yPlayer;
@@ -91,12 +92,19 @@ public class TicTacToe {
 			}
 			else if(array[0] == 'd' && array[1] == 'd' && array[2] == 'd') {
 				System.out.println("You lose!");
+				setDogWin();
 				break;
 			}
 		}
 		return false;
 	 }
 
+	 public void setDogWin() {
+		dogWin = true;
+	 }
+	 public boolean checkDogWin() {
+		return dogWin;
+	 }
 	 public boolean checkVerticalWin() {
 		char array[] = new char[3];
 		for(int i = 0; i < 3; i++) {
@@ -109,10 +117,28 @@ public class TicTacToe {
 			}
 			else if(array[0] == 'd' && array[1] == 'd' && array[2] == 'd') {
 				System.out.println("You lose!");
+				setDogWin();
 				break;
 			}
 		}
 		return false;
+	 }
+
+	 public void playGame(TicTacToe t) {
+		t.setupBoard();
+		t.printBoard();
+		t.setupPlayers("Saaya", "Doggy");
+		boolean win = false;
+		while(!win) {
+			win = checkForWin();
+			if(checkDogWin() == true) {
+				win = true;
+				System.out.println("You Lose!");
+			} 
+			getPlayerMove();
+			dogMove();
+			
+		}
 	 }
 
 	 public boolean checkDiagonalWin() {
