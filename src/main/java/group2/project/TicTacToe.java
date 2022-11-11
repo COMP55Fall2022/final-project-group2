@@ -52,7 +52,24 @@ public class TicTacToe {
 		}
 	 }
 
-	 
+	 public void getPlayerMove() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Input row move: ");
+		int x = sc.nextInt();
+		System.out.print("Input col move: ");
+		int y = sc.nextInt();
+		if(board[x][y] != 'b') {
+			System.out.println("Illegal move! Try again...");
+			getPlayerMove();
+		}
+		else {
+			System.out.println("Executing move...");
+			board[x][y] = 'c';
+			printBoard();
+		}
+	 }
+
+	
      
      public static void main(String[] args) {
     	 TicTacToe t = new TicTacToe(3,3);
