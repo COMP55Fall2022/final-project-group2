@@ -40,7 +40,19 @@ public class TicTacToe {
     	 }
      }
      
+     public void dogMove() {
+		boolean start = true;
+		while(start) {
+			int a = (int) (Math.random() * 3);
+			int b = (int) (Math.random() * 3);
+			if(board[a][b] == 'b') {
+				board[a][b] = 'd';
+				start = false;
+			}
+		}
+	 }
 
+	 
      
      public static void main(String[] args) {
     	 TicTacToe t = new TicTacToe(3,3);
