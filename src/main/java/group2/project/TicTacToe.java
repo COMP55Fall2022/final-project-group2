@@ -19,7 +19,7 @@ public class TicTacToe {
      public void setupBoard() {
     	 for (int i = 0; i < rows; i++) {
     		 for(int j = 0; j < cols; j++) {
-    			 board[i][j] = 'e';
+    			 board[i][j] = 'b';
     			 
     		 }
     	 }
@@ -40,7 +40,7 @@ public class TicTacToe {
     	 }
      }
      
-     
+
      
      public static void main(String[] args) {
     	 TicTacToe t = new TicTacToe(3,3);
