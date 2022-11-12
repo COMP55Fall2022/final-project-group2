@@ -20,8 +20,8 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private GOval saaya; // will change GOval to Gimage of cat later
 	public static final int WINDOW_WIDTH = 1220;
 
-	Timer crowtimerleft = new Timer(50, this);
-	Timer crowtimeright = new Timer(50, this);
+	Timer crowtimerleft = new Timer(40, this);
+	Timer crowtimeright = new Timer(40, this);
 	int x = 15, y = 0, velx = 0, vely = 0;
 
 	public Crow(MainApplication app) {
@@ -77,14 +77,23 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		Object source = e.getSource();
 		x = x + velx;
 		y = y + vely;
-		if(!isOutOfBoundsleft()) {
-			saaya.move(-15, 0);
+		
+		if (source == crowtimerleft) {
+			if(!isOutOfBoundsleft()) {
+			saaya.move(-10, 0); }
 		}
-		else {
-			crowtimerleft.stop();
+		
+		
+		if (source == crowtimeright) {
+			if(!isOutOfBoundsright()) {
+			saaya.move(10, 0); }
 		}
+		
+		
+		
 		
 	
 		System.out.print(x);
@@ -101,12 +110,11 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		int c = e.getKeyCode();
 
 		if (c == KeyEvent.VK_LEFT) {
-			if (!isOutOfBoundsleft()) {
+
 				crowtimerleft.start();
 				velx = -1;
 				vely = 0;
-			
-			}
+		
 
 		}
 
@@ -118,12 +126,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 
 		if (c == KeyEvent.VK_RIGHT) {
 
-			if (!isOutOfBoundsright()) {
 				crowtimeright.start();
 				velx = 1;
 				vely = 0;
-			
-			}
+	
 		}
 
 
