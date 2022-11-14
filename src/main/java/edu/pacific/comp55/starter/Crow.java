@@ -47,8 +47,6 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 	
 	
-
-	
 	public boolean isOutOfBoundsleft() {
 		double leftarea = 0;
 
@@ -156,3 +154,5 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 
 }
+
+
