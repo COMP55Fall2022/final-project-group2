@@ -6,10 +6,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.graphics.GOval;
+import acm.util.RandomGenerator;
 
 public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private static final int SAAYASIZE_Y = 100;
@@ -20,7 +22,16 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private GImage crowgamebackground;
 	private GOval saaya; // will change GOval to Gimage of cat later
 	public static final int WINDOW_WIDTH = 1220;
+	public static final int WINDOW_HEIGHT = 1096;
 	
+	//For trash
+	public static final int SIZE = 10;
+	public static final int SPEED = 2;
+	public static final int MS = 60;
+	private ArrayList<GOval> trash;
+	private RandomGenerator trashGen;
+	private int numTimes;
+	Timer trashDown = new Timer(50, this);
 
 	Timer crowtimerleft = new Timer(40, this);
 	Timer crowtimeright = new Timer(40, this);
@@ -34,6 +45,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		saaya = new GOval(START_X, START_Y, SAAYASIZE_X, SAAYASIZE_Y); // making start position static
 		saaya.setFilled(true);
 		saaya.setColor(Color.green);
+		
+		//For trash
+		trash = new ArrayList<GOval>();
+		numTimes = 0;
 
 	}
 
@@ -64,6 +79,32 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	// setFocusTraversalKeysEnabled(false);
 	// }
 
+	//For trash
+	private void addTrash() {
+		GOval e = makeTrash(trashGen.nextInt(0, WINDOW_WIDTH-SIZE/2));
+		trash.add(e);
+		add(e);
+	}
+		
+	private void add(GOval e) {
+		// TODO Auto-generated method stub
+			
+	}
+
+	public GOval makeTrash(double x) {
+		GOval temp = new GOval(WINDOW_HEIGHT-SIZE, x-SIZE/2, SIZE, SIZE);
+		temp.setColor(Color.GREEN);
+		temp.setFilled(true);
+		return temp;
+	}
+		
+	private void trashMove() {
+		for(GOval e:trash) {
+			e.move(0, trashGen.nextInt(-2, 2));
+		}
+	}
+		
+		
 	@Override
 	public void showContents() {
 		program.add(crowgamebackground);
