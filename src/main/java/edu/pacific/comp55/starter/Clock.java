@@ -17,7 +17,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	private int time;
 	
 	public Clock() { 
-		time = 60;
+		time = 0;
 		clockString = null;
 	}
 	
@@ -27,8 +27,8 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	public void setClockText(String clockString) {
 		this.clockString = clockString;
 	}
-	public void setTime(int time) {
-		this.time = time;
+	public void setTime(int t) {
+		time = t;
 	}
 	
 	public void moveLabel(int x, int y) {
@@ -83,8 +83,8 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	
 	public static void main(String[] args) {
 		Clock clock = new Clock();
-		clock.setTime(60);
-		new Clock().start();
+		clock.setTime(25);
+		clock.start();
 	}
 		
 }
