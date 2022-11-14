@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import acm.graphics.GImage;
+import acm.graphics.GObject;
 import acm.graphics.GOval;
 
 public class Crow extends GraphicsPane implements ActionListener, KeyListener {
@@ -19,10 +20,13 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private GImage crowgamebackground;
 	private GOval saaya; // will change GOval to Gimage of cat later
 	public static final int WINDOW_WIDTH = 1220;
+	
 
 	Timer crowtimerleft = new Timer(40, this);
 	Timer crowtimeright = new Timer(40, this);
-	int x = 15, y = 0, velx = 0, vely = 0;
+	Timer crowtimerup = new Timer(40, this);
+	Timer gravitytimer = new Timer(40, this);
+	
 
 	public Crow(MainApplication app) {
 		this.program = app;
@@ -76,10 +80,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 
 	@Override
+	//this function uses key events and starts movement 
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		x = x + velx;
-		y = y + vely;
 		
 		if (source == crowtimerleft) {
 			if(!isOutOfBoundsleft()) {
@@ -93,11 +96,23 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 		
 		
+		if (source == crowtimerup) {
+			
+			gravitytimer.start();
+			saaya.move(0, -80);
+			crowtimerup.setDelay(20000);
+			
+			
+		
+		}
+		
+		if (source == gravitytimer) {
+			gravity(saaya);
+			gravitytimer.setDelay(20000);
+		}
 		
 		
 	
-		System.out.print(x);
-		x++;
 	}
 
 	
@@ -110,29 +125,25 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		int c = e.getKeyCode();
 
 		if (c == KeyEvent.VK_LEFT) {
-
 				crowtimerleft.start();
-				velx = -1;
-				vely = 0;
-		
 
 		}
 
 		if (c == KeyEvent.VK_UP) {
-			velx = 0;
-			vely = -1;
-			saaya.move(0, -1);
+			
+			crowtimerup.start();
+			
 		}
 
 		if (c == KeyEvent.VK_RIGHT) {
+			crowtimeright.start();
 
-				crowtimeright.start();
-				velx = 1;
-				vely = 0;
-	
 		}
-
-
+}
+	
+	public void gravity(GObject obj) {
+		obj.move(0, 60);
+	
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -141,6 +152,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		crowtimerleft.stop();
 		crowtimeright.stop();
+		crowtimerup.stop();
 	}
 
 }
