@@ -1,4 +1,4 @@
-package group2.project;
+package edu.pacific.comp55.starter;
 import javax.swing.*;
 import java.util.Scanner;
 
