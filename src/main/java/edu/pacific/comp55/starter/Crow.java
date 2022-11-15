@@ -14,6 +14,7 @@ import acm.graphics.GOval;
 import acm.util.RandomGenerator;
 
 public class Crow extends GraphicsPane implements ActionListener, KeyListener {
+	private static final int JUMP_HEIGHT = 30;
 	private static final int SAAYASIZE_Y = 100;
 	private static final int SAAYASIZE_X = 100;
 	private static final int START_Y = 675;
@@ -37,6 +38,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	Timer crowtimeright = new Timer(40, this);
 	Timer crowtimerup = new Timer(40, this);
 	Timer gravitytimer = new Timer(40, this);
+	int gravitymotion = JUMP_HEIGHT;
 	
 
 	public Crow(MainApplication app) {
@@ -136,22 +138,22 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 		
 		if (source == crowtimerup) {
-			
-			gravitytimer.start();
-			saaya.move(0, -80);
-			crowtimerup.setDelay(20000);
-			
-			
-		
+			gravitymotion--;
+			if (gravitymotion == 0) {
+				crowtimerup.stop();
+				gravitytimer.start();
+			}
+			//gravitytimer.start();
+			saaya.move(0, -5);
 		}
 		
 		if (source == gravitytimer) {
-			gravity(saaya);
-			gravitytimer.setDelay(20000);
+			gravitymotion++;
+			if (gravitymotion == JUMP_HEIGHT) {
+				gravitytimer.stop();
+			}
+			saaya.move(0, 5);
 		}
-		
-		
-	
 	}
 
 	
@@ -168,7 +170,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 
 		}
 
-		if (c == KeyEvent.VK_UP) {
+		if (c == KeyEvent.VK_UP && !crowtimerup.isRunning() && !gravitytimer.isRunning()) {
 			
 			crowtimerup.start();
 			
@@ -191,7 +193,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		crowtimerleft.stop();
 		crowtimeright.stop();
-		crowtimerup.stop();
+		//crowtimerup.stop();
 	}
 
 }
