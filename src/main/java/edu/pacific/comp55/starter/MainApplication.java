@@ -10,6 +10,7 @@ public class MainApplication extends GraphicsApplication {
 	private MenuPane menu;
 	private int count;
 	private Crow crowGame;
+	private SetScenes scene1;
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -20,6 +21,7 @@ public class MainApplication extends GraphicsApplication {
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
 		crowGame = new Crow(this);
+		scene1 = new SetScenes(this);
 		setupInteractions();
 		switchToMenu();
 	}
@@ -28,6 +30,10 @@ public class MainApplication extends GraphicsApplication {
 		playRandomSound();
 		count++;
 		switchToScreen(crowGame);
+	}
+	
+	public void switchToScene1() {
+		switchToScreen(scene1);
 	}
 
 	public void switchToMenu() {
