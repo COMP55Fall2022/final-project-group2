@@ -14,43 +14,46 @@ import acm.graphics.GOval;
 import acm.util.RandomGenerator;
 
 public class Crow extends GraphicsPane implements ActionListener, KeyListener {
+	private static final int JUMP_HEIGHT = 30;
 	private static final int SAAYASIZE_Y = 100;
 	private static final int SAAYASIZE_X = 100;
 	private static final int START_Y = 675;
 	private static final int START_X = 550;
 	private MainApplication program;
 	private GImage crowgamebackground;
+	private GImage mycat;
 	private GOval saaya; // will change GOval to Gimage of cat later
 	public static final int WINDOW_WIDTH = 1220;
 	public static final int WINDOW_HEIGHT = 1096;
 	
 	//For trash
-	public static final int SIZE = 50;
+	public static final int SIZE = 10;
 	public static final int SPEED = 2;
 	public static final int MS = 60;
 	private ArrayList<GOval> trash;
 	private RandomGenerator trashGen;
 	private int numTimes;
-	Timer trashDown = new Timer(40, this);
+	Timer trashDown = new Timer(50, this);
 
 	Timer crowtimerleft = new Timer(40, this);
 	Timer crowtimeright = new Timer(40, this);
 	Timer crowtimerup = new Timer(40, this);
 	Timer gravitytimer = new Timer(40, this);
+	int gravitymotion = JUMP_HEIGHT;
 	
 
 	public Crow(MainApplication app) {
 		this.program = app;
 		crowgamebackground = new GImage("7.png", 0, 0);
+		mycat = new GImage("saaya.png", 0, 0);
 		saaya = new GOval(START_X, START_Y, SAAYASIZE_X, SAAYASIZE_Y); // making start position static
 		saaya.setFilled(true);
 		saaya.setColor(Color.green);
-		System.out.println("startapp");
+		
 		//For trash
-		trashGen = RandomGenerator.getInstance();
 		trash = new ArrayList<GOval>();
 		numTimes = 0;
-		trashDown.start();
+
 	}
 
 	public boolean isOutOfBoundsright() {
@@ -71,29 +74,29 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 		return false;
 	}
+	
+
+	
 
 	//For trash
-	//Add the trash to the screen
 	private void addTrash() {
-		GOval etrash = makeTrash(trashGen.nextInt(0, WINDOW_WIDTH-SIZE/2));
-		trash.add(etrash);
-		program.add(etrash);
+		GOval e = makeTrash(trashGen.nextInt(0, WINDOW_WIDTH-SIZE/2));
+		trash.add(e);
+		add(e);
 	}
 		
-//	private void add(GOval e) {
-//		// TODO Auto-generated method stub
-//			
-//	}
-	
-	//Makes the trash
+	private void add(GOval e) {
+		// TODO Auto-generated method stub
+			
+	}
+
 	public GOval makeTrash(double x) {
 		GOval temp = new GOval(WINDOW_HEIGHT-SIZE, x-SIZE/2, SIZE, SIZE);
 		temp.setColor(Color.GREEN);
 		temp.setFilled(true);
 		return temp;
 	}
-	
-	//Trash moves side to side as it moves down
+		
 	private void trashMove() {
 		for(GOval e:trash) {
 			e.move(0, trashGen.nextInt(-2, 2));
@@ -105,8 +108,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void showContents() {
 		program.add(crowgamebackground);
 		program.add(saaya);
-		//Showing trash on the screen
-		//program.add(trash);
+
 	}
 
 	@Override
@@ -133,32 +135,22 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 		
 		if (source == crowtimerup) {
-			
-			gravitytimer.start();
-			saaya.move(0, -80);
-			crowtimerup.setDelay(20000);
-			
-			
-		
+			gravitymotion--;
+			if (gravitymotion == 0) {
+				crowtimerup.stop();
+				gravitytimer.start();
+			}
+			//gravitytimer.start();
+			saaya.move(0, -5);
 		}
 		
 		if (source == gravitytimer) {
-			gravity(saaya);
-			gravitytimer.setDelay(20000);
-		}
-		
-		if (source == trashDown) {
-			System.out.println("startTrashDown");
-			
-			numTimes++;
-			System.out.println(numTimes);
-			if(numTimes % 40 == 0) {
-				addTrash();
-				System.out.println(numTimes);
+			gravitymotion++;
+			if (gravitymotion == JUMP_HEIGHT) {
+				gravitytimer.stop();
 			}
-			trashMove();
+			saaya.move(0, 5);
 		}
-	
 	}
 
 	
@@ -175,7 +167,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 
 		}
 
-		if (c == KeyEvent.VK_UP) {
+		if (c == KeyEvent.VK_UP && !crowtimerup.isRunning() && !gravitytimer.isRunning()) {
 			
 			crowtimerup.start();
 			
@@ -198,8 +190,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		crowtimerleft.stop();
 		crowtimeright.stop();
-		crowtimerup.stop();
+		//crowtimerup.stop();
 	}
 
 }
+
+
 
