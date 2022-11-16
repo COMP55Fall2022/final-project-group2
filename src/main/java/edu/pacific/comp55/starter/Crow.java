@@ -15,20 +15,17 @@ import acm.util.RandomGenerator;
 
 public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private static final int JUMP_HEIGHT = 30;
-	private static final int SAAYASIZE_Y = 100;
-	private static final int SAAYASIZE_X = 100;
-	private static final int START_Y = 675;
+	private static final int START_Y = 620;
 	private static final int START_X = 550;
 	private MainApplication program;
 	private GImage crowgamebackground;
-	private GImage mycat;
-	private GOval saaya; // will change GOval to Gimage of cat later
+	private GImage saaya;
 	public static final int WINDOW_WIDTH = 1220;
 	public static final int WINDOW_HEIGHT = 1096;
 	
 	//For trash
 	public static final int SIZE = 10;
-	public static final int SPEED = 2;
+	public static final int SPEED = 30;
 	public static final int MS = 60;
 	private ArrayList<GOval> trash;
 	private RandomGenerator trashGen;
@@ -41,15 +38,15 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	Timer crowtimerup = new Timer(40, this);
 	Timer gravitytimer = new Timer(40, this);
 	int gravitymotion = JUMP_HEIGHT;
+	int SAAYASIZE_Y = 126;
+	int SAAYASIZE_X = 164;
 	
 
 	public Crow(MainApplication app) {
 		this.program = app;
 		crowgamebackground = new GImage("7.png", 0, 0);
-		mycat = new GImage("saaya.png", 0, 0);
-		saaya = new GOval(START_X, START_Y, SAAYASIZE_X, SAAYASIZE_Y); // making start position static
-		saaya.setFilled(true);
-		saaya.setColor(Color.green);
+		saaya = new GImage("cat.png", START_X, START_Y);
+		
 		
 		//For trash
 		trash = new ArrayList<GOval>();
@@ -142,13 +139,13 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 		
 		
-		if (source == crowtimerup) {
+		if (source == crowtimerup && source !=crowtimeright && source !=crowtimerleft) {
 			gravitymotion--;
 			if (gravitymotion == 0) {
 				crowtimerup.stop();
 				gravitytimer.start();
 			}
-			//gravitytimer.start();
+		
 			saaya.move(0, -5);
 		}
 		
@@ -200,7 +197,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 }
 	
-	public void gravity(GObject obj) {
+	public void gravity(GImage obj) {
 		obj.move(0, 60);
 	
 	}
