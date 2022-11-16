@@ -35,6 +35,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private int numTimes;
 	Timer trashDown = new Timer(50, this);
 
+	Timer crowtimerdown = new Timer(40, this);
 	Timer crowtimerleft = new Timer(40, this);
 	Timer crowtimeright = new Timer(40, this);
 	Timer crowtimerup = new Timer(40, this);
@@ -75,7 +76,14 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		return false;
 	}
 	
+	public boolean isOutOfBoundsdown() {
+		double downarea = 1096;
 
+		if (saaya.getX() < downarea+SAAYASIZE_Y ) {
+			return true;
+		}
+		return false;
+	}
 	
 
 	//For trash
@@ -151,6 +159,13 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			}
 			saaya.move(0, 5);
 		}
+		
+		if (source == crowtimerdown) {
+			if(!isOutOfBoundsdown() && !isOutOfBoundsright() && !isOutOfBoundsleft()) {
+			saaya.move(0, 5); }
+		}
+		
+		
 	}
 
 	
@@ -177,6 +192,12 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			crowtimeright.start();
 
 		}
+		
+		
+		if (c == KeyEvent.VK_DOWN) {
+			crowtimerdown.start();
+
+		}
 }
 	
 	public void gravity(GObject obj) {
@@ -191,6 +212,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		crowtimerleft.stop();
 		crowtimeright.stop();
 		//crowtimerup.stop();
+		crowtimerdown.stop();
 	}
 
 }
