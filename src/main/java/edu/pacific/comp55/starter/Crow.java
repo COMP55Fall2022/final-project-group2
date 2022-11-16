@@ -21,6 +21,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private static final int START_X = 550;
 	private MainApplication program;
 	private GImage crowgamebackground;
+	private GImage mycat;
 	private GOval saaya; // will change GOval to Gimage of cat later
 	public static final int WINDOW_WIDTH = 1220;
 	public static final int WINDOW_HEIGHT = 1096;
@@ -44,6 +45,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public Crow(MainApplication app) {
 		this.program = app;
 		crowgamebackground = new GImage("7.png", 0, 0);
+		mycat = new GImage("saaya.png", 0, 0);
 		saaya = new GOval(START_X, START_Y, SAAYASIZE_X, SAAYASIZE_Y); // making start position static
 		saaya.setFilled(true);
 		saaya.setColor(Color.green);
@@ -74,12 +76,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 	
 
-	// public Crow() {
-	// crowtimer.start();
-	// addKeyListener(this);
-	// setFocusable(true);
-	// setFocusTraversalKeysEnabled(false);
-	// }
+	
 
 	//For trash
 	private void addTrash() {
@@ -197,5 +194,6 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 
 }
+
 
 
