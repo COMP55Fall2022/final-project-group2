@@ -43,6 +43,8 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
     }
     
     private void drawDogMove() {
+    	int x = board.getDogX();
+    	int y = board.getDogY();
     	dogMove = new GOval((PROGRAM_WIDTH/2.4) + 15,(PROGRAM_WIDTH/2.7) + 15,150,150);
     	dogMove.setColor(Color.red);
     	program.add(dogMove);

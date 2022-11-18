@@ -7,7 +7,8 @@ public class TicTacToe {
      private int rows;
      private int cols;
 	 private boolean dogWin = false;
-     
+     public int dogMoveX = 0;
+     public int dogMoveY = 0;
      private String xPlayer;
      private String yPlayer;
      
@@ -48,11 +49,20 @@ public class TicTacToe {
 			int b = (int) (Math.random() * 3);
 			if(board[a][b] == 'b') {
 				board[a][b] = 'd';
+				dogMoveX = a;
+				dogMoveY = b;
 				start = false;
 			}
 		}
 		printBoard();
 	 }
+     
+     public int getDogX() {
+    	 return dogMoveX;
+     }
+     public int getDogY() {
+    	 return dogMoveY;
+     }
 
 	 public void getPlayerMove() {
 		Scanner sc = new Scanner(System.in);
