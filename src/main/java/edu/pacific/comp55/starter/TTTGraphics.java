@@ -8,40 +8,52 @@ import java.awt.event.KeyListener;
 import acm.graphics.GImage;
 import acm.graphics.GLine;
 import acm.graphics.GOval;
-
+import acm.graphics.*;
 import acm.util.RandomGenerator;
 import java.util.ArrayList;
-
+import acm.util.*;
+import acm.program.*;
 public class TTTGraphics extends GraphicsPane implements ActionListener{
+	public static final int PROGRAM_WIDTH = 500;
+	 public static final int PROGRAM_HEIGHT = 500;
 	private TicTacToe board;
 	private MainApplication program;
 	private GImage background;
-	private GImage playerMove;
-	private GImage dogMove;
+	private GRect playerMove;
+	private GOval dogMove;
 	private GLine rowLine;
 	private GLine colLine;
 	
 	public TTTGraphics(MainApplication app) {
 		super();
 		
-		this.program = app;
+//		this.program = app;
+		program = app;
 		board = new TicTacToe(3, 3);
-		
+		run();
 	}
 	
 	
-	 public static final int PROGRAM_WIDTH = 500;
-	 public static final int PROGRAM_HEIGHT = 500;
+	public void init() {
+		program.setSize(PROGRAM_WIDTH,PROGRAM_HEIGHT);
+		
+	}
 	 
     private void drawGridLines() {
-    	for(int i = 1; i <= 3-1;i++) {
+    	for(int i = 1; i <= 2;i++) {
         	rowLine = new GLine(0,i * (PROGRAM_WIDTH/3),PROGRAM_WIDTH,i*(PROGRAM_WIDTH/3));
         	program.add(rowLine);
         }
-        for(int j = 1; j <=3;j++) {
+        for(int j = 1; j <=2;j++) {
         	colLine = new GLine(j*(PROGRAM_HEIGHT/3),0,j*(PROGRAM_HEIGHT/3),PROGRAM_HEIGHT);
         	program.add(colLine);
         }
+    }
+    
+    private void drawdogMove() {
+    	dogMove = new GOval((PROGRAM_WIDTH/3) + 5,(PROGRAM_WIDTH/3) + 5,150,150);
+    	dogMove.setColor(Color.red);
+    	program.add(dogMove);
     }
     
 	@Override
@@ -52,7 +64,8 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 
 	public void run() {
 		drawGridLines();
-	}
+		drawdogMove();
+		System.out.println("Lines on");	}
 
 	@Override
 	public void showContents() {
@@ -66,5 +79,11 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+//	public static void main(String[] args) {
+//	    new MainApplication().start();
+//		System.out.println("start app");
+//	}
+//	
 	 
 }
