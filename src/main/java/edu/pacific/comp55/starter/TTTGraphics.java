@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import acm.util.*;
 import acm.program.*;
 public class TTTGraphics extends GraphicsPane implements ActionListener{
-	public static final int PROGRAM_WIDTH = 500;
-	 public static final int PROGRAM_HEIGHT = 500;
+	public static final int PROGRAM_WIDTH = 1220;
+	 public static final int PROGRAM_HEIGHT = 1096;
 	private TicTacToe board;
 	private MainApplication program;
 	private GImage background;
@@ -26,12 +26,9 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 	
 	public TTTGraphics(MainApplication app) {
 		super();
-		
-//		this.program = app;
 		program = app;
 		background = new GImage("TTTBG1.png", 0, 0);
 		board = new TicTacToe(3, 3);
-		run();
 	}
 	
 	
@@ -63,17 +60,14 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void run() {
-		program.add(background);
-		drawGridLines();
-		drawdogMove();
-		System.out.println("Lines on");	}
-
+	
 	@Override
 	public void showContents() {
 		// TODO Auto-generated method stub
-		
+		program.add(background);
+		drawGridLines();
+		drawdogMove();
+		System.out.println("Lines on");	
 	}
 
 

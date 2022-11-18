@@ -11,6 +11,7 @@ public class MainApplication extends GraphicsApplication {
 	private int count;
 	private Crow crowGame;
 	private SetScenes scene1;
+	private TTTGraphics tictactoe;
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -22,6 +23,7 @@ public class MainApplication extends GraphicsApplication {
 		menu = new MenuPane(this);
 		crowGame = new Crow(this);
 		scene1 = new SetScenes(this);
+		tictactoe = new TTTGraphics(this);
 		setupInteractions();
 		switchToMenu();
 	}
@@ -45,6 +47,12 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToSome() {
 		playRandomSound();
 		switchToScreen(somePane);
+	}
+	
+	public void switchToTTT() {
+		playRandomSound();
+		count++;
+		switchToScreen(tictactoe);
 	}
 
 	private void playRandomSound() {
