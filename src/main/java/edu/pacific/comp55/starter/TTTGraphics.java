@@ -32,24 +32,18 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 	}
 	
 	
-	public void init() {
-		program.setSize(PROGRAM_WIDTH,PROGRAM_HEIGHT);
-		
-	}
-	 
-	
     private void drawGridLines() {
     	for(int i = 1; i <= 2;i++) {
-        	rowLine = new GLine(0,i * (PROGRAM_WIDTH/3),PROGRAM_WIDTH,i*(PROGRAM_WIDTH/3));
+        	rowLine = new GLine(0,i * (PROGRAM_WIDTH/3.4),PROGRAM_WIDTH,i*(PROGRAM_WIDTH/3.4));
         	program.add(rowLine);
         }
         for(int j = 1; j <=2;j++) {
-        	colLine = new GLine(j*(PROGRAM_HEIGHT/3),0,j*(PROGRAM_HEIGHT/3),PROGRAM_HEIGHT);
+        	colLine = new GLine(j*(PROGRAM_HEIGHT/2.7),0,j*(PROGRAM_HEIGHT/2.7),PROGRAM_HEIGHT);
         	program.add(colLine);
         }
     }
     
-    private void drawdogMove() {
+    private void drawDogMove() {
     	dogMove = new GOval((PROGRAM_WIDTH/3) + 5,(PROGRAM_WIDTH/3) + 5,150,150);
     	dogMove.setColor(Color.red);
     	program.add(dogMove);
@@ -66,7 +60,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		// TODO Auto-generated method stub
 		program.add(background);
 		drawGridLines();
-		drawdogMove();
+		drawDogMove();
 		System.out.println("Lines on");	
 	}
 
