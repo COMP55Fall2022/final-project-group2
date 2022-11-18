@@ -14,7 +14,7 @@ import acm.graphics.GOval;
 import acm.util.RandomGenerator;
 
 public class Crow extends GraphicsPane implements ActionListener, KeyListener {
-	private static final int JUMP_HEIGHT = 30;
+	private static final int JUMP_HEIGHT = -20;
 	private static final int START_Y = 620;
 	private static final int START_X = 550;
 	private MainApplication program;
@@ -40,6 +40,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	int gravitymotion = JUMP_HEIGHT;
 	int SAAYASIZE_Y = 126;
 	int SAAYASIZE_X = 164;
+	int jumpvelocity = -20;
 	
 
 	public Crow(MainApplication app) {
@@ -139,22 +140,28 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 		
 		
-		if (source == crowtimerup && source !=crowtimeright && source !=crowtimerleft) {
-			gravitymotion--;
+		if (source == crowtimerup) {
+			//jumpvelocity++;
+			gravitymotion++;
 			if (gravitymotion == 0) {
 				crowtimerup.stop();
 				gravitytimer.start();
 			}
 		
-			saaya.move(0, -5);
+			saaya.move(0, gravitymotion);
 		}
 		
 		if (source == gravitytimer) {
 			gravitymotion++;
-			if (gravitymotion == JUMP_HEIGHT) {
+			if (gravitymotion == 20) {
+				System.out.print(gravitymotion);
 				gravitytimer.stop();
+				gravitymotion = -20;
 			}
-			saaya.move(0, 5);
+			else {
+			saaya.move(0, gravitymotion);
+			}
+			
 		}
 		
 		if (source == crowtimerdown) {
