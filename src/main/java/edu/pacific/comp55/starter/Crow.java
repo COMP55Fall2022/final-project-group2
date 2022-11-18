@@ -25,10 +25,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	
 	//For trash
 	public static final int SIZE = 40;
-	public static final int SPEED = 3;
-	public static final int MS = 60;
-	public static final int TOTAL_TRASH = 5;
-	private static final int TRASHDIV = 30;
+	public static final int SPEED = 5;
+	public static final int MS = 70;
+	private static final int TRASHDIV = 50;
 	private ArrayList<GOval> trash;
 	private ArrayList<Integer> trashDiv;
 	private ArrayList<Integer> trashDirection;
@@ -60,8 +59,8 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		trashDiv = new ArrayList<Integer>();
 		trashDirection = new ArrayList<Integer>();
 		numTimes = 0;
-		trashDown.start();
-
+		
+		
 	}
 
 	public boolean isOutOfBoundsright() {
@@ -91,7 +90,6 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 		return false;
 	}
-	
 
 	//For trash
 	private void addTrash() {
@@ -104,7 +102,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 
 	public GOval makeTrash() {
-		GOval temp = new GOval(trashGen.nextInt(WINDOW_WIDTH), 300 , SIZE, SIZE);
+		GOval temp = new GOval(trashGen.nextInt(WINDOW_WIDTH), 180 , SIZE, SIZE);
 		temp.setColor(Color.GREEN);
 		temp.setFilled(true);
 		return temp;
@@ -126,12 +124,15 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 	}
 		
+	public void showGameObjectContents() {
+		program.add(crowgamebackground);
+		program.add(saaya);
+		trashDown.start();
+	}
 		
 	@Override
 	public void showContents() {
-		program.add(crowgamebackground);
-		program.add(saaya);
-
+		showGameObjectContents();
 	}
 
 	@Override
@@ -189,7 +190,8 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			System.out.println("startTrashDown");
 			numTimes++;
 			System.out.println(numTimes);
-			if (numTimes % 200 == 0) {
+			if (numTimes % 60 == 0) {
+				addTrash();
 				addTrash();
 				System.out.println(numTimes);
 			}
@@ -198,10 +200,6 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 	}
 
-	
-	
-	
-	
 	
 	@Override
 	public void keyPressed(KeyEvent e) {

@@ -28,23 +28,31 @@ public class MenuPane extends GraphicsPane {
 		title.setFont("TimesRoman");
 		title.scale(5, 5);
 		title.setColor(Color.BLUE);
+		displayGameObjectContents();
 		
 	}
-
-	@Override
-	public void showContents() {
+	
+	public void displayGameObjectContents() {
 		program.add(background);
 		program.add(title);
 		program.add(rect);
 		program.add(rect2);
+	}
+
+	@Override
+	public void showContents() {
+//		program.add(background);
+//		program.add(title);
+//		program.add(rect);
+//		program.add(rect2);
 
 	}
 
 	@Override
 	public void hideContents() {
-		program.remove(rect);
-		program.remove(rect2);
-		program.remove(title);
+//		program.remove(rect);
+//		program.remove(rect2);
+//		program.remove(title);
 	}
 
 	@Override
