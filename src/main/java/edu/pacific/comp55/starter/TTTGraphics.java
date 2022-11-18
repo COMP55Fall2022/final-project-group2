@@ -39,6 +39,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		
 	}
 	 
+	
     private void drawGridLines() {
     	for(int i = 1; i <= 2;i++) {
         	rowLine = new GLine(0,i * (PROGRAM_WIDTH/3),PROGRAM_WIDTH,i*(PROGRAM_WIDTH/3));
