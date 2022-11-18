@@ -29,6 +29,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		
 //		this.program = app;
 		program = app;
+		background = new GImage("TTTBG1.png", 0, 0);
 		board = new TicTacToe(3, 3);
 		run();
 	}
@@ -64,6 +65,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 	}
 
 	public void run() {
+		program.add(background);
 		drawGridLines();
 		drawdogMove();
 		System.out.println("Lines on");	}
