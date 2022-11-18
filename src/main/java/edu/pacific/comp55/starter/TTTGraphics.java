@@ -5,9 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import acm.graphics.GImage;
-import acm.graphics.GLine;
-import acm.graphics.GOval;
+import java.awt.event.MouseEvent;
+
 import acm.graphics.*;
 import acm.util.RandomGenerator;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import acm.util.*;
 import acm.program.*;
 public class TTTGraphics extends GraphicsPane implements ActionListener{
 	public static final int PROGRAM_WIDTH = 1220;
-	 public static final int PROGRAM_HEIGHT = 1096;
+	public static final int PROGRAM_HEIGHT = 1096;
 	private TicTacToe board;
 	private MainApplication program;
 	private GImage background;
@@ -44,7 +43,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
     }
     
     private void drawDogMove() {
-    	dogMove = new GOval((PROGRAM_WIDTH/3) + 5,(PROGRAM_WIDTH/3) + 5,150,150);
+    	dogMove = new GOval((PROGRAM_WIDTH/2.4) + 15,(PROGRAM_WIDTH/2.7) + 15,150,150);
     	dogMove.setColor(Color.red);
     	program.add(dogMove);
     }
@@ -69,6 +68,16 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 	public void hideContents() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		int x1 = x/400;
+		int y1 = y/350;
+		
+		System.out.println(x1 + " + " + y1);
 	}
 	
 //	public static void main(String[] args) {
