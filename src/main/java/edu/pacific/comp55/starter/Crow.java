@@ -24,13 +24,17 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public static final int WINDOW_HEIGHT = 1096;
 	
 	//For trash
-	public static final int SIZE = 10;
-	public static final int SPEED = 30;
+	public static final int SIZE = 40;
+	public static final int SPEED = 3;
 	public static final int MS = 60;
+	public static final int TOTAL_TRASH = 5;
+	private static final int TRASHDIV = 30;
 	private ArrayList<GOval> trash;
+	private ArrayList<Integer> trashDiv;
+	private ArrayList<Integer> trashDirection;
 	private RandomGenerator trashGen;
 	private int numTimes;
-	Timer trashDown = new Timer(50, this);
+	Timer trashDown = new Timer(40, this);
 
 	Timer crowtimerdown = new Timer(40, this);
 	Timer crowtimerleft = new Timer(40, this);
@@ -50,8 +54,13 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 		
 		//For trash
+		System.out.println("startapp");
+		trashGen = RandomGenerator.getInstance();
 		trash = new ArrayList<GOval>();
+		trashDiv = new ArrayList<Integer>();
+		trashDirection = new ArrayList<Integer>();
 		numTimes = 0;
+		trashDown.start();
 
 	}
 
@@ -86,26 +95,34 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 
 	//For trash
 	private void addTrash() {
-		GOval e = makeTrash(trashGen.nextInt(0, WINDOW_WIDTH-SIZE/2));
-		trash.add(e);
-		add(e);
-	}
-		
-	private void add(GOval e) {
-		// TODO Auto-generated method stub
-			
+		GOval eTrash = makeTrash();
+		Integer temp = (trashGen.nextBoolean() == true) ? 1 : -1;
+		trashDirection.add(temp);
+		trashDiv.add(trashGen.nextInt(TRASHDIV));
+		trash.add(eTrash);
+		program.add(eTrash);
 	}
 
-	public GOval makeTrash(double x) {
-		GOval temp = new GOval(WINDOW_HEIGHT-SIZE, x-SIZE/2, SIZE, SIZE);
+	public GOval makeTrash() {
+		GOval temp = new GOval(trashGen.nextInt(WINDOW_WIDTH), 300 , SIZE, SIZE);
 		temp.setColor(Color.GREEN);
 		temp.setFilled(true);
 		return temp;
 	}
 		
 	private void trashMove() {
-		for(GOval e:trash) {
-			e.move(0, trashGen.nextInt(-2, 2));
+		for(int i = 0 ; i < trash.size() ; i++) {
+			//Move Down
+			trash.get(i).move(0, SPEED);
+			
+			//Move left/right
+			if( trashDiv.get(i) == 0 ) {
+				trashDirection.set(i, trashDirection.get(i) * -1);
+				trashDiv.set(i, trashGen.nextInt(i, TRASHDIV));
+			}
+			trashDiv.set(i, trashDiv.get(i) - 1);
+			trash.get(i).move(trashDirection.get(i) * SPEED, 0);
+			
 		}
 	}
 		
@@ -141,7 +158,6 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 		
 		if (source == crowtimerup) {
-			//jumpvelocity++;
 			gravitymotion++;
 			if (gravitymotion == 0) {
 				crowtimerup.stop();
@@ -169,6 +185,16 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			saaya.move(0, 5); }
 		}
 		
+		if (source == trashDown) {
+			System.out.println("startTrashDown");
+			numTimes++;
+			System.out.println(numTimes);
+			if (numTimes % 200 == 0) {
+				addTrash();
+				System.out.println(numTimes);
+			}
+			trashMove();
+		}
 		
 	}
 
