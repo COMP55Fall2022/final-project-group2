@@ -1,59 +1,82 @@
 package edu.pacific.comp55.starter;
-import javax.swing.Timer;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
-
-import acm.graphics.*;
-import acm.util.RandomGenerator;
 import java.util.ArrayList;
-import acm.util.*;
-import acm.program.*;
+import acm.graphics.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TTTGraphics extends GraphicsPane implements ActionListener{
-	public static final int PROGRAM_WIDTH = 1220;
-	public static final int PROGRAM_HEIGHT = 1096;
 	private TicTacToe board;
 	private MainApplication program;
 	private GImage background;
-	private GRect playerMove;
-	private GOval dogMove;
-	private GLine rowLine;
-	private GLine colLine;
+	// The below coordinates are the location where the actual playable area is in the background image.
+	private static final int GAMEBOARD_LEFT = 180;
+	private static final int GAMEBOARD_TOP = 100;
+	private static final int GAMEBOARD_RIGHT = 1038;
+	private static final int GAMEBOARD_BOTTOM = 956;
+	// We store references to all of the GImage game pieces used so that we can remove them later on. 
+	private ArrayList<GImage> pieces;
+	private boolean messageShowing = false;
+	private GLabel gameMessage;
 	
 	public TTTGraphics(MainApplication app) {
 		super();
 		program = app;
+		pieces = new ArrayList<>();
 		background = new GImage("TTTBG1.png", 0, 0);
 		board = new TicTacToe(3, 3);
+		board.setupBoard();
+		messageShowing = false;
 	}
-	
-	
+		
     private void drawGridLines() {
-    	for(int i = 1; i <= 2;i++) {
-        	rowLine = new GLine(0,i * (PROGRAM_WIDTH/3.4),PROGRAM_WIDTH,i*(PROGRAM_WIDTH/3.4));
+    	GLine rowLine;
+    	GLine colLine;
+    	double y, x;
+    	for(int i = 0; i <= board.get_num_rows();i++) {
+        	//rowLine = new GLine(0,i * (MainApplication.WINDOW_WIDTH/3.4),MainApplication.WINDOW_WIDTH,i*(MainApplication.WINDOW_WIDTH/3.4));
+    		y = i*((GAMEBOARD_BOTTOM - GAMEBOARD_TOP) / board.get_num_rows()) + GAMEBOARD_TOP;
+    		rowLine = new GLine(0, y , MainApplication.WINDOW_WIDTH, y); 
         	program.add(rowLine);
         }
-        for(int j = 1; j <=2;j++) {
-        	colLine = new GLine(j*(PROGRAM_HEIGHT/2.7),0,j*(PROGRAM_HEIGHT/2.7),PROGRAM_HEIGHT);
+        for(int j = 0; j <= board.get_num_cols();j++) {
+        	//colLine = new GLine(j*(MainApplication.WINDOW_HEIGHT/2.7),0,j*(MainApplication.WINDOW_HEIGHT/2.7),MainApplication.WINDOW_HEIGHT);
+        	x = j * ((GAMEBOARD_RIGHT - GAMEBOARD_LEFT) / board.get_num_cols()) + GAMEBOARD_LEFT;
+        	colLine = new GLine(x, 0, x, MainApplication.WINDOW_HEIGHT);
         	program.add(colLine);
         }
     }
     
-    private void drawDogMove() {
-    	int x = board.getDogX();
-    	int y = board.getDogY();
-    	dogMove = new GOval((PROGRAM_WIDTH/2.4) + 15,(PROGRAM_WIDTH/2.7) + 15,150,150);
-    	dogMove.setColor(Color.red);
-    	program.add(dogMove);
+    private void drawCat(double xPos, double yPos) {
+    	GImage piece = new GImage("cat.png", xPos, yPos);
+    	double offsetX = (((GAMEBOARD_RIGHT - GAMEBOARD_LEFT) / board.get_num_cols()) - piece.getWidth()) / 2.0;
+		double offsetY = (((GAMEBOARD_BOTTOM - GAMEBOARD_TOP) / board.get_num_rows()) - piece.getHeight()) / 2.0;
+		xPos += offsetX;
+		yPos += offsetY;
+		piece.setLocation(xPos, yPos);
+    	pieces.add(piece);
+    	program.add(piece);
     }
     
+    private void drawDog(double xPos, double yPos) {
+    	GImage piece = new GImage("dog.png", xPos, yPos);
+    	double offsetX = (((GAMEBOARD_RIGHT - GAMEBOARD_LEFT) / board.get_num_cols()) - piece.getWidth()) / 2.0;
+		double offsetY = (((GAMEBOARD_BOTTOM - GAMEBOARD_TOP) / board.get_num_rows()) - piece.getHeight()) / 2.0;
+		xPos += offsetX;
+		yPos += offsetY;
+		piece.setLocation(xPos, yPos);
+    	pieces.add(piece);
+    	program.add(piece);
+    }
+        
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("ACTION PERFORMED");
 	}
 	
 	@Override
@@ -61,31 +84,138 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		// TODO Auto-generated method stub
 		program.add(background);
 		drawGridLines();
-		drawDogMove();
-		System.out.println("Lines on");	
+		drawBoard();	
 	}
-
+	
+	private void drawBoard() {
+		for(int i = 0; i < board.get_num_rows(); i++) {
+			for(int j = 0; j < board.get_num_cols(); j++) {
+				double x = i * ((GAMEBOARD_RIGHT - GAMEBOARD_LEFT) / board.get_num_cols()) + GAMEBOARD_LEFT;
+				double y = j*((GAMEBOARD_BOTTOM - GAMEBOARD_TOP) / board.get_num_rows()) + GAMEBOARD_TOP;
+				if(board.board[i][j] == 'c') {
+					drawCat(x,y);
+				} else if (board.board[i][j] == 'd') {
+					drawDog(x,y);
+				}
+   		 	}
+   	 	}
+	}
+	
+	private void showMessage(String theMsg, boolean autoHide) {
+		gameMessage = new GLabel(theMsg);
+		
+		gameMessage.setFont(new Font("Serif", Font.BOLD, 32));
+		gameMessage.setColor(Color.red);
+		
+		// Center the message in the area above the gameboard
+		double xPos = (MainApplication.WINDOW_WIDTH - gameMessage.getWidth()) / 2.0;
+		double yPos = (GAMEBOARD_TOP - gameMessage.getHeight()) / 2.0;
+		gameMessage.setLocation(xPos, yPos);
+		program.add(gameMessage);
+		messageShowing = true;
+		if(autoHide) {
+			Timer timer = new Timer("messageTimer");
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					removeMessage();
+				}
+			}, 2000);
+		}
+	}
+	
+	private void removeMessage() {
+		program.remove(gameMessage);
+		this.messageShowing = false;
+	}
 
 	@Override
 	public void hideContents() {
 		// TODO Auto-generated method stub
-		
+		for(GImage p:pieces) {
+			program.remove(p);
+		}
+		if(this.messageShowing) {
+			this.removeMessage();
+		}
+	}
+	
+	private int calculate_row_from_mouse(int xPos) {
+		int row = (xPos - GAMEBOARD_LEFT) / (((GAMEBOARD_RIGHT - GAMEBOARD_LEFT) / board.get_num_cols()));
+		return row;
+	}
+	
+	private int calculate_col_from_mouse(int yPos) {
+		int col = (yPos - GAMEBOARD_TOP) / (((GAMEBOARD_BOTTOM - GAMEBOARD_TOP) / board.get_num_rows()));
+		return col;
+	}
+	
+	private void handleWin() {
+		System.out.println("handling win...");
+		if(board.checkDogWin()) {
+			System.out.println("You lost the game to the dog!!!");
+			this.showMessage("You lost the game to the dog!!!", false);
+		} else {
+			System.out.println("You Won!!!");
+			this.showMessage("You Won!!!", false);
+		}
+		// END THE GAME HERE. TODO: Add button to exit or restart the game
+	}
+	
+	private void doDogMove() {
+		board.dogMove();
+		this.drawBoard();
+		if (board.checkForWin()) {
+			System.out.println("checked for win...true");
+			this.handleWin();
+		} else {
+			System.out.println("checked for win...false");
+		}
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-		int x1 = x/400;
-		int y1 = y/350;
 		
-		System.out.println(x1 + " + " + y1);
-	}
-	
-//	public static void main(String[] args) {
-//	    new MainApplication().start();
-//		System.out.println("start app");
-//	}
-//	
-	 
+		// Handle any button that are outside of the gameboard here
+		
+		//return if the game is over
+		if(board.checkForWin()) {
+			return;
+		}
+		// Now check the row and col on the gameboard. Return if the calculated row and col is outside of the gameboard allowed values
+		int row = calculate_row_from_mouse(x);
+		int col = calculate_col_from_mouse(y);
+		boolean inGameBoard = false;
+		
+		if(row >= 0 && row < board.get_num_rows()) {
+			if(col >= 0 && col < board.get_num_cols()) {
+				inGameBoard = true;
+			}
+		}
+		if(!inGameBoard) {
+			return;
+		}
+		
+		if(board.board[row][col] =='b') {
+			board.board[row][col] = 'c';
+		} else {
+			System.out.println("Illegal Move");
+			showMessage("Illegal Move!!!", true);
+			return;
+		}
+		this.drawBoard();
+		if (board.checkForWin()) {
+			this.handleWin();
+		} else {
+			Timer timer = new Timer("dogmove");
+			timer.schedule(new TimerTask() {
+				@Override
+				public void run() {
+					doDogMove();
+				}
+			}, 1000L);
+		}
+	}	 
 }
