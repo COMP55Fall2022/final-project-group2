@@ -11,18 +11,18 @@ import acm.graphics.GRect;
 public class MenuPane extends GraphicsPane {
 	private MainApplication program; // you will use program to get access to
 										// all of the GraphicsProgram calls
-	private GButton rect;
-	private GButton rect2;
+	private GButton start;
+	private GButton quit;
 	private GImage background;
 	private GLabel title;
 
 	public MenuPane(MainApplication app) {
 		super();
 		program = app;
-		rect = new GButton("Start", 730, 650, 150, 100);
-		rect2 = new GButton("Quit", 400, 650, 150, 100);
-		rect.setFillColor(Color.GREEN);
-		rect2.setFillColor(Color.RED);
+		start = new GButton("Start", 730, 650, 150, 100);
+		quit = new GButton("Quit", 400, 650, 150, 100);
+		start.setFillColor(Color.GREEN);
+		quit.setFillColor(Color.RED);
 		background = new GImage("2.png", 0, 0);
 		title = new GLabel("SAYA'S BIG ADVENTURE", 300, 300);
 		title.setFont("TimesRoman");
@@ -35,8 +35,8 @@ public class MenuPane extends GraphicsPane {
 	public void displayGameObjectContents() {
 		program.add(background);
 		program.add(title);
-		program.add(rect);
-		program.add(rect2);
+		program.add(start);
+		program.add(quit);
 	}
 
 	@Override
@@ -58,10 +58,10 @@ public class MenuPane extends GraphicsPane {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
-		if (obj == rect) {
+		if (obj == start) {
 			program.switchToCrow();
 		}
-		else if (obj == rect2){
+		else if (obj == quit){
 			System.exit(0);
 		}
 		else {
