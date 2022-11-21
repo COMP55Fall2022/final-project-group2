@@ -9,6 +9,8 @@ public class TicTacToe {
 	 private boolean dogWin = false;
      public int dogMoveX = 0;
      public int dogMoveY = 0;
+     public int playerMoveX = 0;
+     public int playerMoveY = 0;
      private String xPlayer;
      private String yPlayer;
      
@@ -57,13 +59,7 @@ public class TicTacToe {
 		printBoard();
 	 }
      
-     public int getDogX() {
-    	 return dogMoveX;
-     }
-     public int getDogY() {
-    	 return dogMoveY;
-     }
-
+     //Grabs an input from user
 	 public void getPlayerMove() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Input row move: ");
@@ -81,9 +77,9 @@ public class TicTacToe {
 		}
 	 }
 
-	public boolean checkForWin() {
+	 public boolean checkForWin() {
 		return checkHorizontalWin() || checkVerticalWin() || checkDiagonalWin();
-	}
+	 }
 
 	 public boolean checkHorizontalWin() {
 		char array[] = new char[3];
@@ -98,7 +94,7 @@ public class TicTacToe {
 			else if(array[0] == 'd' && array[1] == 'd' && array[2] == 'd') {
 				System.out.println("You lose!");
 				setDogWin();
-				break;
+				return true;
 			}
 		}
 		return false;
@@ -107,9 +103,19 @@ public class TicTacToe {
 	 public void setDogWin() {
 		dogWin = true;
 	 }
+	 
 	 public boolean checkDogWin() {
 		return dogWin;
 	 }
+	 
+	 public int get_num_rows() {
+		 return rows;
+	 }
+	 
+	 public int get_num_cols() {
+		 return cols;
+	 }
+	 
 	 public boolean checkVerticalWin() {
 		char array[] = new char[3];
 		for(int i = 0; i < 3; i++) {
@@ -123,7 +129,7 @@ public class TicTacToe {
 			else if(array[0] == 'd' && array[1] == 'd' && array[2] == 'd') {
 				System.out.println("You lose!");
 				setDogWin();
-				break;
+				return true;
 			}
 		}
 		return false;
@@ -157,6 +163,7 @@ public class TicTacToe {
         	return true;
         }else if((board[0][0] == 'd' && board[1][1] == 'd' && board[2][2] == 'd')|| (board[0][2] == 'd' && board[1][1] == 'd' && board[2][0] == 'd')) {
         	System.out.println("You lose!");
+        	return true;
         }
         return false;
         
