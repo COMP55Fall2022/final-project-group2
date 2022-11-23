@@ -17,15 +17,23 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GImage scene1;
 	private GImage roses;
 	private GImage rosesdialogue;
+	private GImage blueflower;
+	private GImage blueflowertext;
+	private GImage sun;
 	Timer rosestimer = new Timer(40, this);
-	int roseCountdown = 0;
+	Timer blueflowertimer = new Timer(40, this);
+	int dialogueCountdown = 0;
+	
 
 	public SetScenes(MainApplication app) {
 		super();
 		program = app;
 		scene1 = new GImage("scene1.png", 0, 0);
 		roses = new GImage("roses.png", -165, 178);
-//		rosetext = new GLabel("This is not the main object, but keep trying!", 160, 170);
+		blueflower = new GImage("blueflower.png", 795, 425);
+		sun = new GImage("sun.png", 400, -20);
+		sun.scale(0.15);
+		
 
 	}
 
@@ -35,6 +43,8 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	public void showContents() {
 		program.add(scene1);
 		program.add(roses);
+		program.add(blueflower);
+		program.add(sun);
 
 	}
 
@@ -50,28 +60,51 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 
 	}
 
+	
+	
+	// These functions check if the user is clicking on the interactable object and 
+	//starts it's timer
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == roses) {
 			rosesdialogue = new GImage("rosesdialogue.png", 65, 200);
-			program.add(rosesdialogue );
+			program.add(rosesdialogue);
 			rosestimer.start();
 
 		}
+		
+		if (obj == blueflower) {
+		blueflowertext = new GImage("blueflowerdialogue.png", 670, 275);
+		blueflowertext.scale(0.5);
+		program.add(blueflowertext);
+		blueflowertimer.start();
+		}
 	}
 
+	
+	//These functions create and remove the dialogues that get prompted using their own timers
 	@Override
 	public void actionPerformed(ActionEvent g) {
 		Object source = g.getSource();
 
 		if (source == rosestimer) {
-			roseCountdown++;
-			System.out.println(roseCountdown);
+			dialogueCountdown++;
+			System.out.println(dialogueCountdown);
 
-			if (roseCountdown > 100) {
+			if (dialogueCountdown > 100) {
 				program.remove(rosesdialogue);
-				roseCountdown = 0;
+				dialogueCountdown = 0;
 				rosestimer.stop();
+			}
+		}
+		
+		if (source == blueflowertimer) {
+			dialogueCountdown++;
+			
+			if (dialogueCountdown > 100) {
+				program.remove(blueflowertext);
+				dialogueCountdown = 0;
+				blueflowertimer.stop();
 			}
 		}
 

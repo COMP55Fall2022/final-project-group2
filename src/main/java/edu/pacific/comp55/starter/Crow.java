@@ -209,7 +209,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 		
 		trashsaaya();
-		//removetrash();
+		removetrash();
 		
 	}
 
@@ -284,7 +284,14 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 	
 	
-	
+	public void removetrash() {
+		if  (istrashtouchingsaaya()) {
+			for (int i=0; i <trash.size(); i++) {
+				trash.remove(i);
+			}
+		}
+	}
+
 	
 
 
