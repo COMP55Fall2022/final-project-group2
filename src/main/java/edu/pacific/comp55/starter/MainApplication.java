@@ -25,6 +25,7 @@ public class MainApplication extends GraphicsApplication {
 		crowGame = new Crow(this);
 		scene1 = new SetScenes(this);
 		tictactoe = new TTTGraphics(this);
+		mouse = new MouseGame(this);
 		setupInteractions();
 		switchToMenu();
 	}
