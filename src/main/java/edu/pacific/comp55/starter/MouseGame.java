@@ -32,6 +32,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	public MouseGame(MainApplication app) {
 		super();
 		program = app;
+		mouseList = new ArrayList<GImage>();
 		background = new GImage("mousebg.png", 0, 0);
 		
 	}
