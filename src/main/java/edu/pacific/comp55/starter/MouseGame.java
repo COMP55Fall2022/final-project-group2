@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import acm.graphics.*;
-import acm.program.GraphicsProgram;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,7 +25,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private static final int GAMEBOARD_RIGHT = 1038;
 	private static final int GAMEBOARD_BOTTOM = 956;
 	//Mouse scaling sizes
-	private static final double[] scaleSizes = new double[]{0.85, 0.5, 0.25};
+	private static final double[] scaleSizes = new double[]{0.75, 0.5, 0.25};
 	
 	
 	public MouseGame(MainApplication app) {
@@ -39,20 +38,55 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	
 	
 	private void addMouse() {
-		int x = (int) (Math.random() * (GAMEBOARD_LEFT - GAMEBOARD_RIGHT) + GAMEBOARD_BOTTOM);
-		int y = (int) (Math.random() * (GAMEBOARD_TOP - GAMEBOARD_BOTTOM) + GAMEBOARD_BOTTOM);
-		int mouseScaleSize = (int) (Math.random() * 3); //Scales the mouse down since the original image is too big
-		
+		int x = (int) (Math.random() * (GAMEBOARD_LEFT - GAMEBOARD_RIGHT) + GAMEBOARD_RIGHT);
+		int y = (int) (Math.random() * (GAMEBOARD_BOTTOM - GAMEBOARD_TOP) + GAMEBOARD_TOP);
 		mouse = new GImage("genericMouse.png", x, y);
-		mouse.scale(scaleSizes[mouseScaleSize]);
+		scaleMouse(mouse);
 		
+		
+		if(!checkForOverlap(mouse)) {
+			boolean temp = checkForOverlap(mouse);
+			while(!temp) {
+				int x1 = (int) (Math.random() * (GAMEBOARD_LEFT - GAMEBOARD_RIGHT) + GAMEBOARD_RIGHT);
+				int y1 = (int) (Math.random() * (GAMEBOARD_BOTTOM - GAMEBOARD_TOP) + GAMEBOARD_TOP);
+				mouse.setLocation(x1, y1);
+				temp = checkForOverlap(mouse);
+			}
+		}
 		mouseList.add(mouse);
 		program.add(mouse);
 	}
 	
-	//Checks if the any mice are overlapping and moves them appropriately
-	private void checkForOverlap(int x, int y) {
+	//Scales the mouse down since the original image is too big. 
+	//Chances for a default size is 50%, scaled down half is 30%, and scaled down to 25% is 20% 
+	private void scaleMouse(GImage m) {
+		int mouseScaleSize = (int) (Math.random() * 10); 
+		int scaleNum = 0;
+		if(mouseScaleSize >= 5) {
+			scaleNum = 0;
+		}
+		else if(mouseScaleSize < 5 && mouseScaleSize >= 2) {
+			scaleNum = 1;
+		}
+		else {
+			scaleNum = 2;
+		}
+		mouse.scale(scaleSizes[scaleNum]);
 		
+	}
+	
+	//Checks if the any mice are overlapping and returns false if overlapped.
+	private boolean checkForOverlap(GImage m) {
+		GRectangle mouseBounds = m.getBounds();
+		for (int i = 0; i < mouseList.size(); i++) {
+			GRectangle miceListBounds = mouseList.get(i).getBounds();
+
+			if (mouseBounds.intersects(miceListBounds)) {
+				System.out.println("INTERSECTION OCCURED!");
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	@Override
