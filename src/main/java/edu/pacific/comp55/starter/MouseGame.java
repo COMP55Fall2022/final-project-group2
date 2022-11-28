@@ -72,7 +72,18 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		GPoint point = new GPoint(e.getX(), e.getY());
+		GObject mouse = program.getElementAt(e.getX(), e.getY());
+		if(mouse != null) {
+			for(GImage g : mouseList) {
+				if(mouse == g) {
+					program.remove(g);
+					mouseList.remove(g);
+					System.out.println(mouseList.size());
+					break;
+				}
+			}
+		}
+		
 	}
 
 	@Override
