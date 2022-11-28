@@ -19,6 +19,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private GImage mouse;
 	private GImage background;
 	private MainApplication program;
+	private Clock clock;
 	// The below coordinates are the location where the actual playable area is in the background image.
 	private static final int GAMEBOARD_LEFT = 180;
 	private static final int GAMEBOARD_TOP = 100;
@@ -33,7 +34,6 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		program = app;
 		mouseList = new ArrayList<GImage>();
 		background = new GImage("mousebg.png", 0, 0);
-		
 	}
 	
 	
@@ -58,7 +58,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	}
 	
 	//Scales the mouse down since the original image is too big. 
-	//Chances for a default size is 50%, scaled down half is 30%, and scaled down to 25% is 20% 
+	//Chances for a default size is 50%, scaled down half is 30%, and scaled down to a quarter is 20% 
 	private void scaleMouse(GImage m) {
 		int mouseScaleSize = (int) (Math.random() * 10); 
 		int scaleNum = 0;
@@ -93,7 +93,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	public void showContents() {
 		// TODO Auto-generated method stub
 		program.add(background);
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 7; i++) {
 			addMouse();
 		}
 	}

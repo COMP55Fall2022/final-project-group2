@@ -11,7 +11,7 @@ public class Clock extends GraphicsProgram implements ActionListener {
 	private static final String clockTitle = "Time: ";
 	private static int timerTime = 1000;
 	
-	private Timer timer = new Timer(timerTime, this);;
+	private Timer timer = new Timer(timerTime, this);
 	private String clockString;
 	private GLabel label;
 	private int time;
