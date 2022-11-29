@@ -22,9 +22,11 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private MainApplication program;
 	private GImage crowgamebackground;
 	private GImage saaya;
-	private GLabel saayatrash;
+	//private GLabel livescounter;
+	private int lives =3;
 	public static final int WINDOW_WIDTH = 1220;
 	public static final int WINDOW_HEIGHT = 1096;
+	GLabel livescounter = new GLabel(String.valueOf(lives), 50, 50);
 	
 	
 	//For trash
@@ -49,12 +51,14 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	int SAAYASIZE_X = 164;
 	int jumpvelocity = -20;
 	
+	
 
 	public Crow(MainApplication app) {
 		this.program = app;
 		crowgamebackground = new GImage("7.png", 0, 0);
 		saaya = new GImage("cat.png", START_X, START_Y);
-		saayatrash = new GLabel("hello", 0, 300);
+		
+	
 		
 		//For trash
 		System.out.println("startapp");
@@ -63,6 +67,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		trashDiv = new ArrayList<Integer>();
 		trashDirection = new ArrayList<Integer>();
 		numTimes = 0;
+		
+		//livescounter
+		
+		livescounter.setColor(Color.black);
 		
 		
 	}
@@ -107,6 +115,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 	
 	
+	
+	
+	
 
 	public GOval makeTrash() {
 		GOval temp = new GOval(trashGen.nextInt(WINDOW_WIDTH), 180 , SIZE, SIZE);
@@ -134,6 +145,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void showGameObjectContents() {
 		program.add(crowgamebackground);
 		program.add(saaya);
+		program.add(livescounter);
 		trashDown.start();
 	}
 		
@@ -145,6 +157,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	@Override
 	public void hideContents() {
 		program.remove(crowgamebackground);
+		program.remove(saaya);
+		program.remove(livescounter);
+		trashDown.stop();
 
 	}
 	
@@ -154,6 +169,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	@Override
 	//this function uses key events and starts movement 
 	public void actionPerformed(ActionEvent e) {
+	
 		Object source = e.getSource();
 		
 		if (source == crowtimerleft) {
@@ -208,8 +224,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			trashMove();
 		}
 		
-		trashsaaya();
-		removetrash();
+	
+		istrashtouchingsaaya();
+		endgame();
+		livescounter.setLabel(String.valueOf(lives));
 		
 	}
 
@@ -256,45 +274,40 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		crowtimerdown.stop();
 	}
 
-
-	public void trashsaaya() {
-		GRectangle saayasbounds = saaya.getBounds();
-
-		for (int i = 0; i < trash.size(); i++) {
-			GRectangle trashbounds = trash.get(i).getBounds();
-
-			if (saayasbounds.intersects(trashbounds)) {
-				System.out.println("INTERSECTION OCCURED!");
-			}
-		}
-
-	}
-
 	public boolean istrashtouchingsaaya() {
+		
 		GRectangle saayasbounds = saaya.getBounds();
-
 		for (int i = 0; i < trash.size(); i++) {
-			GRectangle trashbounds = trash.get(i).getBounds();
 
+			GRectangle trashbounds = trash.get(i).getBounds();
 			if (saayasbounds.intersects(trashbounds)) {
-				return true;
+				lives--;
+				System.out.println("the number of lives left is:");
+				System.out.println(lives);
+			
+				program.remove(trash.get(i));
+				trash.remove(i);
+				
+			
 			}
+
 		}
 		return false;
+
+	}
+
+	
+	public void endgame() {
+		if (lives == 0) {
+			lives =3;
+			program.switchToMenu();
+		}
 	}
 	
-	
-	public void removetrash() {
-		if  (istrashtouchingsaaya()) {
-			for (int i=0; i <trash.size(); i++) {
-				trash.remove(i);
-			}
+	public void wongame() {
+		if (lives >0) {
+			System.out.println("You won the game!");
 		}
 	}
 
-	
-
-
 }
-
-
