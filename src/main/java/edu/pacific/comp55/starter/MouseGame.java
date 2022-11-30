@@ -120,11 +120,11 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		if(mouseObj != null) {
 			for(GImage g : mouseList) {
 				if(mouseObj == g) {
-					if(g.getWidth() == mouse.getWidth() * 0.75) {
+					if(g.getWidth() == 231.75) {
 						addScore(5);
 						score.setLabel("Score: " + points);
 					}
-					else if(g.getWidth() == mouse.getWidth() * 0.5) {
+					else if(g.getWidth() == 154.5) {
 						addScore(10);
 						score.setLabel("Score: " + points);
 					}
