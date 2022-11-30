@@ -123,14 +123,17 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 					if(g.getWidth() == 231.75) {
 						addScore(5);
 						score.setLabel("Score: " + points);
+						addMouse();
 					}
 					else if(g.getWidth() == 154.5) {
 						addScore(10);
 						score.setLabel("Score: " + points);
+						addMouse();
 					}
 					else {
 						addScore(15);
 						score.setLabel("Score: " + points);
+						addMouse();
 					}
 					program.remove(g);
 					mouseList.remove(g);
