@@ -47,7 +47,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				moveMice();
+				moveMice(); //test
 			}
 		}, 10);
 	}
