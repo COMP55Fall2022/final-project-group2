@@ -36,7 +36,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		program = app;
 		mouseList = new ArrayList<GImage>();
 		background = new GImage("mousebg.png", 0, 0);
-		score = new GLabel("Score: " + 0, 275, 100);
+		score = new GLabel("Score: " + points, 275, 100);
 		score.scale(5);
 		score.setColor(Color.white);
 	}
@@ -116,10 +116,19 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		GObject mouse = program.getElementAt(e.getX(), e.getY());
-		if(mouse != null) {
+		GObject mouseObj = program.getElementAt(e.getX(), e.getY());
+		if(mouseObj != null) {
 			for(GImage g : mouseList) {
-				if(mouse == g) {
+				if(mouseObj == g) {
+					if(g.getWidth() == mouse.getWidth() * 0.75) {
+						addScore(5);
+					}
+					else if(g.getWidth() == mouse.getWidth() * 0.5) {
+						addScore(10);
+					}
+					else {
+						addScore(15);
+					}
 					program.remove(g);
 					mouseList.remove(g);
 					System.out.println(mouseList.size());
