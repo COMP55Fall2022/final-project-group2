@@ -19,7 +19,9 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private GImage mouse;
 	private GImage background;
 	private MainApplication program;
-	private Clock clock;
+	private GLabel score; 
+	private int points;
+	
 	// The below coordinates are the location where the actual playable area is in the background image.
 	private static final int GAMEBOARD_LEFT = 175;
 	private static final int GAMEBOARD_TOP = 100;
@@ -27,7 +29,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private static final int GAMEBOARD_BOTTOM = 842;
 	//Mouse scaling sizes
 	private static final double[] scaleSizes = new double[]{0.75, 0.5, 0.25};
-	private GLabel score; 
+
 	
 	public MouseGame(MainApplication app) {
 		super();
@@ -90,6 +92,10 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 			}
 		}
 		return true;
+	}
+	
+	private void addScore(int s) {
+		points += s;
 	}
 	
 	@Override
