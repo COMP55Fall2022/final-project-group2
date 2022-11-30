@@ -20,8 +20,11 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GImage blueflower;
 	private GImage blueflowertext;
 	private GImage sun;
+	private GImage sunscreen;
+	private boolean suntimerstart = false;
 	Timer rosestimer = new Timer(40, this);
 	Timer blueflowertimer = new Timer(40, this);
+	Timer suntimer = new Timer(40, this);
 	int dialogueCountdown = 0;
 	
 
@@ -36,6 +39,9 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 
 	}
+	
+	
+	
 
 	// if we win the game we switch to scene1
 
@@ -66,19 +72,30 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	//starts it's timer
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
-		if (obj == roses) {
+		if (obj == roses && !suntimerstart) {
 			rosesdialogue = new GImage("rosesdialogue.png", 65, 200);
 			program.add(rosesdialogue);
 			rosestimer.start();
 
 		}
 		
-		if (obj == blueflower) {
+		if (obj == blueflower && !suntimerstart) {
 		blueflowertext = new GImage("blueflowerdialogue.png", 670, 275);
 		blueflowertext.scale(0.5);
 		program.add(blueflowertext);
 		blueflowertimer.start();
 		}
+		
+		
+		if (obj == sun) {
+			sunscreen = new GImage("sunscreen.png", 350, 200);
+			sunscreen.scale(0.5);
+			program.add(sunscreen);
+			suntimer.start();
+			suntimerstart = true;
+		}
+		
+	
 	}
 
 	
@@ -106,6 +123,10 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 				dialogueCountdown = 0;
 				blueflowertimer.stop();
 			}
+		}
+		
+		if (source == suntimer) {
+			
 		}
 
 	}
