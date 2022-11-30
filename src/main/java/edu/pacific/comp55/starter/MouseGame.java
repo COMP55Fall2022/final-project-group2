@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import acm.graphics.*;
+import acm.util.RandomGenerator;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,11 +23,12 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private MainApplication program;
 	private GLabel score; 
 	private int points;
+	private Timer mouseMovement;
 	
 	// The below coordinates are the location where the actual playable area is in the background image.
-	private static final int GAMEBOARD_LEFT = 175;
+	private static final int GAMEBOARD_LEFT = 185;
 	private static final int GAMEBOARD_TOP = 100;
-	private static final int GAMEBOARD_RIGHT = 975;
+	private static final int GAMEBOARD_RIGHT = 970;
 	private static final int GAMEBOARD_BOTTOM = 842;
 	//Mouse scaling sizes
 	private static final double[] scaleSizes = new double[]{0.75, 0.5, 0.25};
@@ -39,6 +42,14 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		score = new GLabel("Score: " + points, 275, 100);
 		score.scale(5);
 		score.setColor(Color.white);
+		mouseMovement = new Timer("mouseTimer");
+		mouseMovement.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				moveMice();
+			}
+		}, 10);
 	}
 	
 	
@@ -94,6 +105,14 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		return true;
 	}
 	
+	
+	private void moveMice() {
+		RandomGenerator gen = new RandomGenerator();
+		for(GImage g : mouseList) {
+			g.move(10, 10);
+		}
+	}
+	
 	private void addScore(int s) {
 		points += s;
 	}
@@ -111,6 +130,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		moveMice();
 		System.out.println("ACTION PERFORMED");
 	}
 	
