@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import acm.graphics.GImage;
@@ -22,9 +23,18 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private MainApplication program;
 	private GImage crowgamebackground;
 	private GImage saaya;
-	private GLabel saayatrash;
+	private GImage crowlost;
+	private GImage crowin;
+	private GButton tryagain;
+	private GButton mainmenue;
+	private GButton scene1;
+	int minutecount =0;
+	//private GLabel livescounter;
+	private int lives =3;
 	public static final int WINDOW_WIDTH = 1220;
 	public static final int WINDOW_HEIGHT = 1096;
+	GLabel livescounter = new GLabel(String.valueOf(lives), 50, 50);
+	private Crow newcrow = this;
 	
 	
 	//For trash
@@ -37,24 +47,40 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private ArrayList<Integer> trashDirection;
 	private RandomGenerator trashGen;
 	private int numTimes;
+	Timer sec = new Timer(1000, this);
 	Timer trashDown = new Timer(40, this);
-
 	Timer crowtimerdown = new Timer(40, this);
 	Timer crowtimerleft = new Timer(40, this);
 	Timer crowtimeright = new Timer(40, this);
 	Timer crowtimerup = new Timer(40, this);
 	Timer gravitytimer = new Timer(40, this);
+	Timer crowlosttimer = new Timer(40, this);
 	int gravitymotion = JUMP_HEIGHT;
 	int SAAYASIZE_Y = 126;
 	int SAAYASIZE_X = 164;
 	int jumpvelocity = -20;
+	
 	
 
 	public Crow(MainApplication app) {
 		this.program = app;
 		crowgamebackground = new GImage("7.png", 0, 0);
 		saaya = new GImage("cat.png", START_X, START_Y);
-		saayatrash = new GLabel("hello", 0, 300);
+		
+		//loostgame
+		crowlost = new GImage("crowlost.png",350, 200);
+		crowlost.scale(0.5);
+		tryagain = new GButton("Try again", 655, 500, 100, 100);
+		mainmenue = new GButton("Main menue", 455, 500, 100, 100);
+		tryagain.setFillColor(Color.GREEN);
+		mainmenue.setFillColor(Color.RED);
+		
+		//wingame
+		crowin = new GImage("crowin.png", 350,200);
+		scene1 = new GButton("Next scene", 655, 500, 100, 100);
+		scene1.setFillColor(Color.GREEN);
+		crowin.scale(0.5);
+
 		
 		//For trash
 		System.out.println("startapp");
@@ -63,6 +89,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		trashDiv = new ArrayList<Integer>();
 		trashDirection = new ArrayList<Integer>();
 		numTimes = 0;
+		
+		//livescounter
+		
+		livescounter.setColor(Color.black);
 		
 		
 	}
@@ -107,6 +137,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 	
 	
+	
+	
+	
 
 	public GOval makeTrash() {
 		GOval temp = new GOval(trashGen.nextInt(WINDOW_WIDTH), 180 , SIZE, SIZE);
@@ -134,7 +167,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void showGameObjectContents() {
 		program.add(crowgamebackground);
 		program.add(saaya);
+		program.add(livescounter);
+		crowlosttimer.stop();
 		trashDown.start();
+		sec.start();
 	}
 		
 	@Override
@@ -145,7 +181,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	@Override
 	public void hideContents() {
 		program.remove(crowgamebackground);
-
+		program.remove(saaya);
+		program.remove(livescounter);
+		trashDown.stop();
+		removeWinloseScreen();
 	}
 	
 	
@@ -154,6 +193,8 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	@Override
 	//this function uses key events and starts movement 
 	public void actionPerformed(ActionEvent e) {
+	
+	System.out.println(minutecount);
 		Object source = e.getSource();
 		
 		if (source == crowtimerleft) {
@@ -208,8 +249,23 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			trashMove();
 		}
 		
-		trashsaaya();
-		removetrash();
+		if (source == crowlosttimer) {
+			program.add(crowlost);
+			program.add(tryagain);
+			program.add(mainmenue);
+			stopTimers();
+			
+		}
+		
+		if (source == sec) {
+			minutecount++;
+		}
+		
+	
+		istrashtouchingsaaya();
+		endgame();
+		wongame();
+		livescounter.setLabel(String.valueOf(lives));
 		
 	}
 
@@ -256,45 +312,98 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		crowtimerdown.stop();
 	}
 
-
-	public void trashsaaya() {
-		GRectangle saayasbounds = saaya.getBounds();
-
-		for (int i = 0; i < trash.size(); i++) {
-			GRectangle trashbounds = trash.get(i).getBounds();
-
-			if (saayasbounds.intersects(trashbounds)) {
-				System.out.println("INTERSECTION OCCURED!");
-			}
-		}
-
-	}
-
 	public boolean istrashtouchingsaaya() {
+		
 		GRectangle saayasbounds = saaya.getBounds();
-
 		for (int i = 0; i < trash.size(); i++) {
-			GRectangle trashbounds = trash.get(i).getBounds();
 
+			GRectangle trashbounds = trash.get(i).getBounds();
 			if (saayasbounds.intersects(trashbounds)) {
-				return true;
+				lives--;
+				System.out.println("the number of lives left is:");
+				System.out.println(lives);
+			
+				program.remove(trash.get(i));
+				trash.remove(i);
+				
+			
 			}
+
 		}
 		return false;
+
 	}
+
 	
 	
-	public void removetrash() {
-		if  (istrashtouchingsaaya()) {
-			for (int i=0; i <trash.size(); i++) {
-				trash.remove(i);
-			}
+	public void endgame() {
+		if (lives == 0) {
+			sec.stop();
+			crowlosttimer.start();
+			
 		}
 	}
 
-	
+	public void wongame() {
+		if (lives > 0 && minutecount == 60) {
+			stopTimers();
+			minutecount = 0;
+			program.add(crowin);
+			program.add(mainmenue);
+			program.add(scene1);
+		}
+	}
 
+	public void mousePressed(MouseEvent e) {
+		GObject obj = program.getElementAt(e.getX(), e.getY());
+		if (obj == tryagain) {
+			//crowlosttimer.stop();
+			removeWinloseScreen();
+			program.switchToCrow();
+			//startTimers();
+			lives = 3;
+		}
+		 if (obj == mainmenue){
+			 lives = 3;
+			 //removeWinloseScreen();
+			 crowlosttimer.stop();
+			 program.switchToMenu();
+			 
+		}
+		 
+		 if (obj == scene1) {
+			 lives =3;
+			 program.switchToScene1();
+		 }
+		else {
+			
+		}
+	}
+	
+	public void stopTimers() {
+		crowtimerdown.stop();
+		trashDown.stop();
+		crowtimerdown.stop();
+		crowtimerleft.stop();
+		crowtimeright.stop();
+		gravitytimer.stop();
+		crowtimerup.stop();
+	}
+	
+	public void startTimers() {
+		trashDown.start();
+		crowtimerdown.start();
+		crowtimerleft.start();
+		crowtimeright.start();
+		crowtimerup.start();
+		gravitytimer.start();
+	}
+	
+	public void removeWinloseScreen() {
+		program.remove(crowlost);
+		program.remove(tryagain);
+		program.remove(mainmenue);
+		program.remove(crowin);
+	}
 
 }
-
-
