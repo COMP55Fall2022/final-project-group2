@@ -13,6 +13,7 @@ public class MainApplication extends GraphicsApplication {
 	private SetScenes scene1;
 	private TTTGraphics tictactoe;
 	private MouseGame mouse;
+	private Basket basketGame;
 
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -22,8 +23,8 @@ public class MainApplication extends GraphicsApplication {
 		System.out.println("Hello, world!");
 		somePane = new SomePane(this);
 		menu = new MenuPane(this);
-		crowGame = new Crow(this);
-		scene1 = new SetScenes(this);
+		
+		//scene1 = new SetScenes(this);
 		tictactoe = new TTTGraphics(this);
 		mouse = new MouseGame(this);
 		setupInteractions();
@@ -32,11 +33,20 @@ public class MainApplication extends GraphicsApplication {
 	
 	public void switchToCrow() {
 		playRandomSound();
+		crowGame = new Crow(this);
 		count++;
 		switchToScreen(crowGame);
 	}
 	
+	public void switchToBasket() {
+		playRandomSound();
+		basketGame = new Basket(this);
+		count++;
+		switchToScreen(basketGame);
+	}
+	
 	public void switchToScene1() {
+		scene1 = new SetScenes(this);
 		switchToScreen(scene1);
 	}
 
