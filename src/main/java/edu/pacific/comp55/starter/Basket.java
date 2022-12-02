@@ -21,17 +21,18 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener{
 	
 	// apple movements
 	public static final int SIZE = 40;
-	public static final int SPEED = 5;
+	public static final int SPEED = 10;
 	public static final int MS = 70;
-	private static final int TRASHDIV = 50;
+	private static final int APPLEDIV = 50;
 	private ArrayList<GImage> apple;
 	private ArrayList<Integer> appleDiv;
 	private ArrayList<Integer> appleDirection;
 	private RandomGenerator appleGen;
 	private int numTimes;
 	Timer appleDown = new Timer(40, this);
-
-
+	
+	// basket
+	
 
 	
 
@@ -49,13 +50,11 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener{
 	}
 
 	//For apples
-
-	//For trash
-	private void addTrash() {
-		GImage eTrash = makeTrash();
+	private void addApples() {
+		GImage eTrash = makeApple();
 		Integer temp = (appleGen.nextBoolean() == true) ? 1 : -1;
 		appleDirection.add(temp);
-		appleDiv.add(appleGen.nextInt(TRASHDIV));
+		appleDiv.add(appleGen.nextInt(APPLEDIV));
 		apple.add(eTrash);
 		program.add(eTrash);
 		
@@ -63,27 +62,17 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener{
 	
 	
 	
-	
-	
 
-	public GImage makeTrash() {
+	public GImage makeApple() {
 		GImage temp = new GImage("apple.png", appleGen.nextInt(WINDOW_WIDTH), 180);
-		temp.scale(0.45);
+		temp.scale(0.25);
 		return temp;
 	}
 		
-	private void trashMove() {
+	private void appleMove() {
 		for(int i = 0 ; i < apple.size() ; i++) {
 			//Move Down
 			apple.get(i).move(0, SPEED);
-			
-			//Move left/right
-			if( appleDiv.get(i) == 0 ) {
-				appleDirection.set(i, appleDirection.get(i) * -1);
-				appleDiv.set(i, appleGen.nextInt(i, TRASHDIV));
-			}
-			appleDiv.set(i, appleDiv.get(i) - 1);
-			apple.get(i).move(appleDirection.get(i) * SPEED, 0);
 			
 		}
 	}
@@ -102,11 +91,11 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener{
 		if (source == appleDown) {
 			numTimes++;
 			if (numTimes % 60 == 0) {
-				addTrash();
-				addTrash();
+				addApples();
+
 
 			}
-			trashMove();
+			appleMove();
 		}
 	}
 
