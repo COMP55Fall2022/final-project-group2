@@ -55,9 +55,9 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	Timer suntimer = new Timer(40, this);
 	
 	//Timers needed for scene 2
-	//private boolean crowtimerstart = false;
-	//Timer desertpathtimer = new Timer(40, this);
-	//Timer crowtimer = new Timer(40, this);
+	private boolean crowtimerstart = false;
+	Timer desertpathtimer = new Timer(40, this);
+	Timer crowtimer = new Timer(40, this);
 	
 	//Timers needed for scene 3
 	
@@ -97,6 +97,9 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		program.add(roses);
 		program.add(blueflower);
 		program.add(sun);
+		
+		//scene 2
+		program.add(scene2);
 
 	}
 
@@ -112,12 +115,15 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 
 	}
 
-	
+	public void setscene2() {
+		program.add(scene2);
+	}
 	
 	// These functions check if the user is clicking on the interactable object and 
 	//starts it's timer
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
+		
 		if (obj == roses && !suntimerstart) {
 			rosesdialogue = new GImage("rosesdialogue.png", 65, 200);
 			program.add(rosesdialogue);
@@ -126,10 +132,10 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == blueflower && !suntimerstart) {
-		blueflowertext = new GImage("blueflowerdialogue.png", 670, 275);
-		blueflowertext.scale(0.5);
-		program.add(blueflowertext);
-		blueflowertimer.start();
+			blueflowertext = new GImage("blueflowerdialogue.png", 670, 275);
+			blueflowertext.scale(0.5);
+			program.add(blueflowertext);
+			blueflowertimer.start();
 		}
 		
 		
@@ -141,6 +147,9 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 			suntimerstart = true;
 		}
 		
+		if (obj == desertpath && !crowtimerstart) {
+			//desertpathtext = new GImage("desertpathtext.png, 300, 300");
+		}
 	
 	}
 
