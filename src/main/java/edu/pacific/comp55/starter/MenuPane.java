@@ -59,7 +59,8 @@ public class MenuPane extends GraphicsPane {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == start) {
-			program.switchToCrow();
+			//program.switchToTTT();
+			program.switchToMouse();
 		}
 		else if (obj == quit){
 			System.exit(0);

@@ -22,6 +22,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 	private ArrayList<GImage> pieces;
 	private boolean messageShowing = false;
 	private GLabel gameMessage;
+	private GButton tryagain;
 	
 	public TTTGraphics(MainApplication app) {
 		super();
@@ -90,8 +91,8 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 	private void drawBoard() {
 		for(int i = 0; i < board.get_num_rows(); i++) {
 			for(int j = 0; j < board.get_num_cols(); j++) {
-				double x = i * ((GAMEBOARD_RIGHT - GAMEBOARD_LEFT) / board.get_num_cols()) + GAMEBOARD_LEFT;
-				double y = j*((GAMEBOARD_BOTTOM - GAMEBOARD_TOP) / board.get_num_rows()) + GAMEBOARD_TOP;
+				double y = i * ((GAMEBOARD_RIGHT - GAMEBOARD_LEFT) / board.get_num_cols()) + GAMEBOARD_TOP;
+				double x = j*((GAMEBOARD_BOTTOM - GAMEBOARD_TOP) / board.get_num_rows()) + GAMEBOARD_LEFT;
 				if(board.board[i][j] == 'c') {
 					drawCat(x,y);
 				} else if (board.board[i][j] == 'd') {
@@ -138,6 +139,8 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		if(this.messageShowing) {
 			this.removeMessage();
 		}
+		program.remove(tryagain);
+		tryagain = null;
 	}
 	
 	private int calculate_row_from_mouse(int xPos) {
@@ -150,16 +153,37 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		return col;
 	}
 	
+	private void displayResetButton() {
+		tryagain = new GButton("Try again", 655, 500, 100, 100);
+		tryagain.setFillColor(Color.GREEN);
+		program.add(tryagain);
+	}
+	private void resetGame() {
+		this.hideContents();
+		this.removeMessage();
+		board = new TicTacToe(3, 3);
+		board.setupBoard();
+	}
+	
 	private void handleWin() {
 		System.out.println("handling win...");
-		if(board.checkDogWin()) {
-			System.out.println("You lost the game to the dog!!!");
-			this.showMessage("You lost the game to the dog!!!", false);
-		} else {
+		if (board.getYouWin()) {
 			System.out.println("You Won!!!");
 			this.showMessage("You Won!!!", false);
+			this.exitGame();
+		}
+		else if (board.getDogWin()) {
+			System.out.println("You lost the game to the dog!!!");
+			this.showMessage("You lost the game to the dog!!!", false);
+			this.offerToReplay();
 		}
 		// END THE GAME HERE. TODO: Add button to exit or restart the game
+	}
+	
+	private void handleTie() {
+		System.out.println("Determined it is a tie!!!");
+		this.showMessage("It's a Tie Game!!!", false);
+		this.offerToReplay();
 	}
 	
 	private void doDogMove() {
@@ -170,7 +194,19 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 			this.handleWin();
 		} else {
 			System.out.println("checked for win...false");
+			if(board.checkForTie()) {
+				this.handleTie();
+			}
 		}
+	}
+	
+	private void exitGame() {
+		System.out.println("need to add code to move on to next mini-game?");
+	}
+	
+	private void offerToReplay() {
+		System.out.println("need to add code to add a 'click to restart' button, that restarts the game.");
+		this.displayResetButton();
 	}
 	
 	@Override
@@ -179,14 +215,26 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		int y = e.getY();
 		
 		// Handle any button that are outside of the gameboard here
+		GObject obj = program.getElementAt(x,y);
+		if(obj != null && tryagain != null) {
+			if(obj == tryagain) {
+				System.out.println("reset button pressed");
+				this.resetGame();
+				return;
+			}
+		}
 		
 		//return if the game is over
 		if(board.checkForWin()) {
 			return;
+		} else {
+			if(board.checkForTie()) {
+				this.handleTie();
+			}
 		}
 		// Now check the row and col on the gameboard. Return if the calculated row and col is outside of the gameboard allowed values
-		int row = calculate_row_from_mouse(x);
-		int col = calculate_col_from_mouse(y);
+		int row = calculate_row_from_mouse(y);
+		int col = calculate_col_from_mouse(x);
 		boolean inGameBoard = false;
 		
 		if(row >= 0 && row < board.get_num_rows()) {
@@ -209,6 +257,9 @@ public class TTTGraphics extends GraphicsPane implements ActionListener{
 		if (board.checkForWin()) {
 			this.handleWin();
 		} else {
+			if(board.checkForTie()) {
+				this.handleTie();
+			}
 			Timer timer = new Timer("dogmove");
 			timer.schedule(new TimerTask() {
 				@Override
