@@ -34,7 +34,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GImage tumbleweed;
 	private GImage crow;
 	private GImage crowscreen;
-	
+	private GImage telePole;
 	//GImages needed for scene3
 	private GImage dog2;
 	private GImage dog2text;
@@ -81,6 +81,10 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		desertpath = new GImage("desertpath.png", 30, 30);
 		crow = new GImage("crow.png", 50, 50);
 		tumbleweed = new GImage("tumbleweed.png", 100, 100);
+<<<<<<< HEAD
+=======
+		telePole = new GImage("telephonePole.png", 100, 100);
+>>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group2.git
 		
 		//For scene 3
 		
