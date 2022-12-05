@@ -34,6 +34,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GImage tumbleweed;
 	private GImage crow;
 	private GImage crowscreen;
+
 	private GImage telePole;
 	//GImages needed for scene3
 	private GImage dog2;
@@ -66,7 +67,6 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	
 	int dialogueCountdown = 0;
 	
-
 	public SetScenes(MainApplication app) {
 		super();
 		program = app;
@@ -78,25 +78,28 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 		//For scene 2
 		scene2 = new GImage("scene2.png", 0, 0);
-		desertpath = new GImage("desertpath.png", 30, 30);
 		crow = new GImage("crow.png", 50, 50);
 		tumbleweed = new GImage("tumbleweed.png", 100, 100);
-<<<<<<< HEAD
-=======
+
 		telePole = new GImage("telephonePole.png", 100, 100);
->>>>>>> branch 'main' of https://github.com/COMP55Fall2022/final-project-group2.git
-		
+
 		//For scene 3
+		scene3 = new GImage("scene3.png", 0, 0);
+		dog2 = new GImage("dog2.png", 100, 100);
+		dog2text = new GImage("dog2text.png", 200, 100);
+		
 		
 		//For scene 4
-		
+		scene4 = new GImage("scene4.png", 0, 0);
+		dog3 = new GImage("dog3.png", 200, 200);
+		dog3text = new GImage("dog3text.png", 10, 10);
+		basket = new GImage("basket.png", 0, 0);
+		basketscreen = new GImage("basketscreen.png", 0 ,0);
 	}
 	
 	
 	
-
 	// if we win the game we switch to scene1
-
 	@Override
 	public void showContents() {
 		program.add(scene1);
@@ -106,21 +109,15 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 		//scene 2
 		program.add(scene2);
-
 	}
-
 	@Override
 	public void hideContents() {
 		program.remove(scene1);
 		program.remove(roses);
-
 	}
-
 	public void setscene1() {
 		program.add(scene1);
-
 	}
-
 	public void setscene2() {
 		program.add(scene2);
 	}
@@ -134,7 +131,6 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 			rosesdialogue = new GImage("rosesdialogue.png", 65, 200);
 			program.add(rosesdialogue);
 			rosestimer.start();
-
 		}
 		
 		if (obj == blueflower && !suntimerstart) {
@@ -154,21 +150,18 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == desertpath && !crowtimerstart) {
-			desertpathtext = new GImage("desertpathtext.png, 300, 300");
+			//desertpathtext = new GImage("desertpathtext.png, 300, 300");
 		}
 	
 	}
-
 	
 	//These functions create and remove the dialogues that get prompted using their own timers
 	@Override
 	public void actionPerformed(ActionEvent g) {
 		Object source = g.getSource();
-
 		if (source == rosestimer) {
 			dialogueCountdown++;
 			System.out.println(dialogueCountdown);
-
 			if (dialogueCountdown > 100) {
 				program.remove(rosesdialogue);
 				dialogueCountdown = 0;
@@ -189,7 +182,5 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		if (source == suntimer) {
 			
 		}
-
 	}
-
 }
