@@ -34,7 +34,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GImage tumbleweed;
 	private GImage crow;
 	private GImage crowscreen;
-	
+	private GImage telePole;
 	//GImages needed for scene3
 	private GImage dog2;
 	private GImage dog2text;
@@ -80,7 +80,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		scene2 = new GImage("scene2.png", 0, 0);
 		crow = new GImage("crow.png", 50, 50);
 		tumbleweed = new GImage("tumbleweed.png", 100, 100);
-		
+		telePole = new GImage("telephonePole.png", 100, 100);
 		
 		//For scene 3
 		scene3 = new GImage("scene3.png", 0, 0);
