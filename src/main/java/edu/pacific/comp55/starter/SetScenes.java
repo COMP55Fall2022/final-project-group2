@@ -77,21 +77,13 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 		//For scene 2
 		scene2 = new GImage("scene2.png", 0, 0);
+		desertpath = new GImage("desertpath.png", 30, 30);
 		crow = new GImage("crow.png", 50, 50);
 		
-		
 		//For scene 3
-		scene3 = new GImage("scene3.png", 0, 0);
-		dog2 = new GImage("dog2.png", 100, 100);
-		dog2text = new GImage("dog2text.png", 200, 100);
-		
 		
 		//For scene 4
-		scene4 = new GImage("scene4.png", 0, 0);
-		dog3 = new GImage("dog3.png", 200, 200);
-		dog3text = new GImage("dog3text.png", 10, 10);
-		basket = new GImage("basket.png", 0, 0);
-		basketscreen = new GImage("basketscreen.png", 0 ,0);
+		
 	}
 	
 	
@@ -156,7 +148,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == desertpath && !crowtimerstart) {
-			//desertpathtext = new GImage("desertpathtext.png, 300, 300");
+			desertpathtext = new GImage("desertpathtext.png, 300, 300");
 		}
 	
 	}
