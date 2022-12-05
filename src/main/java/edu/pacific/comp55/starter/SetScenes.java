@@ -15,16 +15,54 @@ import acm.graphics.GOval;
 public class SetScenes extends GraphicsPane implements ActionListener {
 	private MainApplication program;
 	private GImage scene1;
+	private GImage scene2;
+	private GImage scene3;
+	private GImage scene4;
+	//private GImage endscene;
+	
+	//GImages needed for scene 1
 	private GImage roses;
 	private GImage rosesdialogue;
 	private GImage blueflower;
 	private GImage blueflowertext;
 	private GImage sun;
 	private GImage sunscreen;
+	
+	//GImages needed for scene 2
+	private GImage desertpath;
+	private GImage desertpathtext;
+	private GImage crow;
+	private GImage crowscreen;
+	
+	//GImages needed for scene3
+	private GImage dog2;
+	private GImage dog2text;
+	private GImage barn;
+	private GImage barntext;
+	private GImage tree;
+	private GImage treescreen;
+	
+	//Gimages needed for scene4
+	private GImage dog3;
+	private GImage dog3text;
+	private GImage basket;
+	private GImage basketscreen;
+	
+	//Timers needed for scene 1
 	private boolean suntimerstart = false;
 	Timer rosestimer = new Timer(40, this);
 	Timer blueflowertimer = new Timer(40, this);
 	Timer suntimer = new Timer(40, this);
+	
+	//Timers needed for scene 2
+	//private boolean crowtimerstart = false;
+	//Timer desertpathtimer = new Timer(40, this);
+	//Timer crowtimer = new Timer(40, this);
+	
+	//Timers needed for scene 3
+	
+	//Timers needed for scene 4
+	
 	int dialogueCountdown = 0;
 	
 
@@ -37,7 +75,15 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		sun = new GImage("sun.png", 400, -20);
 		sun.scale(0.15);
 		
-
+		//For scene 2
+		scene2 = new GImage("scene2.png", 0, 0);
+		crow = new GImage("crow.png", 50, 50);
+		//
+		
+		//For scene 3
+		
+		//For scene 4
+		
 	}
 	
 	
