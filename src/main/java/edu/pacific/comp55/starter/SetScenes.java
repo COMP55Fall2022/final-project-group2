@@ -34,7 +34,6 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GImage tumbleweed;
 	private GImage crow;
 	private GImage crowscreen;
-
 	private GImage telePole;
 	//GImages needed for scene3
 	private GImage dog2;
@@ -80,13 +79,16 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		scene2 = new GImage("scene2.png", 0, 0);
 		crow = new GImage("crow.png", 50, 50);
 		tumbleweed = new GImage("tumbleweed.png", 100, 100);
-
 		telePole = new GImage("telephonePole.png", 100, 100);
+		desertpath = new GImage("desertpath.png", 0, 0);
+		
 
 		//For scene 3
 		scene3 = new GImage("scene3.png", 0, 0);
 		dog2 = new GImage("dog2.png", 100, 100);
 		dog2text = new GImage("dog2text.png", 200, 100);
+		barn = new GImage("barn.png", 100, 100);
+		barntext = new GImage("barntext.png", 100, 100);
 		
 		
 		//For scene 4
@@ -102,24 +104,26 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	// if we win the game we switch to scene1
 	@Override
 	public void showContents() {
-		program.add(scene1);
-		program.add(roses);
-		program.add(blueflower);
-		program.add(sun);
-		
-		//scene 2
-		program.add(scene2);
+		setScene1();
+		setScene2();
 	}
 	@Override
 	public void hideContents() {
 		program.remove(scene1);
 		program.remove(roses);
 	}
-	public void setscene1() {
+	public void setScene1() {
 		program.add(scene1);
+		program.add(roses);
+		program.add(blueflower);
+		program.add(sun);
 	}
-	public void setscene2() {
+	public void setScene2() {
 		program.add(scene2);
+		program.add(crow);
+		program.add(tumbleweed);
+		program.add(telePole);
+		program.add(desertpath);
 	}
 	
 	// These functions check if the user is clicking on the interactable object and 
