@@ -31,6 +31,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	//GImages needed for scene 2
 	private GImage desertpath;
 	private GImage desertpathtext;
+	private GImage tumbleweed;
 	private GImage crow;
 	private GImage crowscreen;
 	
@@ -78,6 +79,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		//For scene 2
 		scene2 = new GImage("scene2.png", 0, 0);
 		crow = new GImage("crow.png", 50, 50);
+		tumbleweed = new GImage("tumbleweed.png", 100, 100);
 		
 		
 		//For scene 3
