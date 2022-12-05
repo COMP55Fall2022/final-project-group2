@@ -357,7 +357,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == tryagain) {
-			//crowlosttimer.stop();
+			crowlosttimer.stop();
 			removeWinloseScreen();
 			program.switchToCrow();
 			//startTimers();
@@ -368,7 +368,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			 //removeWinloseScreen();
 			 crowlosttimer.stop();
 			 program.switchToMenu();
-			 
+			 hideContents();
 		}
 		 
 		 if (obj == scene1) {
