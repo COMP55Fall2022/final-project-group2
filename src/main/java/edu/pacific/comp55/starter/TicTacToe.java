@@ -9,6 +9,7 @@ public class TicTacToe {
 	private int cols;
 	private boolean dogWin = false;
 	private boolean youWin = false;
+	public int squareCount = 0;
 	public int dogMoveX = 0;
 	public int dogMoveY = 0;
 	public int playerMoveX = 0;
@@ -205,13 +206,18 @@ public class TicTacToe {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
 				if (board[i][j] != 'b') {
-
-					return true;
+					squareCount++;			
 				}
-				System.out.println("i: " + i + "j: " + j);
 			}
 		}
-		return false;
+		if (squareCount == 9) {
+			return true;
+		}
+		else
+		{
+			squareCount = 0;
+			return false;
+		}
 	}
 
 	public static void main(String[] args) {
