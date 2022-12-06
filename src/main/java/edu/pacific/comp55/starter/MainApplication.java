@@ -4,7 +4,7 @@ public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_WIDTH = 1220;
 	public static final int WINDOW_HEIGHT = 1096;
 	public static final String MUSIC_FOLDER = "sounds";
-	private static final String[] SOUND_FILES = { "magicsound.mp3"};
+	private static final String[] SOUND_FILES = { "magicsound.mp3"};//comment
 
 	private SomePane somePane;
 	private MenuPane menu;
