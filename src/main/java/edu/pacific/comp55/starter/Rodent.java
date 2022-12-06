@@ -8,6 +8,7 @@ public class Rodent {
 	private GImage mouseImg;
 	
 	
+	
 	// This sets the direction that the mouse is moving
 	private double deltaX;
 	private double deltaY;

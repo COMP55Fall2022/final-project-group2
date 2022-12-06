@@ -26,6 +26,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private double gameRunTime; // number of seconds that the game has been running
 	private GButton startButton;
 	
+	
 	// The below coordinates are the location where the actual playable area is in the background image.
 	private static final int GAMEBOARD_LEFT = 225;
 	private static final int GAMEBOARD_TOP = 117;
