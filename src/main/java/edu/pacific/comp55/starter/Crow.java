@@ -42,7 +42,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public static final int SPEED = 5;
 	public static final int MS = 70;
 	private static final int TRASHDIV = 50;
-	private ArrayList<GOval> trash;
+	private ArrayList<GImage> trash;
 	private ArrayList<Integer> trashDiv;
 	private ArrayList<Integer> trashDirection;
 	private RandomGenerator trashGen;
@@ -85,7 +85,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		//For trash
 		System.out.println("startapp");
 		trashGen = RandomGenerator.getInstance();
-		trash = new ArrayList<GOval>();
+		trash = new ArrayList<GImage>();
 		trashDiv = new ArrayList<Integer>();
 		trashDirection = new ArrayList<Integer>();
 		numTimes = 0;
@@ -135,7 +135,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 
 	//For trash
 	private void addTrash() {
-		GOval eTrash = makeTrash();
+		GImage eTrash = makeTrash();
 		Integer temp = (trashGen.nextBoolean() == true) ? 1 : -1;
 		trashDirection.add(temp);
 		trashDiv.add(trashGen.nextInt(TRASHDIV));
@@ -164,10 +164,19 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	
 	
 
-	public GOval makeTrash() {
-		GOval temp = new GOval(trashGen.nextInt(WINDOW_WIDTH), 180 , SIZE, SIZE);
-		temp.setColor(Color.GREEN);
-		temp.setFilled(true);
+	public GImage makeTrash() {
+		int gen = (int) Math.random() * 3;
+		GImage temp = new GImage("trash.png",  trashGen.nextInt(WINDOW_WIDTH), 180);
+		if(gen == 0) {
+			temp = new GImage("trash.png",  trashGen.nextInt(WINDOW_WIDTH), 180);
+			temp.scale(0.5);
+		}
+		else if(gen == 1) {
+			temp = new GImage("trash2.png",  trashGen.nextInt(WINDOW_WIDTH), 180);
+		}
+		else {
+			temp = new GImage("trash3.png",  trashGen.nextInt(WINDOW_WIDTH), 180);
+		}
 		return temp;
 	}
 		
