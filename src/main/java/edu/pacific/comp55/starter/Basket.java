@@ -282,6 +282,10 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		program.remove(scene1);
 		lostgametimer.stop();
 		wongametimer.stop();
+		
+		for (int i=0; i<apple.size();i++) {
+			program.remove(apple.get(i));
+		}
 	
 	}
 
