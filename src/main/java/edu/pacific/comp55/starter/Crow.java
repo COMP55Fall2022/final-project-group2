@@ -22,7 +22,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private static final int START_X = 550;
 	private MainApplication program;
 	private GImage crowgamebackground;
-	private GImage saaya;
+	private GImage saaya; private GImage heart1; private GImage heart2; private GImage heart3;
 	private GImage crowlost;
 	private GImage crowin;
 	private GButton tryagain;
@@ -94,7 +94,15 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 		livescounter.setColor(Color.black);
 		
-		
+		// heart
+
+		heart1 = new GImage("heart.png", 50, 50);
+		heart2 = new GImage("heart.png", 100, 50);
+		heart3 = new GImage("heart.png", 150, 50);
+		heart1.scale(0.15);
+		heart2.scale(0.15);
+		heart3.scale(0.15);
+
 	}
 
 	public boolean isOutOfBoundsright() {
@@ -135,7 +143,22 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		program.add(eTrash);
 		
 	}
-	
+
+	public void heartbreaker() {
+
+
+		if (lives == 2) {
+			program.remove(heart3);
+		}
+
+		if (lives == 1) {
+			program.remove(heart2);
+		}
+
+		if (lives == 0) {
+			program.remove(heart1);
+		}
+	}
 	
 	
 	
@@ -171,6 +194,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		crowlosttimer.stop();
 		trashDown.start();
 		sec.start();
+		program.add(heart1);
+		program.add(heart2);
+		program.add(heart3);
 	}
 		
 	@Override
@@ -267,6 +293,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 	
 		istrashtouchingsaaya();
+		heartbreaker();
 		endgame();
 		wongame();
 		livescounter.setLabel(String.valueOf(lives));
