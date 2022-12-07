@@ -369,6 +369,14 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	public void hideContents() {
 		// TODO Auto-generated method stub
 		for(int i = 0; i < mouseList.size(); i++) {
+			program.switchToMenu();
+			program.remove(crowlost);
+			program.remove(tryagain);
+			program.remove(mainmenue);
+			program.remove(crowin);
+			program.remove(scene1);
+			program.remove(score);
+			program.remove(timeRemaining);
 			program.remove(mouseList.get(i).getMouseImg());
 		}
 		mouseList.clear();

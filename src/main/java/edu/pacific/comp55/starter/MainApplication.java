@@ -87,9 +87,11 @@ public class MainApplication extends GraphicsApplication {
 	
 	public void switchToMouse() {
 		playRandomSound();
+		mouse = new MouseGame(this);
 		count++;
 		switchToScreen(mouse);
 	}
+	
 
 	private void playRandomSound() {
 		AudioPlayer audio = AudioPlayer.getInstance();
