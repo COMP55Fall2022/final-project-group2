@@ -58,15 +58,15 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		crowlost.scale(0.5);
 		tryagain = new GButton("Try again", 655, 500, 100, 100);
 		tryagain.setFillColor(Color.green);
-		score = new GLabel("Score: " + points, 275, 100);
+		score = new GLabel("Score: " + points, 200, 100);
 		score.scale(5);
 		score.setColor(Color.white);
 		isGameRunning = false;
 		lastUpdatedTime = 0;
 		gameRunTime = 0;
-		timeRemaining = new GLabel(this.getRemaingTimeAsString(), (GAMEBOARD_RIGHT - 275), 100);
+		timeRemaining = new GLabel("Time Remaining: " + this.getRemaingTimeAsString(), (GAMEBOARD_RIGHT - 550), 100);
 		timeRemaining.scale(5);
-		timeRemaining.setColor(Color.blue);
+		timeRemaining.setColor(Color.white);
 		System.out.println("Game variables initialized");
 	}
 	
