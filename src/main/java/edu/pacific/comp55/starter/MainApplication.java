@@ -11,6 +11,9 @@ public class MainApplication extends GraphicsApplication {
 	private int count;
 	private Crow crowGame;
 	private SetScenes scene1;
+	private SetScenes scene2;
+	private SetScenes scene3;
+	private SetScenes scene4;
 	private TTTGraphics tictactoe;
 	private MouseGame mouse;
 	private Basket basketGame;
@@ -48,6 +51,21 @@ public class MainApplication extends GraphicsApplication {
 	public void switchToScene1() {
 		scene1 = new SetScenes(this);
 		switchToScreen(scene1);
+	}
+	
+	public void switchToScene2() {
+		scene2 = new SetScenes(this);
+		switchToScreen(scene2);
+	}
+	
+	public void switchToScene3() {
+		scene3 = new SetScenes(this);
+		switchToScreen(scene3);
+	}
+	
+	public void switchToscene4() {
+		scene4 = new SetScenes(this);
+		switchToScreen(scene4);
 	}
 
 	public void switchToMenu() {

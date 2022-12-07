@@ -60,7 +60,8 @@ public class MenuPane extends GraphicsPane {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		if (obj == start) {
 			//program.switchToTTT();
-			program.switchToMouse();
+			//program.switchToMouse();
+			program.switchToScene2();
 		}
 		else if (obj == quit){
 			System.exit(0);

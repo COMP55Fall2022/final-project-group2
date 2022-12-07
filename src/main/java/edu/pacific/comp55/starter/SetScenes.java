@@ -77,11 +77,15 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 		//For scene 2
 		scene2 = new GImage("scene2.png", 0, 0);
-		crow = new GImage("crow.png", 50, 50);
-		tumbleweed = new GImage("tumbleweed.png", 100, 100);
-		telePole = new GImage("telephonePole.png", 100, 100);
-		desertpath = new GImage("desertpath.png", 0, 0);
-		
+		crow = new GImage("crow.png", 380, 30);
+		tumbleweed = new GImage("tumbleweed.png", 800, 300);
+		telePole = new GImage("telephonePole.png", 20, 100);
+		//desertpath = new GImage("desertpath.png", 0, 0);
+		//Scaling all the GImages to the correct size
+		//desertpath.scale(0.5);
+		crow.scale(0.5);
+		tumbleweed.scale(0.1);
+		telePole.scale(0.8);
 
 		//For scene 3
 		scene3 = new GImage("scene3.png", 0, 0);
