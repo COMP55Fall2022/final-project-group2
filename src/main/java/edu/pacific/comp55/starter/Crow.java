@@ -2,6 +2,7 @@ package edu.pacific.comp55.starter;
 
 import javax.swing.Timer;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -35,6 +36,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public static final int WINDOW_HEIGHT = 1096;
 	GLabel livescounter = new GLabel(String.valueOf(lives), 50, 50);
 	private Crow newcrow = this;
+	private GLabel time;
 	
 	
 	//For trash
@@ -93,7 +95,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		//livescounter
 		
 		livescounter.setColor(Color.black);
-		
+		time = new GLabel("Time Elapsed: " + minutecount, 700, 75);
+		time.setColor(Color.white);
+		time.setFont(Font.SERIF);
+		time.scale(2.5);
 		// heart
 
 		heart1 = new GImage("heart.png", 50, 50);
@@ -206,6 +211,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		program.add(heart1);
 		program.add(heart2);
 		program.add(heart3);
+		program.add(time);
 	}
 		
 	@Override
@@ -298,6 +304,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 		if (source == sec) {
 			minutecount++;
+			time.setLabel("Time Elapsed: " + minutecount);
 		}
 		
 	
@@ -380,7 +387,6 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		if (lives == 0) {
 			sec.stop();
 			crowlosttimer.start();
-			
 		}
 	}
 
