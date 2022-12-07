@@ -79,11 +79,13 @@ public class MouseGame extends GraphicsPane implements ActionListener{
     		y = i*(GAMEBOARD_BOTTOM - GAMEBOARD_TOP) + GAMEBOARD_TOP;
     		rowLine = new GLine(0, y , MainApplication.WINDOW_WIDTH, y); 
         	program.add(rowLine);
+        	rowLine.setVisible(false);
         }
         for(int j = 0; j <= 1;j++) {
         	x = j * (GAMEBOARD_RIGHT - GAMEBOARD_LEFT) + GAMEBOARD_LEFT;
         	colLine = new GLine(x, 0, x, MainApplication.WINDOW_HEIGHT);
         	program.add(colLine);
+        	colLine.setVisible(false);
         }
     }
 	
@@ -369,6 +371,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		program.remove(background);
 		program.remove(rowLine);
 		program.remove(colLine);
+		
 	}
 	
 	public boolean wingame() {
