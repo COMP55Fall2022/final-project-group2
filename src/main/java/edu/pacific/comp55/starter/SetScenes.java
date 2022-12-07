@@ -27,6 +27,8 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GImage blueflowertext;
 	private GImage sun;
 	private GImage sunscreen;
+	private GButton cont;
+	private GButton exit;
 	
 	//GImages needed for scene 2
 	private GImage desertpath;
@@ -58,11 +60,20 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	//Timers needed for scene 2
 	private boolean crowtimerstart = false;
 	Timer desertpathtimer = new Timer(40, this);
+	Timer tumbleweedtimer = new Timer(40, this);
+	Timer telePoletimer = new Timer(40, this);
 	Timer crowtimer = new Timer(40, this);
 	
 	//Timers needed for scene 3
+	//private boolean treetimerstart = false;
+	//Timer barntimer = new Timer(40, this);
+	//Timer dog2timer = new Timer(40, this);
+	//Timer treetimer = new Timer(40, this);
 	
 	//Timers needed for scene 4
+	//private boolean baskettimerstart = false;
+	//Timer dog3 = new Timer(40, this);
+	//Timer baskettimer = newTimer(40, this);
 	
 	int dialogueCountdown = 0;
 	
@@ -74,6 +85,11 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		blueflower = new GImage("blueflower.png", 795, 425);
 		sun = new GImage("sun.png", 400, -20);
 		sun.scale(0.15);
+		
+		cont = new GButton("Continue", 655, 500, 100, 100);
+		cont.setFillColor(Color.GREEN);
+		exit = new GButton("Exit", 455, 500, 100, 100);
+		exit.setFillColor(Color.RED);
 		
 		//For scene 2
 		scene2 = new GImage("scene2.png", 0, 0);
@@ -109,12 +125,13 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	@Override
 	public void showContents() {
 		setScene1();
-		setScene2();
+		//setScene2();
 	}
 	@Override
 	public void hideContents() {
 		program.remove(scene1);
 		program.remove(roses);
+		removebuttons();
 	}
 	public void setScene1() {
 		program.add(scene1);
@@ -122,13 +139,13 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		program.add(blueflower);
 		program.add(sun);
 	}
-	public void setScene2() {
-		program.add(scene2);
-		program.add(crow);
-		program.add(tumbleweed);
-		program.add(telePole);
-		program.add(desertpath);
-	}
+	//public void setScene2() {
+		//program.add(scene2);
+		//program.add(crow);
+		//program.add(tumbleweed);
+		//program.add(telePole);
+		//program.add(desertpath);
+	//}
 	
 	// These functions check if the user is clicking on the interactable object and 
 	//starts it's timer
@@ -157,8 +174,9 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 			suntimerstart = true;
 		}
 		
-		if (obj == desertpath && !crowtimerstart) {
-			//desertpathtext = new GImage("desertpathtext.png, 300, 300");
+		if (obj == cont) {
+			program.switchToMouse();
+			removebuttons();
 		}
 	
 	}
@@ -188,7 +206,13 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		}
 		
 		if (source == suntimer) {
-			
+			program.add(cont);
+			program.add(exit);
 		}
+	}
+	
+	public void removebuttons() {
+		program.remove(cont);
+		program.remove(exit);
 	}
 }
