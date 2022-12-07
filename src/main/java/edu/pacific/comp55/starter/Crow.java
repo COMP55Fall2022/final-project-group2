@@ -99,6 +99,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		time.setColor(Color.white);
 		time.setFont(Font.SERIF);
 		time.scale(2.5);
+		
 		// heart
 
 		heart1 = new GImage("heart.png", 50, 50);
@@ -224,6 +225,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		program.remove(crowgamebackground);
 		program.remove(saaya);
 		program.remove(livescounter);
+		program.remove(time);
 		trashDown.stop();
 		removeWinloseScreen();
 		
@@ -304,7 +306,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		
 		if (source == sec) {
 			minutecount++;
+			time.setColor(Color.black);
 			time.setLabel("Time Elapsed: " + minutecount);
+	
 		}
 		
 	
