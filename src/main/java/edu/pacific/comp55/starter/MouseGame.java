@@ -25,8 +25,13 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private long lastUpdatedTime;
 	private double gameRunTime; // number of seconds that the game has been running
 	private GButton startButton;
-	
-	
+	private GImage crowin;
+	private GButton scene1;
+	private GButton mainmenue;
+	private GImage crowlost;
+	private GButton tryagain;
+	private GLine rowLine;
+	private GLine colLine;
 	// The below coordinates are the location where the actual playable area is in the background image.
 	private static final int GAMEBOARD_LEFT = 225;
 	private static final int GAMEBOARD_TOP = 117;
@@ -43,6 +48,16 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		program = app;
 		mouseList = new ArrayList<Rodent>();
 		background = new GImage("mousebg.png", 0, 0);
+		crowin = new GImage("crowin.png", 350, 200);
+		scene1 = new GButton("Next scene", 655, 500, 100, 100);
+		scene1.setFillColor(Color.GREEN);
+		crowin.scale(0.5);
+		mainmenue = new GButton("Main menue", 455, 500, 100, 100);
+		mainmenue.setFillColor(Color.red);
+		crowlost = new GImage("crowlost.png", 350, 200);
+		crowlost.scale(0.5);
+		tryagain = new GButton("Try again", 655, 500, 100, 100);
+		tryagain.setFillColor(Color.green);
 		score = new GLabel("Score: " + points, 275, 100);
 		score.scale(5);
 		score.setColor(Color.white);
@@ -58,8 +73,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	// draws black lines around the gameboard just to help us make sure that we have the bounds correct. 
 	// can be removed later on.
 	private void drawGridLines() {
-    	GLine rowLine;
-    	GLine colLine;
+    	
     	double y, x;
     	for(int i = 0; i <= 1;i++) {
     		y = i*(GAMEBOARD_BOTTOM - GAMEBOARD_TOP) + GAMEBOARD_TOP;
@@ -167,6 +181,18 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	
 	private void handleGameOver() {
 		System.out.println("GAME IS OVER. Take Next Action....");
+		if(wingame() == true) {
+			program.add(crowin);
+			program.add(scene1);
+			program.add(mainmenue);
+			System.out.println("Won gmae!!!");
+		}else {
+			program.add(crowlost);
+			program.add(tryagain);
+			program.add(mainmenue);
+			System.out.println("lost gmae!!!");
+		}
+		
 	}
 	
 	private void addMouse() {
@@ -283,6 +309,23 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 					this.startGame();
 					return;
 				}
+				if(obj == tryagain) {
+					program.switchToMouse();
+					
+				}
+				if(obj == mainmenue) {
+					program.switchToMenu();
+					program.remove(crowlost);
+					program.remove(tryagain);
+					program.remove(mainmenue);
+					program.remove(crowin);
+					program.remove(scene1);
+					program.remove(score);
+					program.remove(timeRemaining);
+				}
+				if(obj == scene1) {
+					program.switchToCrow();
+				}
 			}
 		}
 		GImage g;
@@ -323,6 +366,18 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		}
 		mouseList.clear();
 		program.remove(background);
+		program.remove(rowLine);
+		program.remove(colLine);
 	}
+	
+	public boolean wingame() {
+		if(points >= 100) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
 	
 }
