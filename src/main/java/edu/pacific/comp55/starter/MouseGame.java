@@ -32,6 +32,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private GButton tryagain;
 	private GLine rowLine;
 	private GLine colLine;
+	private GImage startBoard;
 	// The below coordinates are the location where the actual playable area is in the background image.
 	private static final int GAMEBOARD_LEFT = 225;
 	private static final int GAMEBOARD_TOP = 117;
@@ -61,6 +62,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		score = new GLabel("Score: " + points, 200, 100);
 		score.scale(5);
 		score.setColor(Color.white);
+		startBoard = new GImage("mousebg.png",0,0);
 		isGameRunning = false;
 		lastUpdatedTime = 0;
 		gameRunTime = 0;
@@ -125,7 +127,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 			currentTime = System.nanoTime();
 			elapsedTimeInSeconds = ((double)(currentTime - lastUpdatedTime)) / (double)1_000_000_000; // converts nanoseconds to seconds
 			gameRunTime += elapsedTimeInSeconds;
-			timeRemaining.setLabel(this.getRemaingTimeAsString());
+			timeRemaining.setLabel("Time Remaining: " + this.getRemaingTimeAsString());
 			if(gameRunTime >= MAX_GAME_TIME) {
 				isGameRunning = false;
 				return;
@@ -279,6 +281,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private void displayStartButton() {
 		startButton = new GButton("START", 655, 500, 100, 100);
 		startButton.setFillColor(Color.GREEN);
+		program.add(startBoard);
 		program.add(startButton);
 	}
 	
@@ -308,6 +311,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 			if(obj != null) {
 				if(obj == startButton) {
 					program.remove(startButton);
+					program.remove(startBoard);
 					this.startGame();
 					return;
 				}
