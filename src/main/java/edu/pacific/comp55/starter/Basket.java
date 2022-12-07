@@ -275,6 +275,14 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		program.remove(basket);
 		appleDown.stop();
 		rottenappleDown.stop();
+		program.remove(crowlost);
+		program.remove(tryagain);
+		program.remove(mainmenue);
+		program.remove(crowin);
+		program.remove(scene1);
+		lostgametimer.stop();
+		wongametimer.stop();
+	
 	}
 
 	public boolean isappletouchingbasket() {
@@ -352,7 +360,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 	
 	//starting and ending game
 	public void wingame() {
-		if (applecount >= 1 && minutecount == 20) {
+		if (applecount >= 5 && minutecount == 20) {
 			System.out.println("You won the game");
 
 			wongametimer.start();
@@ -361,7 +369,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 	}
 
 	public void endgame() {
-		if (applecount <= 5 && minutecount == 20) {
+		if (applecount < 5 && minutecount == 20) {
 			lostgametimer.start();
 		}
 
@@ -383,7 +391,10 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 			
 			 lostgametimer.stop();
 			 wongametimer.stop();
+			 appleDown.stop();
+			rottenappleDown.stop();
 			 program.switchToMenu();
+			
 			 
 		}
 		 
