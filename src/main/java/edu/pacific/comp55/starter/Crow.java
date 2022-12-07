@@ -225,7 +225,6 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		program.remove(crowgamebackground);
 		program.remove(saaya);
 		program.remove(livescounter);
-		program.remove(time);
 		trashDown.stop();
 		removeWinloseScreen();
 		
