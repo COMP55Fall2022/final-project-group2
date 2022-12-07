@@ -95,8 +95,8 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		//livescounter
 		
 		livescounter.setColor(Color.black);
-		time = new GLabel("Time Elapsed: " + minutecount, 700, 75);
-		time.setColor(Color.white);
+		time = new GLabel("Time Elapsed: " + minutecount, 850, 75);
+		time.setColor(Color.black);
 		time.setFont(Font.SERIF);
 		time.scale(2.5);
 		// heart
