@@ -25,7 +25,12 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 	private ArrayList<GImage> pieces;
 	private boolean messageShowing = false;
 	private GLabel gameMessage;
+	private GImage crowin;
+	private GButton scene1;
+	private GButton mainmenue;
+	private GImage crowlost;
 	private GButton tryagain;
+	private GImage crowresult;
 
 	public TTTGraphics(MainApplication app) {
 		super();
@@ -35,6 +40,16 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 		board = new TicTacToe(3, 3);
 		board.setupBoard();
 		messageShowing = false;
+		crowin = new GImage("crowin.png", 350, 200);
+		scene1 = new GButton("Next scene", 655, 500, 100, 100);
+		scene1.setFillColor(Color.GREEN);
+		crowin.scale(0.5);
+		mainmenue = new GButton("Main menue", 455, 500, 100, 100);
+		mainmenue.setFillColor(Color.red);
+		crowlost = new GImage("crowlost.png", 350, 200);
+		crowlost.scale(0.5);
+		tryagain = new GButton("Try again", 655, 500, 100, 100);
+		tryagain.setFillColor(Color.green);
 	}
 
 	private void drawGridLines() {
@@ -122,8 +137,8 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 		program.add(gameMessage);
 		messageShowing = true;
 		if (autoHide) {
-			Timer timer = new Timer("messageTimer");
-			timer.schedule(new TimerTask() {
+			Timer myTime = new Timer("messageTimer");
+			myTime.schedule(new TimerTask() {
 				@Override
 				public void run() {
 					removeMessage();
@@ -146,8 +161,10 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 		if (this.messageShowing) {
 			this.removeMessage();
 		}
-		program.remove(tryagain);
-		tryagain = null;
+		
+		program.remove(crowresult);
+		//program.remove(tryagain);
+		//tryagain = null;
 	}
 
 	private int calculate_row_from_mouse(int xPos) {
@@ -161,8 +178,8 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 	}
 
 	private void displayResetButton() {
-		tryagain = new GButton("Try again", 655, 500, 100, 100);
-		tryagain.setFillColor(Color.GREEN);
+		//tryagain = new GButton("Try again", 655, 500, 100, 100);
+		//tryagain.setFillColor(Color.GREEN);
 		program.add(tryagain);
 	}
 
@@ -176,12 +193,19 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 	private void handleWin() {
 		System.out.println("handling win...");
 		if (board.getYouWin()) {
+			crowresult = crowin;
 			System.out.println("You Won!!!");
 			this.showMessage("You Won!!!", false);
-			this.exitGame();
+			program.add(crowresult);
+			program.add(scene1);
+			program.add(mainmenue);
+			//this.exitGame();
 		} else if (board.getDogWin()) {
+			crowresult = crowlost;
 			System.out.println("You lost the game to the dog!!!");
 			this.showMessage("You lost the game to the dog!!!", false);
+			program.add(crowresult);
+			program.add(mainmenue);
 			this.offerToReplay();
 		}
 		// END THE GAME HERE. TODO: Add button to exit or restart the game
@@ -210,10 +234,13 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 
 	private void exitGame() {
 		System.out.println("need to add code to move on to next mini-game?");
+		program.switchToBasket();
 	}
+	
 
 	private void offerToReplay() {
 		System.out.println("need to add code to add a 'click to restart' button, that restarts the game.");
+		
 		this.displayResetButton();
 	}
 
@@ -224,11 +251,27 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 
 		// Handle any button that are outside of the gameboard here
 		GObject obj = program.getElementAt(x, y);
-		if (obj != null && tryagain != null) {
+		if (obj != null) {
 			if (obj == tryagain) {
 				System.out.println("reset button pressed");
+				program.remove(tryagain);
+				program.remove(mainmenue);
+				program.remove(crowlost);
 				this.resetGame();
 				return;
+			}
+			
+			if(obj == mainmenue) {
+				System.out.println("Main menu button pressed");
+				program.switchToMenu();
+				program.remove(mainmenue);
+				program.remove(scene1);
+				//program.switchToMenu();
+				
+			}
+			
+			if(obj == scene1) {
+				this.exitGame();
 			}
 		}
 
