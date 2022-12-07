@@ -47,6 +47,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 			y = i * ((GAMEBOARD_BOTTOM - GAMEBOARD_TOP) / board.get_num_rows()) + GAMEBOARD_TOP;
 			rowLine = new GLine(0, y, MainApplication.WINDOW_WIDTH, y);
 			program.add(rowLine);
+			rowLine.setVisible(false);
 		}
 		for (int j = 0; j <= board.get_num_cols(); j++) {
 			// colLine = new
@@ -54,6 +55,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 			x = j * ((GAMEBOARD_RIGHT - GAMEBOARD_LEFT) / board.get_num_cols()) + GAMEBOARD_LEFT;
 			colLine = new GLine(x, 0, x, MainApplication.WINDOW_HEIGHT);
 			program.add(colLine);
+			colLine.setVisible(false);
 		}
 	}
 
