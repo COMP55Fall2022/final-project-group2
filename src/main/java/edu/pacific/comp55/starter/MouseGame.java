@@ -322,6 +322,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 					program.remove(scene1);
 					program.remove(score);
 					program.remove(timeRemaining);
+					
 				}
 				if(obj == scene1) {
 					program.switchToCrow();
