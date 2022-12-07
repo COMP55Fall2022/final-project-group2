@@ -175,8 +175,8 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == cont) {
-			program.switchToMouse();
 			removebuttons();
+			program.switchToMouse();
 		}
 	
 	}
@@ -206,6 +206,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		}
 		
 		if (source == suntimer) {
+			suntimer.stop();
 			program.add(cont);
 			program.add(exit);
 		}
