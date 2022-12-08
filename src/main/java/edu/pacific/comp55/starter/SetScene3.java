@@ -41,8 +41,9 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		program = app;
 		
 		//For scene 3
-		scene3 = new GImage("scene3.png", 0, 0);
-		dog2 = new GImage("dog2.png", 100, 100);
+		scene3 = new GImage("scene3 (1).png", 0, 0);
+		dog2 = new GImage("dog2.png", 700, 600);
+		dog2.scale(0.6);
 		dog2text = new GImage("dog2text.png", 200, 100);
 		barn = new GImage("barn.png", 100, 100);
 		barntext = new GImage("barntext.png", 100, 100);
