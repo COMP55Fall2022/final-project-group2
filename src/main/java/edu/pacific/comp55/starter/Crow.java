@@ -27,8 +27,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private GImage crowlost;
 	private GImage crowin;
 	private GButton tryagain;
-	private GButton mainmenue;
+	private GButton mainmenue; 
 	private GButton scene1;
+	private GButton newbutton;
+	
 	int minutecount =0;
 	//private GLabel livescounter;
 	private int lives =3;
@@ -38,6 +40,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private Crow newcrow = this;
 	private GLabel time;
 	
+	//forhelpbutton
+	private GImage helpbutton;
+	private GImage crowinstructions;
 	
 	//For trash
 	public static final int SIZE = 40;
@@ -57,6 +62,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	Timer crowtimerup = new Timer(40, this);
 	Timer gravitytimer = new Timer(40, this);
 	Timer crowlosttimer = new Timer(40, this);
+	Timer crowwintimer = new Timer(40, this);
 	int gravitymotion = JUMP_HEIGHT;
 	int SAAYASIZE_Y = 126;
 	int SAAYASIZE_X = 164;
@@ -108,6 +114,14 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		heart1.scale(0.15);
 		heart2.scale(0.15);
 		heart3.scale(0.15);
+		
+		//helpbutton
+		helpbutton = new GImage("helpbutton.png", 1150, 25);
+		helpbutton.scale(0.25);
+		crowinstructions = new GImage("crowinstructions.png",350, 100);
+		newbutton = new GButton("Continue game", 655, 500, 100, 100);
+		newbutton.setFillColor(Color.GREEN);
+
 
 	}
 
@@ -213,6 +227,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		program.add(heart2);
 		program.add(heart3);
 		program.add(time);
+		program.add(helpbutton);
 	}
 		
 	@Override
@@ -244,7 +259,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	System.out.println(minutecount);
 		Object source = e.getSource();
 		
-		if (source == crowtimerleft) {
+		if (source == crowtimerleft && !(source == crowlosttimer)) {
 			if(!isOutOfBoundsleft()) {
 			saaya.move(-10, 0); }
 		}
@@ -311,6 +326,14 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	
 		}
 		
+		if (source == crowwintimer) {
+			program.add(crowin);
+			program.add(mainmenue);
+			program.add(scene1);
+			program.remove(time);
+			stopTimers();
+		}
+		
 	
 		istrashtouchingsaaya();
 		heartbreaker();
@@ -325,7 +348,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int c = e.getKeyCode();
 
-		if (c == KeyEvent.VK_LEFT) {
+		if (c == KeyEvent.VK_LEFT ) {
 				crowtimerleft.start();
 
 		}
@@ -395,12 +418,11 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	}
 
 	public void wongame() {
-		if (lives > 0 && minutecount == 60) {
-			stopTimers();
+		if (lives > 0 && minutecount == 20) {
+			sec.stop();
+			crowwintimer.start();
 			minutecount = 0;
-			program.add(crowin);
-			program.add(mainmenue);
-			program.add(scene1);
+			
 		}
 	}
 
@@ -424,6 +446,19 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		 if (obj == scene1) {
 			 lives =3;
 			 program.switchToScene1();
+		 }
+		 
+		 if (obj == helpbutton) {
+			 stopTimers();
+			 program.add(crowinstructions);
+			 program.add(newbutton);
+			 sec.stop();
+		 }
+		 
+		 if (obj == newbutton) {
+			 program.remove(crowinstructions);
+			 program.remove(newbutton);
+			 startTimers();
 		 }
 		else {
 			
