@@ -41,6 +41,8 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	//Mouse scaling sizes
 	private static final double[] scaleSizes = new double[]{0.75, 0.5, 0.25};
 	
+	
+	
 	private static final double MAX_GAME_TIME = 30; // number of seconds that the game runs for
 	private static final int MAX_NUMBER_MICE = 10;
 	
@@ -62,7 +64,10 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		score = new GLabel("Score: " + points, 200, 100);
 		score.scale(5);
 		score.setColor(Color.white);
-		startBoard = new GImage("mousebg.png",0,0);
+		//trying to add instructions
+		startBoard = new GImage("mouseinstructions.png",247,147);
+		startBoard.scale(1.1);
+		
 		isGameRunning = false;
 		lastUpdatedTime = 0;
 		gameRunTime = 0;
@@ -70,6 +75,8 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		timeRemaining.scale(5);
 		timeRemaining.setColor(Color.white);
 		System.out.println("Game variables initialized");
+		
+	
 	}
 	
 	// draws black lines around the gameboard just to help us make sure that we have the bounds correct. 
@@ -189,12 +196,12 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 			program.add(crowin);
 			program.add(scene1);
 			program.add(mainmenue);
-			System.out.println("Won gmae!!!");
+			
 		}else {
 			program.add(crowlost);
 			program.add(tryagain);
 			program.add(mainmenue);
-			System.out.println("lost gmae!!!");
+			
 		}
 		
 	}
@@ -279,7 +286,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	}
 	
 	private void displayStartButton() {
-		startButton = new GButton("START", 655, 500, 100, 100);
+		startButton = new GButton("START", 600, 625, 100, 100);
 		startButton.setFillColor(Color.GREEN);
 		program.add(startBoard);
 		program.add(startButton);
