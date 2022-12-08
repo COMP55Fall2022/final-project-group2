@@ -445,7 +445,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		 
 		 if (obj == scene1) {
 			 lives =3;
+			 crowwintimer.stop();
 			 program.switchToScene1();
+			 
 		 }
 		 
 		 if (obj == helpbutton) {
