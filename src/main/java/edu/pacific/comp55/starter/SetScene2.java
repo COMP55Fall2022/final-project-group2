@@ -17,16 +17,17 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	private GImage scene2;
 	
 	//GImages needed for scene 2
-	private GImage desertpath;
-	private GImage desertpathtext;
 	private GImage tumbleweed;
+	private GImage tumbleweedtext;
 	private GImage crow;
 	private GImage crowscreen;
 	private GImage telePole;
+	private GImage telePoletext;
+	private GButton cont;
+	private GButton exit;
 	
 	//Timers needed for scene 2
 	private boolean crowtimerstart = false;
-	Timer desertpathtimer = new Timer(40, this);
 	Timer tumbleweedtimer = new Timer(40, this);
 	Timer telePoletimer = new Timer(40, this);
 	Timer crowtimer = new Timer(40, this);
@@ -36,18 +37,19 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	public SetScene2(MainApplication app) {
 		super();
 		program = app;
-		
 		//For scene 2
-		scene2 = new GImage("scene2.png", 0, 0);
-		crow = new GImage("crow.png", 380, 30);
-		tumbleweed = new GImage("tumbleweed.png", 800, 300);
+		scene2 = new GImage("scene2 (1).png", 0, 0);
+		crow = new GImage("crow.png", 450, 30);
+		tumbleweed = new GImage("tumbleweed.png", 800, 400);
 		telePole = new GImage("telephonePole.png", 20, 100);
-		desertpath = new GImage("desertpath.png", 0, 0);
-		//Scaling all the GImages to the correct size
-		desertpath.scale(0.5);
 		crow.scale(0.5);
 		tumbleweed.scale(0.1);
 		telePole.scale(0.8);
+		
+		cont = new GButton("Continue", 655, 600, 100, 100);
+		cont.setFillColor(Color.GREEN);
+		exit = new GButton("Exit", 455, 600, 100, 100);
+		exit.setFillColor(Color.RED);
 
 	}
 	
@@ -69,7 +71,6 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 		program.add(crow);
 		program.add(tumbleweed);
 		program.add(telePole);
-		program.add(desertpath);
 	}
 	
 	// These functions check if the user is clicking on the interactable object and 
@@ -77,60 +78,69 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		
-	//	if (obj == roses && !suntimerstart) {
-	//		rosesdialogue = new GImage("rosesdialogue.png", 65, 200);
-	//		program.add(rosesdialogue);
-	//		rosestimer.start();
-	//	}
-		
-	//	if (obj == blueflower && !suntimerstart) {
-	//		blueflowertext = new GImage("blueflowerdialogue.png", 670, 275);
-	//		blueflowertext.scale(0.5);
-	//		program.add(blueflowertext);
-	//		blueflowertimer.start();
-	//	}
-		
-		
-	//	if (obj == sun) {
-	//		sunscreen = new GImage("sunscreen.png", 350, 200);
-	//		sunscreen.scale(0.5);
-	//		program.add(sunscreen);
-	//		suntimer.start();
-	//		suntimerstart = true;
-	//	}
-		
-		if (obj == desertpath && !crowtimerstart) {
-			//desertpathtext = new GImage("desertpathtext.png, 300, 300");
+		if (obj == tumbleweed && !crowtimerstart) {
+			tumbleweedtext = new GImage("tumtext.png", 800, 200);
+			tumbleweedtext.scale(0.5);
+			program.add(tumbleweedtext);
+			tumbleweedtimer.start();
 		}
-	
+		
+		if (obj == telePole && !crowtimerstart) {
+			telePoletext = new GImage("telePoletext.png", 100, 100);
+			telePoletext.scale(0.5);
+			program.add(telePoletext);
+			telePoletimer.start();
+		}
+		
+		if (obj == crow) {
+			crowscreen = new GImage("crowscreen.png", 350, 200);
+			crowscreen.scale(0.5);
+			program.add(crowscreen);
+			crowtimer.start();
+			crowtimerstart = true;
+		}
+		
+		if (obj == cont) {
+			removebuttons();
+			program.switchToCrow();
+		}
 	}
 	
 	//These functions create and remove the dialogues that get prompted using their own timers
 	@Override
 	public void actionPerformed(ActionEvent g) {
 		Object source = g.getSource();
-	//	if (source == rosestimer) {
-	//		dialogueCountdown++;
-	//		System.out.println(dialogueCountdown);
-	//		if (dialogueCountdown > 100) {
-	//			program.remove(rosesdialogue);
-	//			dialogueCountdown = 0;
-	//			rosestimer.stop();
-	//		}
-	//	}
+		if (source == tumbleweedtimer) {
+			dialogueCountdown++;
+			System.out.println(dialogueCountdown);
+			if (dialogueCountdown > 100) {
+				program.remove(tumbleweedtext);
+				dialogueCountdown = 0;
+				tumbleweedtimer.stop();
+			}
+		}
 		
-	//	if (source == blueflowertimer) {
-	//		dialogueCountdown++;
+		if (source == telePoletimer) {
+			dialogueCountdown++;
 			
-	//		if (dialogueCountdown > 100) {
-	//			program.remove(blueflowertext);
-	//			dialogueCountdown = 0;
-	//			blueflowertimer.stop();
-	//		}
-	//	}
+			if (dialogueCountdown > 100) {
+				program.remove(telePoletext);
+				dialogueCountdown = 0;
+				telePoletimer.stop();
+			}
+		}
 		
-	//	if (source == suntimer) {
-			
-	//	}
+		if (source == crowtimer) {
+			crowtimer.stop();
+			program.add(cont);
+			program.add(exit);
+		}
+	
 	}
+	
+	public void removebuttons() {
+		program.remove(cont);
+		program.remove(exit);
+	}
+	
 }
