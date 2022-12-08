@@ -24,7 +24,9 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	private GImage tree;
 	private GImage treescreen;
 	private GImage mapGif;
-	
+	private AudioPlayer mapSound;
+	public static final String MUSIC_FOLDER = "sounds";
+	private static final String SOUND_FILE = "Running On Leaves.mp3";
 	//Timers needed for scene 3
 	private boolean treetimerstart = false;
 	Timer barntimer = new Timer(40, this);
@@ -45,6 +47,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		barn = new GImage("barn.png", 100, 100);
 		barntext = new GImage("barntext.png", 100, 100);
 		mapGif = new GImage("journey2.gif",0,0);
+		mapSound = AudioPlayer.getInstance();
 	}
 	
 	// if we win the game we switch to scene3
@@ -60,6 +63,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 
 	public void setScene3() {
 		gifTimer.start();
+		mapSound.playSound(MUSIC_FOLDER, SOUND_FILE);
 		program.add(scene3);
 		program.add(dog2);
 		program.add(barn);
@@ -84,6 +88,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 			System.out.println(gifCounter);
 			if(gifCounter == 3) {
 				program.remove(mapGif);
+				mapSound.stopSound(MUSIC_FOLDER, SOUND_FILE);
 				gifTimer.stop();
 			}
 		}

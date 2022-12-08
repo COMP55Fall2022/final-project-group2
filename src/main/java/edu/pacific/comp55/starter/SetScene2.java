@@ -15,8 +15,11 @@ import acm.graphics.GOval;
 public class SetScene2 extends GraphicsPane implements ActionListener {
 	private MainApplication program;
 	private GImage scene2;
+	public static final String MUSIC_FOLDER = "sounds";
+	private static final String SOUND_FILE = "Running On Leaves.mp3";
 	
 	//GImages needed for scene 2
+	
 	private GImage tumbleweed;
 	private GImage tumbleweedtext;
 	private GImage crow;
@@ -26,6 +29,8 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	private GButton cont;
 	private GButton exit;
 	private GImage map1gif;
+	private AudioPlayer mapSound;
+	
 	
 	//Timers needed for scene 2
 	private boolean crowtimerstart = false;
@@ -54,6 +59,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 		exit = new GButton("Exit", 455, 600, 100, 100);
 		exit.setFillColor(Color.RED);
 		map1gif = new GImage("journey1.gif", 0, 0);
+		mapSound = AudioPlayer.getInstance();
 	}
 	
 	
@@ -71,6 +77,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 
 	public void setScene2() {
 		gifTimer.start();
+		mapSound.playSound(MUSIC_FOLDER, SOUND_FILE);
 		program.add(scene2);
 		program.add(crow);
 		program.add(tumbleweed);
@@ -122,6 +129,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 			System.out.println(gifCounter);
 			if(gifCounter == 3) {
 				program.remove(map1gif);
+				mapSound.stopSound(MUSIC_FOLDER, SOUND_FILE);
 				gifTimer.stop();
 			}
 		}
