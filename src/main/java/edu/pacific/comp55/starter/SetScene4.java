@@ -21,14 +21,15 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 	private GImage dog3text;
 	private GImage basket;
 	private GImage basketscreen;
+	private GImage mapGif;
 	
 	//Timers needed for scene 4
 	private boolean baskettimerstart = false;
 	Timer dog3timer = new Timer(40, this);
 	Timer baskettimer = new Timer(40, this);
-	
+	Timer gifTimer = new Timer(1000, this);
 	int dialogueCountdown = 0;
-	
+	private int gifCounter = 0;
 	public SetScene4(MainApplication app) {
 		super();
 		program = app;
@@ -39,7 +40,7 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 		dog3text = new GImage("dog3text.png", 10, 10);
 		basket = new GImage("basket.png", 0, 0);
 		basketscreen = new GImage("basketscreen.png", 0 ,0);
-
+		mapGif = new GImage("journey3.gif",0,0);
 	}
 	
 	// if we win the game we switch to scene4
@@ -54,6 +55,7 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 	}
 
 	public void setScene4() {
+		gifTimer.start();
 		program.add(scene4);
 		program.add(dog3);
 		program.add(basket);
@@ -71,6 +73,16 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent g) {
 		Object source = g.getSource();
+		
+		if(source == gifTimer) {
+			gifCounter++;
+			System.out.println(gifCounter);
+			if(gifCounter == 3) {
+				program.remove(mapGif);
+				gifTimer.stop();
+			}
+		}
+		
 	//	if (source == rosestimer) {
 	//		dialogueCountdown++;
 	//		System.out.println(dialogueCountdown);
