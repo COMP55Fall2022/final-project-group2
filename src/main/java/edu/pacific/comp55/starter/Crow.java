@@ -30,6 +30,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private GButton mainmenue; 
 	private GButton scene1;
 	private GButton newbutton;
+	private Boolean isInstructionsonScreen = false;
 	
 	int minutecount =0;
 	//private GLabel livescounter;
@@ -134,6 +135,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		return false;
 	}
 	
+
 	
 	public boolean isOutOfBoundsleft() {
 		double leftarea = 0;
@@ -347,8 +349,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int c = e.getKeyCode();
+		
+		if(!isInstructionsonScreen) {
 
-		if (c == KeyEvent.VK_LEFT ) {
+		if (c == KeyEvent.VK_LEFT) {
 				crowtimerleft.start();
 
 		}
@@ -359,7 +363,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			
 		}
 
-		if (c == KeyEvent.VK_RIGHT) {
+		if (c == KeyEvent.VK_RIGHT ) {
 			crowtimeright.start();
 
 		}
@@ -368,6 +372,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		if (c == KeyEvent.VK_DOWN) {
 			crowtimerdown.start();
 
+		}
 		}
 }
 	
@@ -446,26 +451,32 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		 if (obj == scene1) {
 			 lives =3;
 			 crowwintimer.stop();
-			 program.switchToScene1();
+			 program.switchToScene3();
 			 
 		 }
 		 
 		 if (obj == helpbutton) {
-			 stopTimers();
+			 //stopTimers();
+			 trashDown.stop();
 			 program.add(crowinstructions);
 			 program.add(newbutton);
 			 sec.stop();
+			 isInstructionsonScreen = true;
 		 }
 		 
 		 if (obj == newbutton) {
 			 program.remove(crowinstructions);
 			 program.remove(newbutton);
-			 startTimers();
+			 trashDown.start();
+			 sec.start();
+			 isInstructionsonScreen = false;
 		 }
 		else {
 			
 		}
 	}
+	
+
 	
 	public void stopTimers() {
 		crowtimerdown.stop();
@@ -476,6 +487,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		gravitytimer.stop();
 		crowtimerup.stop();
 	}
+	
 	
 	public void startTimers() {
 		trashDown.start();
