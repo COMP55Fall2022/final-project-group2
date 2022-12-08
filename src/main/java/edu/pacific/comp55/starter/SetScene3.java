@@ -23,14 +23,16 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	private GImage barntext;
 	private GImage tree;
 	private GImage treescreen;
+	private GImage mapGif;
 	
 	//Timers needed for scene 3
 	private boolean treetimerstart = false;
 	Timer barntimer = new Timer(40, this);
 	Timer dog2timer = new Timer(40, this);
 	Timer treetimer = new Timer(40, this);
-	
+	Timer gifTimer = new Timer(1000, this);
 	int dialogueCountdown = 0;
+	int gifCounter = 0;
 	
 	public SetScene3(MainApplication app) {
 		super();
@@ -42,7 +44,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		dog2text = new GImage("dog2text.png", 200, 100);
 		barn = new GImage("barn.png", 100, 100);
 		barntext = new GImage("barntext.png", 100, 100);
-
+		mapGif = new GImage("journey2.gif",0,0);
 	}
 	
 	// if we win the game we switch to scene3
@@ -57,9 +59,11 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	}
 
 	public void setScene3() {
+		gifTimer.start();
 		program.add(scene3);
 		program.add(dog2);
 		program.add(barn);
+		program.add(mapGif);
 	}
 	
 	// These functions check if the user is clicking on the interactable object and 
@@ -74,6 +78,15 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent g) {
 		Object source = g.getSource();
+		
+		if(source == gifTimer) {
+			gifCounter++;
+			System.out.println(gifCounter);
+			if(gifCounter == 3) {
+				program.remove(mapGif);
+				gifTimer.stop();
+			}
+		}
 
 	}
 }

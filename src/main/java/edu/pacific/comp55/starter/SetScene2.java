@@ -35,7 +35,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	Timer gifTimer = new Timer(1000, this);
 	
 	int dialogueCountdown = 0;
-	int gifCounter = 0;
+	private int gifCounter = 0;
 	
 	public SetScene2(MainApplication app) {
 		super();
