@@ -116,7 +116,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	public void actionPerformed(ActionEvent g) {
 		Object source = g.getSource();
 		
-		
+		//test
 		if(source == gifTimer) {
 			gifCounter++;
 			System.out.println(gifCounter);
