@@ -72,7 +72,12 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	@Override
 	public void hideContents() {
 		program.remove(scene2);
-		//program.remove();
+		removebuttons();
+		program.remove(crowscreen);
+		program.remove(crow);
+		program.remove(tumbleweed);
+		program.remove(telePole);
+	
 	}
 
 	public void setScene2() {
@@ -115,6 +120,11 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 		if (obj == cont) {
 			removebuttons();
 			program.switchToCrow();
+		}
+		
+		if (obj == exit) {
+			
+			program.switchToMenu();
 		}
 	}
 	

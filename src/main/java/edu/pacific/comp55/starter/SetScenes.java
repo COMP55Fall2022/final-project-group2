@@ -60,6 +60,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		program.remove(scene1);
 		program.remove(roses);
 		removebuttons();
+		program.remove(sunscreen);
 	}
 	public void setScene1() {
 		program.add(scene1);
@@ -98,6 +99,10 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		if (obj == cont) {
 			removebuttons();
 			program.switchToMouse();
+		}
+		
+		if (obj == exit) {
+			program.switchToMenu();
 		}
 	
 	}
