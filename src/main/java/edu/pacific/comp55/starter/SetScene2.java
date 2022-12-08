@@ -25,14 +25,17 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	private GImage telePoletext;
 	private GButton cont;
 	private GButton exit;
+	private GImage map1gif;
 	
 	//Timers needed for scene 2
 	private boolean crowtimerstart = false;
 	Timer tumbleweedtimer = new Timer(40, this);
 	Timer telePoletimer = new Timer(40, this);
 	Timer crowtimer = new Timer(40, this);
+	Timer gifTimer = new Timer(1000, this);
 	
 	int dialogueCountdown = 0;
+	int gifCounter = 0;
 	
 	public SetScene2(MainApplication app) {
 		super();
@@ -50,7 +53,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 		cont.setFillColor(Color.GREEN);
 		exit = new GButton("Exit", 455, 600, 100, 100);
 		exit.setFillColor(Color.RED);
-
+		map1gif = new GImage("journey1.gif", 0, 0);
 	}
 	
 	
@@ -67,10 +70,12 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	}
 
 	public void setScene2() {
+		gifTimer.start();
 		program.add(scene2);
 		program.add(crow);
 		program.add(tumbleweed);
 		program.add(telePole);
+		program.add(map1gif);
 	}
 	
 	// These functions check if the user is clicking on the interactable object and 
@@ -110,6 +115,17 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent g) {
 		Object source = g.getSource();
+		
+		
+		if(source == gifTimer) {
+			gifCounter++;
+			System.out.println(gifCounter);
+			if(gifCounter == 3) {
+				program.remove(map1gif);
+				gifTimer.stop();
+			}
+		}
+		
 		if (source == tumbleweedtimer) {
 			dialogueCountdown++;
 			System.out.println(dialogueCountdown);
