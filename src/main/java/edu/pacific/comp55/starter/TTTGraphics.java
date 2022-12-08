@@ -165,6 +165,10 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 		program.remove(crowresult);
 		//program.remove(tryagain);
 		//tryagain = null;
+		
+		
+		program.remove(mainmenue);
+		program.remove(scene1);
 	}
 
 	private int calculate_row_from_mouse(int xPos) {
@@ -234,7 +238,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 
 	private void exitGame() {
 		System.out.println("need to add code to move on to next mini-game?");
-		program.switchToBasket();
+		program.switchToScene4();
 	}
 	
 
@@ -262,11 +266,9 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 			}
 			
 			if(obj == mainmenue) {
-				System.out.println("Main menu button pressed");
+				hideContents();
+				
 				program.switchToMenu();
-				program.remove(mainmenue);
-				program.remove(scene1);
-				//program.switchToMenu();
 				
 			}
 			
