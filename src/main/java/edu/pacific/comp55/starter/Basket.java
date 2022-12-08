@@ -48,6 +48,11 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 	private int rottennumTimes;
 	Timer rottenappleDown = new Timer(40, this);
 
+	//forhelpbutton
+	private GImage helpbutton;
+	private GImage basketinstructions;
+	private GButton newbutton;
+	private boolean isInstructionOnscreen=false;
 
 	// basket
 	private GImage basket;
@@ -60,6 +65,9 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 	// score
 	private int applecount;
 	GLabel applecounter = new GLabel(String.valueOf(applecount), 50, 50);
+	Timer helptimer = new Timer(40, this);
+
+	
 
 	// wongame
 	private GImage crowin;
@@ -110,6 +118,14 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		crowlost.scale(0.5);
 		tryagain = new GButton("Try again", 655, 500, 100, 100);
 		tryagain.setFillColor(Color.green);
+
+		// helpbutton
+		helpbutton = new GImage("helpbutton.png", 1150, 25);
+		helpbutton.scale(0.25);
+		basketinstructions = new GImage("basketinstructions.png", 250, 75);
+		basketinstructions.scale(0.75);
+		newbutton = new GButton("Continue game", 500, 400, 100, 100);
+		newbutton.setFillColor(Color.GREEN);
 
 	}
 
@@ -211,7 +227,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 		// apple movements
 
-		if (source == appleDown) {
+		if (source == appleDown && !isInstructionOnscreen) {
 			numTimes++;
 			if (numTimes % 30 == 0) {
 				addApples();
@@ -220,7 +236,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 			appleMove();
 		}
 
-		if (source == rottenappleDown) {
+		if (source == rottenappleDown && !isInstructionOnscreen) {
 			rottennumTimes++;
 			if (rottennumTimes % 30 == 0) {
 				addRottenApples();
@@ -249,12 +265,15 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 			program.add(mainmenue);
 			stoptimers();
 		}
+		
 
 		isappletouchingbasket();
 		isrottenappletouchingbasket();
 		wingame();
 		endgame();
+		
 		applecounter.setLabel(String.valueOf(applecount));
+		
 	}
 
 	@Override
@@ -266,6 +285,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		rottenappleDown.start();
 		program.add(applecounter);
 		sec.start();
+		program.add(helpbutton);
 
 	}
 
@@ -329,20 +349,22 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		return false;
 
 	}
-	
-	//basket movements
+
+	// basket movements
 
 	public void keyPressed(KeyEvent e) {
 		int c = e.getKeyCode();
 
-		if (c == KeyEvent.VK_LEFT) {
-			baskettimerleft.start();
+		if (!isInstructionOnscreen) {
+			if (c == KeyEvent.VK_LEFT) {
+				baskettimerleft.start();
 
-		}
+			}
 
-		if (c == KeyEvent.VK_RIGHT) {
-			baskettimerright.start();
+			if (c == KeyEvent.VK_RIGHT) {
+				baskettimerright.start();
 
+			}
 		}
 
 	}
@@ -360,6 +382,12 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		baskettimerright.stop();
 	}
 	
+	public void starttimers() {
+		appleDown.start();
+		rottenappleDown.start();
+		baskettimerleft.start();
+		baskettimerright.start();
+	}
 
 	
 	//starting and ending game
@@ -406,6 +434,22 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 			 wongametimer.stop();
 			 this.program.switchToScene1();
 		 }
+		 
+		 if (obj == helpbutton) {
+			 program.add(basketinstructions);
+			 program.add(newbutton);
+			 isInstructionOnscreen = true;
+			 sec.stop();
+		 }
+		 
+		 if (obj == newbutton) {
+			 program.remove(basketinstructions);
+			 isInstructionOnscreen = false;
+			 program.remove(newbutton);
+			 sec.start();
+		 }
+		 
+		
 		else {
 			
 		}
