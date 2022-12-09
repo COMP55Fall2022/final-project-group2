@@ -49,15 +49,16 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 		saaya = new GImage("cat.png", 200, 600);
 		scene4 = new GImage("basketbackground.png", 0, 0);
 		dog3 = new GImage("dog3.png", 700, 500);
-		apple = new GImage("apple.png", 600, 700);
-		basket = new GImage("basket.png", 400, 600);
+		apple = new GImage("apple.png", 900, 800);
+		apple.rotate(-15);
+		basket = new GImage("basket.png", 450, 600);
 		basketscreen = new GImage("basketscreen.png", 0 ,0);
 		mapGif = new GImage("journey3.gif",0,0);
 		mapSound = AudioPlayer.getInstance();
 
 		dog3.scale(0.4);
-		basket.scale(0.25);
-		apple.scale(0.2);
+		basket.scale(0.5);
+		apple.scale(0.5);
 		
 		cont = new GButton("Continue", 655, 600, 100, 100);
 		cont.setFillColor(Color.GREEN);
@@ -101,7 +102,7 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == apple && !baskettimerstart) {
-			appletext = new GImage("appletext.png", 570, 500);
+			appletext = new GImage("appletext.png", 875, 625);
 			appletext.scale(0.5);
 			program.add(appletext);
 			appletimer.start();
