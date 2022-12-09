@@ -31,6 +31,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private GButton scene1;
 	private GButton newbutton;
 	private Boolean isInstructionsonScreen = false;
+	private Boolean iswinonscreen =false;
+	private Boolean isloseronscreen =false;
+	
 	
 	int minutecount =0;
 	//private GLabel livescounter;
@@ -316,6 +319,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 		
 		if (source == crowlosttimer) {
+			isloseronscreen = true;
 			program.add(crowlost);
 			program.add(tryagain);
 			program.add(mainmenue);
@@ -331,6 +335,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		}
 		
 		if (source == crowwintimer) {
+			iswinonscreen = true;
 			program.add(crowin);
 			program.add(mainmenue);
 			program.add(scene1);
@@ -458,11 +463,14 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		 }
 		 
 		 if (obj == helpbutton) {
+			 if (!iswinonscreen && !isloseronscreen) {
 			 //stopTimers();
 			 trashDown.stop();
 			 program.add(crowinstructions);
 			 program.add(newbutton);
 			 sec.stop();
+			
+			 }
 			 isInstructionsonScreen = true;
 		 }
 		 

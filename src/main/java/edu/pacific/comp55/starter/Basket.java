@@ -53,6 +53,8 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 	private GImage basketinstructions;
 	private GButton newbutton;
 	private boolean isInstructionOnscreen=false;
+	private Boolean iswinonscreen =false;
+	private Boolean isloseronscreen =false;
 
 	// basket
 	private GImage basket;
@@ -253,6 +255,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		}
 
 		if (source == wongametimer) {
+			iswinonscreen = true;
 			program.add(crowin);
 			program.add(scene1);
 			program.add(mainmenue);
@@ -260,6 +263,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		}
 
 		if (source == lostgametimer) {
+			isloseronscreen = true;
 			program.add(crowlost);
 			program.add(tryagain);
 			program.add(mainmenue);
@@ -425,33 +429,34 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 			 wongametimer.stop();
 			 appleDown.stop();
 			rottenappleDown.stop();
-			 program.switchToMenu();
-			
-			 
+			program.switchToMenu();
+
 		}
-		 
-		 if (obj == scene1) {
-			 wongametimer.stop();
-			 this.program.switchToScene1();
-		 }
-		 
-		 if (obj == helpbutton) {
-			 program.add(basketinstructions);
-			 program.add(newbutton);
-			 isInstructionOnscreen = true;
-			 sec.stop();
-		 }
-		 
-		 if (obj == newbutton) {
-			 program.remove(basketinstructions);
-			 isInstructionOnscreen = false;
-			 program.remove(newbutton);
-			 sec.start();
-		 }
-		 
-		
+
+		if (obj == scene1) {
+			wongametimer.stop();
+			this.program.switchToScene1();
+		}
+
+		if (obj == helpbutton) {
+			if (!iswinonscreen && !isloseronscreen) {
+				program.add(basketinstructions);
+				program.add(newbutton);
+
+				sec.stop();
+			}
+			isInstructionOnscreen = true;
+		}
+
+		if (obj == newbutton) {
+			program.remove(basketinstructions);
+			isInstructionOnscreen = false;
+			program.remove(newbutton);
+			sec.start();
+		}
+
 		else {
-			
+
 		}
 	}
 	
