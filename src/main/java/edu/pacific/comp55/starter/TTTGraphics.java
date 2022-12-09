@@ -267,7 +267,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 			}
 			
 			if(obj == mainmenue) {
-				hideContents();
+				//hideContents();
 				program.switchToMenu();
 				
 			}
