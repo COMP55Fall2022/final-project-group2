@@ -12,6 +12,9 @@ import java.util.TimerTask;
 
 public class MouseGame extends GraphicsPane implements ActionListener{
 	//private ArrayList<GImage> mouseList;
+	public static final String MUSIC_FOLDER = "sounds";
+	private static final String SOUND_FILE[] = {"ShortMouseSqueak.mp3", "ShortPop.mp3"};
+	private static final String SONG_FILE = "Life of Riley - Kevin MacLeod.mp3";
 	private ArrayList<Rodent> mouseList;
 	private GImage mouse;
 	private GImage background;
@@ -33,7 +36,8 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private GLine rowLine;
 	private GLine colLine;
 	private GImage startBoard;
-	private GImage startBoardInstructionsBackground;
+	private AudioPlayer sound;
+	private int mouseSoundCounter;
 	// The below coordinates are the location where the actual playable area is in the background image.
 	private static final int GAMEBOARD_LEFT = 225;
 	private static final int GAMEBOARD_TOP = 117;
@@ -65,6 +69,9 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		score = new GLabel("Score: " + points, 200, 100);
 		score.scale(5);
 		score.setColor(Color.white);
+		mouseSoundCounter = 0;
+		sound = AudioPlayer.getInstance();
+		
 		//trying to add instructions
 		startBoard = new GImage("mouseinstructions.png",0,0);
 		//startBoardInstructionsBackground = new GImage("mousebg.png",0 ,0);
@@ -103,6 +110,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private void startGame() {
 		// This is the main game loop
 		System.out.println("Starting Game");
+		sound.playSound(MUSIC_FOLDER, SONG_FILE);
 		lastUpdatedTime = System.nanoTime();
 		isGameRunning = true;
 		mouseMovement = new Timer();
@@ -210,6 +218,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	}
 	
 	private void addMouse() {
+		mouseSoundCounter++;
 		int x = (int) (Math.random() * (GAMEBOARD_RIGHT - GAMEBOARD_LEFT) + GAMEBOARD_LEFT);
 		int y = (int) (Math.random() * (GAMEBOARD_BOTTOM - GAMEBOARD_TOP) + GAMEBOARD_TOP);
 		mouse = new GImage("genericMouse.png");
@@ -226,6 +235,9 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		gm.setMouseImg(mouse);
 		mouseList.add(gm);
 		program.add(gm.getMouseImg());
+		if(mouseSoundCounter > 10) {
+			sound.playSound(MUSIC_FOLDER, SOUND_FILE[0]);
+		}
 	}
 	
 	//Scales the mouse down since the original image is too big. 
@@ -328,11 +340,12 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 					return;
 				}
 				if(obj == tryagain) {
+					sound.stopSound(MUSIC_FOLDER, SONG_FILE);
 					program.switchToMouse();
-					
 				}
 				if(obj == mainmenue) {
 					program.switchToMenu();
+					sound.stopSound(MUSIC_FOLDER, SONG_FILE);
 					program.remove(crowlost);
 					program.remove(tryagain);
 					program.remove(mainmenue);
@@ -344,6 +357,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 				}
 				if(obj == scene1) {
 					hideContents();
+					sound.stopSound(MUSIC_FOLDER, SONG_FILE);
 					program.switchToScene2();
 				}
 			}
@@ -371,6 +385,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 					}
 					program.remove(g);
 					mouseList.remove(gm);
+					sound.playSound(MUSIC_FOLDER, SOUND_FILE[1]);
 					if(this.wingame()) {
 						this.handleGameOver();
 					}

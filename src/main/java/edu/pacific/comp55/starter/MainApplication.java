@@ -4,11 +4,10 @@ public class MainApplication extends GraphicsApplication {
 	public static final int WINDOW_WIDTH = 1220;
 	public static final int WINDOW_HEIGHT = 1096;
 	public static final String MUSIC_FOLDER = "sounds";
-	private static final String[] SOUND_FILES = { "magicsound.mp3"};//comment
+	private static final String[] SOUND_FILES = { "magicsound.mp3", "Keyboard press - Sound Effect.mp3"};//comment
 
 	private SomePane somePane;
 	private MenuPane menu;
-	private int count;
 	private Crow crowGame;
 	private SetScenes scene1;
 	private SetScene2 scene2;
@@ -18,7 +17,8 @@ public class MainApplication extends GraphicsApplication {
 	private TTTGraphics tictactoe;
 	private MouseGame mouse;
 	private Basket basketGame;
-
+	AudioPlayer audio = AudioPlayer.getInstance();
+	
 	public void init() {
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	}
@@ -36,20 +36,17 @@ public class MainApplication extends GraphicsApplication {
 	}
 	
 	public void switchToCrow() {
-		playRandomSound();
 		crowGame = new Crow(this);
-		count++;
 		switchToScreen(crowGame);
 	}
 	
 	public void switchToBasket() {
-		playRandomSound();
 		basketGame = new Basket(this);
-		count++;
 		switchToScreen(basketGame);
 	}
 	
 	public void switchToScene1() {
+		audio.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 		scene1 = new SetScenes(this);
 		switchToScreen(scene1);
 	}
@@ -76,36 +73,30 @@ public class MainApplication extends GraphicsApplication {
 
 	public void switchToMenu() {
 		menu = new MenuPane(this);
-		playRandomSound();
-		count++;
+		//playRandomSound();
 		switchToScreen(menu);
 	}
 
 	public void switchToSome() {
 		somePane = new SomePane(this);
-		playRandomSound();
 		switchToScreen(somePane);
 	}
 	
 	public void switchToTTT() {
 		tictactoe = new TTTGraphics(this);
-		playRandomSound();
-		count++;
 		switchToScreen(tictactoe);
 	}
 	
 	public void switchToMouse() {
-		playRandomSound();
 		mouse = new MouseGame(this);
-		count++;
 		switchToScreen(mouse);
 	}
 	
-
+/*
 	private void playRandomSound() {
 		AudioPlayer audio = AudioPlayer.getInstance();
-		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
-	}
+		audio.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
+	}*/
 	
 	
 	public static void main(String[] args) {
