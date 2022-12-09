@@ -35,6 +35,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	Timer treetimer = new Timer(40, this);
 	Timer gifTimer = new Timer(1000, this);
 	private int dialogueCountdown = 0;
+	private int dialogueCountdown2 = 0;
 	private int gifCounter = 0;
 
 	// buttons
@@ -158,10 +159,10 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		}
 		
 		if (source == barntimer) {
-			dialogueCountdown++;
+			dialogueCountdown2++;
 			if (dialogueCountdown > 100) {
 				program.remove(barntext);
-				dialogueCountdown = 0;
+				dialogueCountdown2 = 0;
 				barntimer.stop();
 			}
 		}

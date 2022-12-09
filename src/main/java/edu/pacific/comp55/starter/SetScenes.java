@@ -28,12 +28,14 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	
 	//Timers needed for scene 1
 	private boolean suntimerstart = false;
-	private Timer rosestimer = new Timer(40, this);
-	private Timer blueflowertimer = new Timer(40, this);
-	private Timer suntimer = new Timer(40, this);
-	private Timer clickprompttimer = new Timer(40, this);
+	private Timer rosestimer = new Timer(100, this);
+	private Timer blueflowertimer = new Timer(100, this);
+	private Timer suntimer = new Timer(100, this);
+	private Timer clickprompttimer = new Timer(100, this);
 	
-	private int dialogueCountdown = 0;
+	private int dialogueCountdown1 = 0;
+	private int dialogueCountdown2 = 0;
+	private int dialogueCountdown3 = 0;
 	
 	public SetScenes(MainApplication app) {
 		super();
@@ -132,32 +134,32 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 		
 		if (source == rosestimer) {
-			dialogueCountdown++;
-			System.out.println(dialogueCountdown);
-			if (dialogueCountdown > 100) {
+			dialogueCountdown1++;
+			System.out.println(dialogueCountdown1);
+			if (dialogueCountdown1 > 50) {
 				program.remove(rosesdialogue);
-				dialogueCountdown = 0;
+				dialogueCountdown1 = 0;
 				rosestimer.stop();
 			}
 		}
 		
 		if (source == clickprompttimer) {
 			program.add(clickprompt);
-			dialogueCountdown++;
-			System.out.println(dialogueCountdown);
-			if (dialogueCountdown > 80) {
+			dialogueCountdown2++;
+			System.out.println(dialogueCountdown2);
+			if (dialogueCountdown2 > 50) {
 				program.remove(clickprompt);
-				dialogueCountdown = 0;
+				dialogueCountdown2 = 0;
 				clickprompttimer.stop();
 			}
 		}
 		
 		if (source == blueflowertimer) {
-			dialogueCountdown++;
+			dialogueCountdown3++;
 			
-			if (dialogueCountdown > 100) {
+			if (dialogueCountdown3 > 50) {
 				program.remove(blueflowertext);
-				dialogueCountdown = 0;
+				dialogueCountdown3 = 0;
 				blueflowertimer.stop();
 			}
 		}

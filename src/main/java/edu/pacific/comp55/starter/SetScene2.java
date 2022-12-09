@@ -40,6 +40,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	Timer gifTimer = new Timer(1000, this);
 	
 	private int dialogueCountdown = 0;
+	private int dialogueCountdown2 = 0;
 	private int gifCounter = 0;
 	
 	public SetScene2(MainApplication app) {
@@ -155,11 +156,11 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 		}
 		
 		if (source == telePoletimer) {
-			dialogueCountdown++;
+			dialogueCountdown2++;
 			
-			if (dialogueCountdown > 100) {
+			if (dialogueCountdown2 > 100) {
 				program.remove(telePoletext);
-				dialogueCountdown = 0;
+				dialogueCountdown2 = 0;
 				telePoletimer.stop();
 			}
 		}

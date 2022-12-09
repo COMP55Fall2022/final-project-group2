@@ -39,6 +39,7 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 	private Timer baskettimer = new Timer(40, this);
 	private Timer gifTimer = new Timer(1000, this);
 	private int dialogueCountdown = 0;
+	private int dialogueCountdown2 = 0;
 	private int gifCounter = 0;
 	
 	public SetScene4(MainApplication app) {
@@ -148,10 +149,10 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 		}
 		
 		if (source == appletimer) {
-			dialogueCountdown++;
-			if (dialogueCountdown > 100) {
+			dialogueCountdown2++;
+			if (dialogueCountdown2 > 100) {
 				program.remove(appletext);
-				dialogueCountdown = 0;
+				dialogueCountdown2 = 0;
 				appletimer.stop();
 			}
 		}
