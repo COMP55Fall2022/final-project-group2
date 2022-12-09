@@ -19,6 +19,8 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	// GImages needed for scene 3
 	private GImage dog2;
 	private GImage dog2text;
+	private GImage barn;
+	private GImage barntext;
 	private GImage tree;
 	private GImage treescreen;
 	private GImage mapGif;
@@ -45,20 +47,21 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		program = app;
 		
 		// For scene 3
-		saaya = new GImage("cat.png", 100, 670);
+		saaya = new GImage("cat.png", 100, 750);
 		scene3 = new GImage("scene3.png", 0, 0);
-		dog2 = new GImage("dog2.png", 825, 650);
-		tree = new GImage("tree.png", 10, 376);
+		dog2 = new GImage("dog2.png", 700, 750);
+		barn = new GImage("barn.png", 67, 18);
+		tree = new GImage("tree.png", 10, 400);
 		mapGif = new GImage("journey2.gif", 0, 0);
 		mapSound = AudioPlayer.getInstance();
 
 		// buttons
 		saaya.scale(2);
-		//scene3.scale(1.1);
+		scene3.scale(1.1);
 		dog2.scale(0.4);
 		saaya.scale(0.7);
 		tree.scale(0.4);
-	
+		barn.scale(1.1);
 		
 		//buttons 
 		cont = new GButton("Continue", 655, 550, 100, 100);
@@ -76,6 +79,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	@Override
 	public void hideContents() {
 		program.remove(scene3);
+		program.remove(scene3);
 		program.remove(dog2);
 		program.remove(saaya);
 		program.remove(exit);
@@ -88,6 +92,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		gifTimer.start();
 		mapSound.playSound(MUSIC_FOLDER, SOUND_FILE);
 		program.add(scene3);
+		program.add(barn);
 		program.add(dog2);
 		program.add(saaya);
 		program.add(tree);
@@ -100,12 +105,18 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 
 		if (obj == dog2 && !treetimerstart) {
-			dog2text = new GImage("dog2text.png", 445, 450);
+			dog2text = new GImage("dog2text.png", 350, 550);
 			dog2text.scale(0.5);
 			program.add(dog2text);
 			dog2timer.start();
 		}
 		
+		if (obj == barn && !treetimerstart) {
+			barntext = new GImage("barntext.png", 200, 200);
+			barntext.scale(0.5);
+			program.add(barntext);
+			barntimer.start();
+		}
 		
 		if (obj == tree) {
 			treescreen = new GImage("treescreen.png", 350, 200);
@@ -151,7 +162,14 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 			}
 		}
 		
-		
+		if (source == barntimer) {
+			dialogueCountdown2++;
+			if (dialogueCountdown > 100) {
+				program.remove(barntext);
+				dialogueCountdown2 = 0;
+				barntimer.stop();
+			}
+		}
 		
 		if (source == treetimer) {
 			dialogueCountdown++;
