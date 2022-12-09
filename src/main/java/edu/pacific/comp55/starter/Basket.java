@@ -23,6 +23,11 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 	public static final int WINDOW_HEIGHT = 1096;
 	private MainApplication program;
 	private GImage basketbackground;
+	private AudioPlayer audio;
+	private static final String MUSIC_FOLDER = "sounds";
+	private static final String SOUND_FILE = "Running On Leaves.mp3";
+	private static final String SONG_FILE = "Malt Shop Bop - Kevin MacLeod.mp3";
+	private static final String[] SOUND_FILES = {"plop.mp3", "Congrats v2.mp3"};
 
 	// Timer for game
 	int minutecount = 0;
@@ -82,7 +87,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 	public Basket(MainApplication app) {
 		this.program = app;
 		basketbackground = new GImage("basketbackground.png", 0, 0);
-
+		audio = AudioPlayer.getInstance();
 		// basket
 		basket = new GImage("basket.png", START_X, START_Y);
 		
@@ -132,6 +137,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		basketinstructions.scale(0.75);
 		newbutton = new GButton("Continue", 490, 500, 100, 100);
 		newbutton.setFillColor(Color.GREEN);
+		audio.playSound(MUSIC_FOLDER, SONG_FILE);
 
 	}
 
@@ -216,7 +222,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		Object source = e.getSource();
 
 		// basket movements
-
+		
 		if (source == baskettimerleft) {
 			if (!isOutOfBoundsleft()) {
 				basket.move(-25, 0);
@@ -260,6 +266,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 		if (source == wongametimer) {
 			iswinonscreen = true;
+			audio.playSound(MUSIC_FOLDER, SOUND_FILES[1]);
 			program.add(crowin);
 			program.add(scene1);
 			program.add(mainmenue);
@@ -311,6 +318,9 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		program.remove(scene1);
 		lostgametimer.stop();
 		wongametimer.stop();
+		audio.stopSound(MUSIC_FOLDER, SONG_FILE);
+		audio.stopSound(MUSIC_FOLDER, SOUND_FILES[1]);
+		audio.stopSound(MUSIC_FOLDER, SOUND_FILES[0]);
 		
 		for (int i=0; i<apple.size();i++) {
 			program.remove(apple.get(i));
@@ -328,7 +338,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 			GRectangle applebounds = apple.get(i).getBounds();
 			if (basketbounds.intersects(applebounds)) {
 				applecount++;
-
+				audio.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 				program.remove(apple.get(i));
 				apple.remove(i);
 
