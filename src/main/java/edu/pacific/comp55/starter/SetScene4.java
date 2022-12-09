@@ -28,6 +28,8 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 	private AudioPlayer mapSound;
 	private static final String MUSIC_FOLDER = "sounds";
 	private static final String SOUND_FILE = "Running On Leaves.mp3";
+	private static final String SONG_FILE = "Midsummer Sky - Kevin MacLeod.mp3";
+	private static final String[] SOUND_FILES = {"Dog Barking.mp3", "plop.mp3", "Congrats v2.mp3"};
 	
 	private GButton cont;
 	private GButton exit;
@@ -71,6 +73,7 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 	@Override
 	public void showContents() {
 		setScene4();
+		mapSound.playSound(MUSIC_FOLDER, SONG_FILE);
 	}
 	@Override
 	public void hideContents() {
@@ -80,6 +83,7 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 		program.remove(basket);
 		program.remove(saaya);
 		program.remove(apple);
+		mapSound.stopSound(MUSIC_FOLDER, SONG_FILE);
 		//program.remove();
 	}
 
@@ -104,6 +108,7 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 			dog3text = new GImage("dog3text.png", 380, 300);
 			dog3text.scale(0.5);
 			program.add(dog3text);
+			mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 			dog3timer.start();
 		}
 		
@@ -111,6 +116,8 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 			appletext = new GImage("appletext.png", 875, 625);
 			appletext.scale(0.5);
 			program.add(appletext);
+			mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[1]);
+			mapSound.stopSound(MUSIC_FOLDER, SOUND_FILES[0]);
 			appletimer.start();
 		}
 		
@@ -119,7 +126,9 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 			basketscreen.scale(0.5);
 			program.add(basketscreen);
 			baskettimer.start();
+			mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[2]);
 			baskettimerstart = true;
+			mapSound.stopSound(MUSIC_FOLDER, SOUND_FILES[0]);
 		}
 		
 		if (obj == cont) {
