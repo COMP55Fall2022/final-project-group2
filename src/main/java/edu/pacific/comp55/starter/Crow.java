@@ -33,7 +33,10 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private Boolean isInstructionsonScreen = false;
 	private Boolean iswinonscreen =false;
 	private Boolean isloseronscreen =false;
-	
+	private AudioPlayer audio;
+	private static final String MUSIC_FOLDER = "sounds";
+	private static final String SOUND_FILES[] = {"rustle.mp3", "Cat meow sound effect.mp3", "Congrats v2.mp3"};
+	private static final String SONG_FILE = "Corncob - Country - Kevin MacLeod.mp3";
 	
 	
 	int minutecount =0;
@@ -79,7 +82,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		this.program = app;
 		crowgamebackground = new GImage("7.png", 0, 0);
 		saaya = new GImage("cat.png", START_X, START_Y);
-		
+		audio = AudioPlayer.getInstance();
 		//loostgame
 		crowlost = new GImage("crowlost.png",350, 200);
 		crowlost.scale(0.5);
@@ -169,13 +172,15 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		trashDiv.add(trashGen.nextInt(TRASHDIV));
 		trash.add(eTrash);
 		program.add(eTrash);
+		audio.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 		
 	}
 
 	public void heartbreaker() {
-
+		
 
 		if (lives == 2) {
+			
 			program.remove(heart3);
 		}
 
@@ -236,6 +241,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		program.add(heart3);
 		program.add(time);
 		program.add(helpbutton);
+		audio.playSound(MUSIC_FOLDER, SONG_FILE);
 	}
 		
 	@Override
@@ -251,7 +257,9 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		program.remove(livescounter);
 		trashDown.stop();
 		removeWinloseScreen();
-		
+		audio.stopSound(MUSIC_FOLDER, SONG_FILE);
+		audio.stopSound(MUSIC_FOLDER, SOUND_FILES[0]);
+		audio.stopSound(MUSIC_FOLDER, SOUND_FILES[1]);
 		for (int i=0; i<trash.size();i++) {
 			program.remove(trash.get(i));
 		}
@@ -415,7 +423,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			
 				program.remove(trash.get(i));
 				trash.remove(i);
-				
+				audio.playSound(MUSIC_FOLDER, SOUND_FILES[1]);
 			
 			}
 
@@ -461,6 +469,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		 if (obj == scene1) {
 			 lives =3;
 			 crowwintimer.stop();
+			 audio.playSound(MUSIC_FOLDER, SOUND_FILES[2]);
 			 program.switchToScene3();
 			 
 		 }
