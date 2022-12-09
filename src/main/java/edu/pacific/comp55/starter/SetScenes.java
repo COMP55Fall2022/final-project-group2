@@ -28,12 +28,12 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	
 	//Timers needed for scene 1
 	private boolean suntimerstart = false;
-	Timer rosestimer = new Timer(40, this);
-	Timer blueflowertimer = new Timer(40, this);
-	Timer suntimer = new Timer(40, this);
-	Timer clickprompttimer = new Timer(40, this);
+	private Timer rosestimer = new Timer(40, this);
+	private Timer blueflowertimer = new Timer(40, this);
+	private Timer suntimer = new Timer(40, this);
+	private Timer clickprompttimer = new Timer(40, this);
 	
-	int dialogueCountdown = 0;
+	private int dialogueCountdown = 0;
 	
 	public SetScenes(MainApplication app) {
 		super();
@@ -135,7 +135,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 			program.add(clickprompt);
 			dialogueCountdown++;
 			System.out.println(dialogueCountdown);
-			if (dialogueCountdown > 100) {
+			if (dialogueCountdown > 80) {
 				program.remove(clickprompt);
 				dialogueCountdown = 0;
 				clickprompttimer.stop();

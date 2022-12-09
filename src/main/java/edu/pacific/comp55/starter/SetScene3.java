@@ -34,8 +34,8 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	Timer dog2timer = new Timer(40, this);
 	Timer treetimer = new Timer(40, this);
 	Timer gifTimer = new Timer(1000, this);
-	int dialogueCountdown = 0;
-	int gifCounter = 0;
+	private int dialogueCountdown = 0;
+	private int gifCounter = 0;
 
 	// buttons
 	private GButton cont;
