@@ -53,10 +53,10 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		mouseList = new ArrayList<Rodent>();
 		background = new GImage("mousebg.png", 0, 0);
 		crowin = new GImage("crowin.png", 350, 200);
-		scene1 = new GButton("Next scene", 655, 500, 100, 100);
+		scene1 = new GButton("Continue", 655, 500, 100, 100);
 		scene1.setFillColor(Color.GREEN);
 		crowin.scale(0.5);
-		mainmenue = new GButton("Main menue", 455, 500, 100, 100);
+		mainmenue = new GButton("Main Menu", 455, 500, 100, 100);
 		mainmenue.setFillColor(Color.red);
 		crowlost = new GImage("crowlost.png", 350, 200);
 		crowlost.scale(0.5);
