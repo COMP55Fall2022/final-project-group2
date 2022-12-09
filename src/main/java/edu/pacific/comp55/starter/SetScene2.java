@@ -15,8 +15,9 @@ import acm.graphics.GOval;
 public class SetScene2 extends GraphicsPane implements ActionListener {
 	private MainApplication program;
 	private GImage scene2;
-	public static final String MUSIC_FOLDER = "sounds";
+	private static final String MUSIC_FOLDER = "sounds";
 	private static final String SOUND_FILE = "Running On Leaves.mp3";
+	private static final String SONG_FILE = "Cowboy Sting - Kevin MacLeod.mp3";
 	
 	//GImages needed for scene 2
 	
@@ -72,6 +73,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	}
 	@Override
 	public void hideContents() {
+		mapSound.stopSound(MUSIC_FOLDER, SONG_FILE);
 		program.remove(scene2);
 		removebuttons();
 		program.remove(crowscreen);
@@ -84,6 +86,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	public void setScene2() {
 		gifTimer.start();
 		mapSound.playSound(MUSIC_FOLDER, SOUND_FILE);
+		mapSound.playSound(MUSIC_FOLDER, SONG_FILE);
 		program.add(scene2);
 		program.add(crow);
 		program.add(tumbleweed);

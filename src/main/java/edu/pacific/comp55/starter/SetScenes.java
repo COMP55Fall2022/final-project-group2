@@ -13,7 +13,9 @@ import acm.graphics.GObject;
 public class SetScenes extends GraphicsPane implements ActionListener {
 	private MainApplication program;
 	private GImage scene1;
-
+	private static final String MUSIC_FOLDER = "sounds";
+	private static final String SOUND_FILES[] = {"Rustling Leaves.mp3", "shortPileOfLeaves.mp3", "Congrats.mp3"};
+	private static final String SONG_FILE = "Carefree - Kevin MacLeod.mp3";
 	//GImages needed for scene 1
 	private GImage roses;
 	private GImage clickprompt;
@@ -24,7 +26,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GImage sunscreen;
 	private GButton cont;
 	private GButton exit;
-	
+	private AudioPlayer effects;
 	
 	//Timers needed for scene 1
 	private boolean suntimerstart = false;
@@ -53,7 +55,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 		clickprompt = new GImage("clickprompt.png", 200, 240);
 		clickprompt.scale(0.75);
-
+		effects = AudioPlayer.getInstance();
 		
 	}
 	
@@ -63,6 +65,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	@Override
 	public void showContents() {
 		setScene1();
+		effects.playSound(MUSIC_FOLDER, SONG_FILE);
 		clickprompttimer.start();
 	}
 	@Override
@@ -74,6 +77,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		program.remove(clickprompt);
 		removebuttons();
 		clickprompttimer.stop();
+		effects.stopSound(MUSIC_FOLDER, SONG_FILE);
 		program.remove(sunscreen);
 	}
 	public void setScene1() {
@@ -95,6 +99,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		if (obj == roses && !suntimerstart) {
 			rosesdialogue = new GImage("rosesdialogue.png", 65, 200);
 			program.add(rosesdialogue);
+			effects.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 			rosestimer.start();
 		}
 		
@@ -102,6 +107,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 			blueflowertext = new GImage("blueflowerdialogue.png", 670, 275);
 			blueflowertext.scale(0.5);
 			program.add(blueflowertext);
+			effects.playSound(MUSIC_FOLDER, SOUND_FILES[1]);
 			blueflowertimer.start();
 		}
 		
@@ -110,6 +116,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 			sunscreen = new GImage("sunscreen.png", 350, 150);
 			sunscreen.scale(0.5);
 			program.add(sunscreen);
+			effects.playSound(MUSIC_FOLDER, SOUND_FILES[2]);
 			suntimer.start();
 			suntimerstart = true;
 		}

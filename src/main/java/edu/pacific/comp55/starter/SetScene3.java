@@ -26,7 +26,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	private GImage mapGif;
 	private GImage saaya;
 	private AudioPlayer mapSound;
-	public static final String MUSIC_FOLDER = "sounds";
+	private static final String MUSIC_FOLDER = "sounds";
 	private static final String SOUND_FILE = "Running On Leaves.mp3";
 	// Timers needed for scene 3
 	private boolean treetimerstart = false;

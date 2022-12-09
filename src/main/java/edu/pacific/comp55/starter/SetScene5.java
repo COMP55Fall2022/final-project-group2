@@ -24,7 +24,7 @@ public class SetScene5 extends GraphicsPane implements ActionListener {
 	private GImage homeGif4;
 	private GImage homeGif5;
 	private AudioPlayer mapSound;
-	public static final String MUSIC_FOLDER = "sounds";
+	private static final String MUSIC_FOLDER = "sounds";
 	private static final String SOUND_FILE = "Running On Leaves.mp3";
 	
 	private Timer gifTimer = new Timer(1000, this);
