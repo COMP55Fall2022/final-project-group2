@@ -33,6 +33,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private GLine rowLine;
 	private GLine colLine;
 	private GImage startBoard;
+	private GImage startBoardInstructionsBackground;
 	// The below coordinates are the location where the actual playable area is in the background image.
 	private static final int GAMEBOARD_LEFT = 225;
 	private static final int GAMEBOARD_TOP = 117;
@@ -66,6 +67,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		score.setColor(Color.white);
 		//trying to add instructions
 		startBoard = new GImage("mouseinstructions.png",247,147);
+		startBoardInstructionsBackground = new GImage("mousebg.png",0 ,0);
 		startBoard.scale(1.1);
 		
 		isGameRunning = false;
@@ -288,6 +290,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private void displayStartButton() {
 		startButton = new GButton("START", 600, 625, 100, 100);
 		startButton.setFillColor(Color.GREEN);
+		program.add(startBoardInstructionsBackground);
 		program.add(startBoard);
 		program.add(startButton);
 	}
@@ -319,6 +322,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 				if(obj == startButton) {
 					program.remove(startButton);
 					program.remove(startBoard);
+					program.remove(startBoardInstructionsBackground);
 					this.startGame();
 					return;
 				}
