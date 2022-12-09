@@ -35,6 +35,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 	private Boolean isloseronscreen =false;
 	
 	
+	
 	int minutecount =0;
 	//private GLabel livescounter;
 	private int lives =3;
@@ -125,6 +126,8 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		crowinstructions = new GImage("crowinstructions.png",350, 100);
 		newbutton = new GButton("Continue", 655, 500, 100, 100);
 		newbutton.setFillColor(Color.GREEN);
+		
+	
 
 
 	}
@@ -349,6 +352,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		endgame();
 		wongame();
 		livescounter.setLabel(String.valueOf(lives));
+		livescounter.setVisible(false);
 		
 	}
 
