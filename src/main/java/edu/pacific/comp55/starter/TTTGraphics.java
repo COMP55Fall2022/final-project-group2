@@ -31,6 +31,10 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 	private GImage crowlost;
 	private GButton tryagain;
 	private GImage crowresult;
+	private AudioPlayer mapSound;
+	private static final String MUSIC_FOLDER = "sounds";
+	private static final String[] SOUND_FILES = {"Cat meow sound effect.mp3", "Dog Barking.mp3" };
+	private static final String SONG_FILE = "Five Card Shuffle - Kevin MacLeod.mp3";
 
 	public TTTGraphics(MainApplication app) {
 		super();
@@ -50,6 +54,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 		crowlost.scale(0.5);
 		tryagain = new GButton("Try Again", 655, 500, 100, 100);
 		tryagain.setFillColor(Color.green);
+		mapSound = AudioPlayer.getInstance();
 	}
 
 	private void drawGridLines() {
@@ -106,6 +111,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 	public void showContents() {
 		// TODO Auto-generated method stub
 		program.add(background);
+		mapSound.playSound(MUSIC_FOLDER, SONG_FILE);
 		drawGridLines();
 		drawBoard();
 	}
@@ -161,7 +167,9 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 		if (this.messageShowing) {
 			this.removeMessage();
 		}
-		
+		mapSound.stopSound(MUSIC_FOLDER, SONG_FILE);
+		mapSound.stopSound(MUSIC_FOLDER, SOUND_FILES[0]);
+		mapSound.stopSound(MUSIC_FOLDER, SOUND_FILES[1]);
 		program.remove(crowresult);
 		//program.remove(tryagain);
 		//tryagain = null;
@@ -234,6 +242,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 				System.out.println("Tie in doDogMove");
 			}
 		}
+		
 	}
 
 	private void exitGame() {
@@ -279,8 +288,10 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 
 		// return if the game is over
 		if (board.checkForWin()) {
+			mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 			return;
 		} else if (board.checkForTie()) {
+			mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 			this.handleTie();
 			System.out.println("Tie in mousePressed");
 		}
@@ -294,6 +305,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 		if (row >= 0 && row < board.get_num_rows()) {
 			if (col >= 0 && col < board.get_num_cols()) {
 				inGameBoard = true;
+				mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 			}
 		}
 		if (!inGameBoard) {
@@ -320,6 +332,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 				@Override
 				public void run() {
 					doDogMove();
+					mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[1]);
 				}
 			}, 1000L);
 		}
