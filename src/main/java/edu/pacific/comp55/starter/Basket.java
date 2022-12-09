@@ -440,7 +440,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 		if (obj == scene1) {
 			wongametimer.stop();
-			this.program.switchToScene1();
+			this.program.switchToScene5();
 		}
 
 		if (obj == helpbutton) {

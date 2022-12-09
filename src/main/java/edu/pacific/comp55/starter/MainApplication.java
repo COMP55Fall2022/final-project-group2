@@ -14,6 +14,7 @@ public class MainApplication extends GraphicsApplication {
 	private SetScene2 scene2;
 	private SetScene3 scene3;
 	private SetScene4 scene4;
+	private SetScene5 scene5;
 	private TTTGraphics tictactoe;
 	private MouseGame mouse;
 	private Basket basketGame;
@@ -67,6 +68,11 @@ public class MainApplication extends GraphicsApplication {
 		scene4 = new SetScene4(this);
 		switchToScreen(scene4);
 	}
+	
+	public void switchToScene5() {
+		scene5 = new SetScene5(this);
+		switchToScreen(scene5);
+	}
 
 	public void switchToMenu() {
 		playRandomSound();
@@ -102,4 +108,6 @@ public class MainApplication extends GraphicsApplication {
 	public static void main(String[] args) {
 		new MainApplication().start();
 	}
+
+
 }
