@@ -343,6 +343,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 					
 				}
 				if(obj == scene1) {
+					hideContents();
 					program.switchToScene2();
 				}
 			}

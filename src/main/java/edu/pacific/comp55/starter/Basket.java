@@ -429,7 +429,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 			this.program.switchToBasket();
 		}
 		 if (obj == mainmenue){
-			
+			hideContents();
 			 lostgametimer.stop();
 			 wongametimer.stop();
 			 appleDown.stop();
@@ -440,6 +440,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 		if (obj == scene1) {
 			wongametimer.stop();
+			hideContents();
 			this.program.switchToScene5();
 		}
 

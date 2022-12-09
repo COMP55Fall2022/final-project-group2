@@ -452,7 +452,6 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 			 //removeWinloseScreen();
 			 crowlosttimer.stop();
 			 program.switchToMenu();
-			 hideContents();
 		}
 		 
 		 if (obj == scene1) {
