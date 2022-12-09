@@ -34,8 +34,8 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	Timer dog2timer = new Timer(40, this);
 	Timer treetimer = new Timer(40, this);
 	Timer gifTimer = new Timer(1000, this);
-	int dialogueCountdown = 0;
-	int gifCounter = 0;
+	private int dialogueCountdown = 0;
+	private int gifCounter = 0;
 
 	// buttons
 	private GButton cont;
@@ -44,28 +44,28 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	public SetScene3(MainApplication app) {
 		super();
 		program = app;
-
-
+		
 		// For scene 3
-		scene3 = new GImage("scene3bgimage.png", 0, 0);
-		dog2 = new GImage("dog2.png", 800, 650);
-		dog2.scale(0.5);
-
-		
-		
-		dog2text = new GImage("dog2text.png", 200, 100);
-		barn = new GImage("barn.png", 100, 100);
-		barntext = new GImage("barntext.png", 100, 100);
+		saaya = new GImage("cat.png", 100, 750);
+		scene3 = new GImage("scene3.png", 0, 0);
+		dog2 = new GImage("dog2.png", 700, 750);
+		barn = new GImage("barn.png", 67, 18);
+		tree = new GImage("tree.png", 10, 400);
 		mapGif = new GImage("journey2.gif", 0, 0);
 		mapSound = AudioPlayer.getInstance();
 
-		// cat
-		saaya = new GImage("cat.png", 600, 650);
-
 		// buttons
-		cont = new GButton("Continue", 655, 500, 100, 100);
+		saaya.scale(2);
+		scene3.scale(1.1);
+		dog2.scale(0.4);
+		saaya.scale(0.7);
+		tree.scale(0.4);
+		barn.scale(1.1);
+		
+		//buttons 
+		cont = new GButton("Continue", 655, 550, 100, 100);
 		cont.setFillColor(Color.GREEN);
-		exit = new GButton("Exit", 455, 500, 100, 100);
+		exit = new GButton("Exit", 455, 550, 100, 100);
 		exit.setFillColor(Color.RED);
 	}
 
@@ -91,9 +91,10 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		gifTimer.start();
 		mapSound.playSound(MUSIC_FOLDER, SOUND_FILE);
 		program.add(scene3);
+		program.add(barn);
 		program.add(dog2);
 		program.add(saaya);
-		program.add(barn);
+		program.add(tree);
 		program.add(mapGif);
 	}
 
@@ -102,21 +103,31 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 
-		if (obj == dog2) {
-			treescreen = new GImage("sunscreen.png", 350, 200);
+		if (obj == dog2 && !treetimerstart) {
+			dog2text = new GImage("dog2text.png", 350, 550);
+			dog2text.scale(0.5);
+			program.add(dog2text);
+			dog2timer.start();
+		}
+		
+		if (obj == barn && !treetimerstart) {
+			barntext = new GImage("barntext.png", 200, 200);
+			barntext.scale(0.5);
+			program.add(barntext);
+			barntimer.start();
+		}
+		
+		if (obj == tree) {
+			treescreen = new GImage("treescreen.png", 350, 200);
 			treescreen.scale(0.5);
 			program.add(treescreen);
-			dog2timer.start();
-
+			treetimer.start();
+			treetimerstart = true;
 		}
-
+		
 		if (obj == cont) {
 			removebuttons();
 			program.switchToTTT();
-		}
-
-		if (obj == exit) {
-			program.switchToMenu();
 		}
 
 	}
@@ -138,7 +149,26 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		}
 
 		if (source == dog2timer) {
-			dog2timer.stop();
+			dialogueCountdown++;
+			if (dialogueCountdown > 100) {
+				program.remove(dog2text);
+				dialogueCountdown = 0;
+				dog2timer.stop();
+			}
+		}
+		
+		if (source == barntimer) {
+			dialogueCountdown++;
+			if (dialogueCountdown > 100) {
+				program.remove(barntext);
+				dialogueCountdown = 0;
+				barntimer.stop();
+			}
+		}
+		
+		if (source == treetimer) {
+			dialogueCountdown++;
+			treetimer.stop();
 			program.add(cont);
 			program.add(exit);
 		}

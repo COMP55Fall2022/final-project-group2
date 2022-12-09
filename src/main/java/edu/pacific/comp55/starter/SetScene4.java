@@ -34,11 +34,11 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 	
 	//Timers needed for scene 4
 	private boolean baskettimerstart = false;
-	Timer dog3timer = new Timer(40, this);
-	Timer appletimer = new Timer(40, this);
-	Timer baskettimer = new Timer(40, this);
-	Timer gifTimer = new Timer(1000, this);
-	int dialogueCountdown = 0;
+	private Timer dog3timer = new Timer(40, this);
+	private Timer appletimer = new Timer(40, this);
+	private Timer baskettimer = new Timer(40, this);
+	private Timer gifTimer = new Timer(1000, this);
+	private int dialogueCountdown = 0;
 	private int gifCounter = 0;
 	
 	public SetScene4(MainApplication app) {
