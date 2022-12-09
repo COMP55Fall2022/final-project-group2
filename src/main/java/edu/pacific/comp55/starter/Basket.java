@@ -17,7 +17,7 @@ import acm.util.RandomGenerator;
 
 public class Basket extends GraphicsPane implements ActionListener, KeyListener {
 
-	private static final int START_Y = 550;
+	private static final int START_Y = 600;
 	private static final int START_X = 500;
 	public static final int WINDOW_WIDTH = 1220;
 	public static final int WINDOW_HEIGHT = 1096;
@@ -58,6 +58,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 	// basket
 	private GImage basket;
+	
 	private double BASKET_X;
 	
 	Timer baskettimerleft = new Timer(40, this);
@@ -84,11 +85,14 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 		// basket
 		basket = new GImage("basket.png", START_X, START_Y);
-		basket.scale(0.25);
+		
+		basket.scale(0.5);
 		BASKET_X = basket.getWidth();
-		baskettop = new GLine(510, 637, 644, 637);
+		//510, 637, 644, 637
+		baskettop = new GLine(START_X + 40, START_Y + 165, START_X + 255, START_Y + 165);
 		baskettop.setColor(Color.BLACK);
-		// baskettop.setVisible(false);
+		baskettop.setLineWidth(10);
+		baskettop.setVisible(false);
 
 		// apples
 		appleGen = RandomGenerator.getInstance();
@@ -109,10 +113,10 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 		// wingame
 		crowin = new GImage("crowin.png", 350, 200);
-		scene1 = new GButton("Next scene", 655, 500, 100, 100);
+		scene1 = new GButton("Continue", 655, 500, 100, 100);
 		scene1.setFillColor(Color.GREEN);
 		crowin.scale(0.5);
-		mainmenue = new GButton("Main menue", 455, 500, 100, 100);
+		mainmenue = new GButton("Main Menu", 455, 500, 100, 100);
 		mainmenue.setFillColor(Color.red);
 
 		// lostgame
@@ -126,7 +130,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		helpbutton.scale(0.25);
 		basketinstructions = new GImage("basketinstructions.png", 250, 75);
 		basketinstructions.scale(0.75);
-		newbutton = new GButton("Continue game", 500, 400, 100, 100);
+		newbutton = new GButton("Continue", 490, 500, 100, 100);
 		newbutton.setFillColor(Color.GREEN);
 
 	}
@@ -144,7 +148,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 	public GImage makeApple() {
 		GImage temp = new GImage("apple.png", appleGen.nextInt(WINDOW_WIDTH), 180);
-		temp.scale(0.2);
+		temp.scale(0.5);
 		return temp;
 	}
 
@@ -170,7 +174,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 	public GImage makeRottenApple() {
 		GImage temp = new GImage("rottenapple.png", rottenappleGen.nextInt(WINDOW_WIDTH), 180);
-		temp.scale(0.2);
+		temp.scale(0.5);
 		return temp;
 	}
 
@@ -283,6 +287,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 	@Override
 	public void showContents() {
 		program.add(basketbackground);
+		
 		program.add(basket);
 		program.add(baskettop);
 		appleDown.start();
