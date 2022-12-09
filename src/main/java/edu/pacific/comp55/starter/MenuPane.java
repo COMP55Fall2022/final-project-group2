@@ -14,7 +14,7 @@ public class MenuPane extends GraphicsPane {
 	private GButton start;
 	private GButton quit;
 	private GImage background;
-	private GLabel title;
+	//private GLabel title;
 
 	public MenuPane(MainApplication app) {
 		super();
@@ -24,17 +24,17 @@ public class MenuPane extends GraphicsPane {
 		start.setFillColor(Color.GREEN);
 		quit.setFillColor(Color.RED);
 		background = new GImage("2.png", 0, 0);
-		title = new GLabel("SAYA'S BIG ADVENTURE", 300, 300);
-		title.setFont("TimesRoman");
-		title.scale(5, 5);
-		title.setColor(Color.BLUE);
+		//title = new GLabel("SAYA'S BIG ADVENTURE", 300, 300);
+		//title.setFont("TimesRoman");
+		//title.scale(5, 5);
+		//title.setColor(Color.BLUE);
 		displayGameObjectContents();
 		
 	}
 	
 	public void displayGameObjectContents() {
 		program.add(background);
-		program.add(title);
+		//program.add(title);
 		program.add(start);
 		program.add(quit);
 	}
@@ -61,7 +61,7 @@ public class MenuPane extends GraphicsPane {
 		if (obj == start) {
 			//program.switchToTTT();
 			//program.switchToMouse();
-			program.switchToScene2();
+			program.switchToScene1();
 		}
 		else if (obj == quit){
 			System.exit(0);
