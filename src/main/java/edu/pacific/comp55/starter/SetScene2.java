@@ -119,12 +119,12 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == cont) {
-			removebuttons();
+			hideContents();
 			program.switchToCrow();
 		}
 		
 		if (obj == exit) {
-			
+			hideContents();
 			program.switchToMenu();
 		}
 	}

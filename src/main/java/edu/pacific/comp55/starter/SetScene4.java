@@ -74,7 +74,12 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 	}
 	@Override
 	public void hideContents() {
+		removebuttons();
 		program.remove(scene4);
+		program.remove(dog3);
+		program.remove(basket);
+		program.remove(saaya);
+		program.remove(apple);
 		//program.remove();
 	}
 
@@ -118,8 +123,12 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == cont) {
-			removebuttons();
+			hideContents();
 			program.switchToBasket();
+		}
+		if(obj == exit) {
+			hideContents();
+			program.switchToMenu();
 		}
 	
 	}

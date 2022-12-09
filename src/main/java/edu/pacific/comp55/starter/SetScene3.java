@@ -127,8 +127,12 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == cont) {
-			removebuttons();
+			hideContents();
 			program.switchToTTT();
+		}
+		if(obj == exit) {
+			hideContents();
+			program.switchToMenu();
 		}
 
 	}

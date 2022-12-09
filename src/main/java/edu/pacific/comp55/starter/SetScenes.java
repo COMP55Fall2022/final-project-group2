@@ -115,7 +115,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == cont) {
-			removebuttons();
+			hideContents();
 			program.switchToMouse();
 		}
 		
