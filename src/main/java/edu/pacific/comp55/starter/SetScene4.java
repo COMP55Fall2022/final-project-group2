@@ -177,3 +177,4 @@ public class SetScene4 extends GraphicsPane implements ActionListener {
 		program.remove(exit);
 	}
 }
+
