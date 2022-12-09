@@ -28,6 +28,8 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 	private AudioPlayer mapSound;
 	private static final String MUSIC_FOLDER = "sounds";
 	private static final String SOUND_FILE = "Running On Leaves.mp3";
+	private static final String SONG_FILE = "Merry Go - Silent Film Light - Kevin MacLeod.mp3";
+	private static final String[] SOUND_FILES = {"Dog Barking.mp3", "Cowbell Ringing.mp3", "Congrats v2.mp3"};
 	// Timers needed for scene 3
 	private boolean treetimerstart = false;
 	Timer barntimer = new Timer(40, this);
@@ -68,12 +70,14 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		cont.setFillColor(Color.GREEN);
 		exit = new GButton("Main Menu", 455, 550, 100, 100);
 		exit.setFillColor(Color.RED);
+		
 	}
 
 	// if we win the game we switch to scene3
 	@Override
 	public void showContents() {
 		setScene3();
+		mapSound.playSound(MUSIC_FOLDER, SONG_FILE);
 	}
 
 	@Override
@@ -86,6 +90,8 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		program.remove(cont);
 		program.remove(treescreen);
 		program.remove(mapGif);
+		mapSound.stopSound(MUSIC_FOLDER, SOUND_FILES[2]);
+		mapSound.stopSound(MUSIC_FOLDER, SONG_FILE);
 	}
 
 	public void setScene3() {
@@ -108,6 +114,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 			dog2text = new GImage("dog2text.png", 350, 550);
 			dog2text.scale(0.5);
 			program.add(dog2text);
+			mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[0]);
 			dog2timer.start();
 		}
 		
@@ -115,6 +122,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 			barntext = new GImage("barntext.png", 200, 200);
 			barntext.scale(0.5);
 			program.add(barntext);
+			mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[1]);
 			barntimer.start();
 		}
 		
@@ -123,7 +131,10 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 			treescreen.scale(0.5);
 			program.add(treescreen);
 			treetimer.start();
+			mapSound.playSound(MUSIC_FOLDER, SOUND_FILES[2]);
 			treetimerstart = true;
+			mapSound.stopSound(MUSIC_FOLDER, SOUND_FILES[0]);
+			mapSound.stopSound(MUSIC_FOLDER, SOUND_FILES[1]);
 		}
 		
 		if (obj == cont) {
