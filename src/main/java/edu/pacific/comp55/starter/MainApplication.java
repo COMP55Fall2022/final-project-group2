@@ -75,17 +75,20 @@ public class MainApplication extends GraphicsApplication {
 	}
 
 	public void switchToMenu() {
+		menu = new MenuPane(this);
 		playRandomSound();
 		count++;
 		switchToScreen(menu);
 	}
 
 	public void switchToSome() {
+		somePane = new SomePane(this);
 		playRandomSound();
 		switchToScreen(somePane);
 	}
 	
 	public void switchToTTT() {
+		tictactoe = new TTTGraphics(this);
 		playRandomSound();
 		count++;
 		switchToScreen(tictactoe);

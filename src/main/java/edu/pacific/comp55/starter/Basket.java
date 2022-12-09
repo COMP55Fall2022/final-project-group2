@@ -122,7 +122,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 		// lostgame
 		crowlost = new GImage("crowlost.png", 350, 200);
 		crowlost.scale(0.5);
-		tryagain = new GButton("Try again", 655, 500, 100, 100);
+		tryagain = new GButton("Try Again", 655, 500, 100, 100);
 		tryagain.setFillColor(Color.green);
 
 		// helpbutton

@@ -46,7 +46,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 		cont = new GButton("Continue", 655, 500, 100, 100);
 		cont.setFillColor(Color.GREEN);
-		exit = new GButton("Exit", 455, 500, 100, 100);
+		exit = new GButton("Main Menu", 455, 500, 100, 100);
 		exit.setFillColor(Color.RED);
 		
 		clickprompt = new GImage("clickprompt.png", 200, 240);

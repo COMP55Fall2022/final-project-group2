@@ -61,7 +61,7 @@ public class MenuPane extends GraphicsPane {
 		if (obj == start) {
 			//program.switchToTTT();
 			//program.switchToMouse();
-			program.switchToScene5();
+			program.switchToScene1();
 		}
 		else if (obj == quit){
 			System.exit(0);

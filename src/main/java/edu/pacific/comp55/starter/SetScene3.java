@@ -65,7 +65,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		//buttons 
 		cont = new GButton("Continue", 655, 550, 100, 100);
 		cont.setFillColor(Color.GREEN);
-		exit = new GButton("Exit", 455, 550, 100, 100);
+		exit = new GButton("Main Menu", 455, 550, 100, 100);
 		exit.setFillColor(Color.RED);
 	}
 

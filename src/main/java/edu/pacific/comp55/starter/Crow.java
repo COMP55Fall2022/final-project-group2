@@ -82,14 +82,14 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		//loostgame
 		crowlost = new GImage("crowlost.png",350, 200);
 		crowlost.scale(0.5);
-		tryagain = new GButton("Try again", 655, 500, 100, 100);
-		mainmenue = new GButton("Main menue", 455, 500, 100, 100);
+		tryagain = new GButton("Try Again", 655, 500, 100, 100);
+		mainmenue = new GButton("Main Menu", 455, 500, 100, 100);
 		tryagain.setFillColor(Color.GREEN);
 		mainmenue.setFillColor(Color.RED);
 		
 		//wingame
 		crowin = new GImage("crowin.png", 350,200);
-		scene1 = new GButton("Next scene", 655, 500, 100, 100);
+		scene1 = new GButton("Continue", 655, 500, 100, 100);
 		scene1.setFillColor(Color.GREEN);
 		crowin.scale(0.5);
 
@@ -123,7 +123,7 @@ public class Crow extends GraphicsPane implements ActionListener, KeyListener {
 		helpbutton = new GImage("helpbutton.png", 1150, 25);
 		helpbutton.scale(0.25);
 		crowinstructions = new GImage("crowinstructions.png",350, 100);
-		newbutton = new GButton("Continue game", 655, 500, 100, 100);
+		newbutton = new GButton("Continue", 655, 500, 100, 100);
 		newbutton.setFillColor(Color.GREEN);
 
 
