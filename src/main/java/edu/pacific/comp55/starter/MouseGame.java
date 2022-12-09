@@ -66,9 +66,9 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 		score.scale(5);
 		score.setColor(Color.white);
 		//trying to add instructions
-		startBoard = new GImage("mouseinstructions.png",247,147);
-		startBoardInstructionsBackground = new GImage("mousebg.png",0 ,0);
-		startBoard.scale(1.1);
+		startBoard = new GImage("mouseinstructions.png",0,0);
+		//startBoardInstructionsBackground = new GImage("mousebg.png",0 ,0);
+		//startBoard.scale(1.1);
 		
 		isGameRunning = false;
 		lastUpdatedTime = 0;
@@ -291,7 +291,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	private void displayStartButton() {
 		startButton = new GButton("START", 600, 625, 100, 100);
 		startButton.setFillColor(Color.GREEN);
-		program.add(startBoardInstructionsBackground);
+		//program.add(startBoardInstructionsBackground);
 		program.add(startBoard);
 		program.add(startButton);
 	}
@@ -323,7 +323,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 				if(obj == startButton) {
 					program.remove(startButton);
 					program.remove(startBoard);
-					program.remove(startBoardInstructionsBackground);
+					//program.remove(startBoardInstructionsBackground);
 					this.startGame();
 					return;
 				}
