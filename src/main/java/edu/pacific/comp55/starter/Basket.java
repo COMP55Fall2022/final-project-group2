@@ -144,7 +144,7 @@ public class Basket extends GraphicsPane implements ActionListener, KeyListener 
 
 	public GImage makeApple() {
 		GImage temp = new GImage("apple.png", appleGen.nextInt(WINDOW_WIDTH), 180);
-		temp.scale(0.25);
+		temp.scale(0.2);
 		return temp;
 	}
 
