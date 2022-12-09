@@ -403,7 +403,7 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 	public boolean wingame() {
 		if(points >= 100) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
