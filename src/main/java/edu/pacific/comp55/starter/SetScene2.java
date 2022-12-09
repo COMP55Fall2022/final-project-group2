@@ -17,6 +17,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 	private GImage scene2;
 	private static final String MUSIC_FOLDER = "sounds";
 	private static final String SOUND_FILE = "Running On Leaves.mp3";
+	private static final String EFFECTS_LIST[] = {"crowCaw.mp3", "Power Tool Electrical Buzz.mp3", "Slide Whistle.mp3"};
 	private static final String SONG_FILE = "Cowboy Sting - Kevin MacLeod.mp3";
 	
 	//GImages needed for scene 2
@@ -110,7 +111,8 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 			telePoletext = new GImage("telePoletext.png", 100, 100);
 			telePoletext.scale(0.5);
 			program.add(telePoletext);
-			telePoletimer.start();
+			mapSound.playSound(MUSIC_FOLDER, EFFECTS_LIST[1]);
+			telePoletimer.start();	
 		}
 		
 		if (obj == crow) {
@@ -118,6 +120,7 @@ public class SetScene2 extends GraphicsPane implements ActionListener {
 			crowscreen.scale(0.5);
 			program.add(crowscreen);
 			crowtimer.start();
+			mapSound.playSound(MUSIC_FOLDER, EFFECTS_LIST[0]);
 			crowtimerstart = true;
 		}
 		
