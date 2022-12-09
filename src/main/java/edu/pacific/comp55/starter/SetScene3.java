@@ -164,7 +164,7 @@ public class SetScene3 extends GraphicsPane implements ActionListener {
 		
 		if (source == barntimer) {
 			dialogueCountdown2++;
-			if (dialogueCountdown > 100) {
+			if (dialogueCountdown2 > 100) {
 				program.remove(barntext);
 				dialogueCountdown2 = 0;
 				barntimer.stop();
