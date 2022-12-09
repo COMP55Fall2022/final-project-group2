@@ -16,6 +16,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 
 	//GImages needed for scene 1
 	private GImage roses;
+	private GImage clickprompt;
 	private GImage rosesdialogue;
 	private GImage blueflower;
 	private GImage blueflowertext;
@@ -24,11 +25,13 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	private GButton cont;
 	private GButton exit;
 	
+	
 	//Timers needed for scene 1
 	private boolean suntimerstart = false;
 	Timer rosestimer = new Timer(40, this);
 	Timer blueflowertimer = new Timer(40, this);
 	Timer suntimer = new Timer(40, this);
+	Timer clickprompttimer = new Timer(40, this);
 	
 	int dialogueCountdown = 0;
 	
@@ -46,6 +49,10 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		exit = new GButton("Exit", 455, 500, 100, 100);
 		exit.setFillColor(Color.RED);
 		
+		clickprompt = new GImage("clickprompt.png", 200, 240);
+		clickprompt.scale(0.75);
+
+		
 	}
 	
 	
@@ -54,6 +61,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	@Override
 	public void showContents() {
 		setScene1();
+		clickprompttimer.start();
 	}
 	@Override
 	public void hideContents() {
@@ -89,7 +97,7 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		
 		
 		if (obj == sun) {
-			sunscreen = new GImage("sunscreen.png", 350, 200);
+			sunscreen = new GImage("sunscreen.png", 350, 150);
 			sunscreen.scale(0.5);
 			program.add(sunscreen);
 			suntimer.start();
@@ -111,6 +119,8 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent g) {
 		Object source = g.getSource();
+		
+		
 		if (source == rosestimer) {
 			dialogueCountdown++;
 			System.out.println(dialogueCountdown);
@@ -118,6 +128,17 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 				program.remove(rosesdialogue);
 				dialogueCountdown = 0;
 				rosestimer.stop();
+			}
+		}
+		
+		if (source == clickprompttimer) {
+			program.add(clickprompt);
+			dialogueCountdown++;
+			System.out.println(dialogueCountdown);
+			if (dialogueCountdown > 100) {
+				program.remove(clickprompt);
+				dialogueCountdown = 0;
+				clickprompttimer.stop();
 			}
 		}
 		
