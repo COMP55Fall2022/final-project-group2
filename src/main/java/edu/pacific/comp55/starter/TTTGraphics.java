@@ -238,6 +238,7 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 
 	private void exitGame() {
 		System.out.println("need to add code to move on to next mini-game?");
+		hideContents();
 		program.switchToScene4();
 	}
 	
