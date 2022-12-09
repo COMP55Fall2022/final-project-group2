@@ -67,7 +67,11 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	public void hideContents() {
 		program.remove(scene1);
 		program.remove(roses);
+		program.remove(blueflower);
+		program.remove(sun);
+		program.remove(clickprompt);
 		removebuttons();
+		clickprompttimer.stop();
 		program.remove(sunscreen);
 	}
 	public void setScene1() {
@@ -82,6 +86,10 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 	public void mousePressed(MouseEvent e) {
 		GObject obj = program.getElementAt(e.getX(), e.getY());
 		
+		if(obj == clickprompt || obj != clickprompt) {
+			clickprompttimer.stop();
+			program.remove(clickprompt);
+		}
 		if (obj == roses && !suntimerstart) {
 			rosesdialogue = new GImage("rosesdialogue.png", 65, 200);
 			program.add(rosesdialogue);
@@ -110,6 +118,8 @@ public class SetScenes extends GraphicsPane implements ActionListener {
 		}
 		
 		if (obj == exit) {
+			removebuttons();
+			hideContents();
 			program.switchToMenu();
 		}
 	

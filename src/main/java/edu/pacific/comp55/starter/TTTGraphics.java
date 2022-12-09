@@ -41,14 +41,14 @@ public class TTTGraphics extends GraphicsPane implements ActionListener {
 		board.setupBoard();
 		messageShowing = false;
 		crowin = new GImage("crowin.png", 350, 200);
-		scene1 = new GButton("Next scene", 655, 500, 100, 100);
+		scene1 = new GButton("Continue", 655, 500, 100, 100);
 		scene1.setFillColor(Color.GREEN);
 		crowin.scale(0.5);
-		mainmenue = new GButton("Main menue", 455, 500, 100, 100);
+		mainmenue = new GButton("Main Menu", 455, 500, 100, 100);
 		mainmenue.setFillColor(Color.red);
 		crowlost = new GImage("crowlost.png", 350, 200);
 		crowlost.scale(0.5);
-		tryagain = new GButton("Try again", 655, 500, 100, 100);
+		tryagain = new GButton("Try Again", 655, 500, 100, 100);
 		tryagain.setFillColor(Color.green);
 	}
 
