@@ -185,13 +185,14 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 			lastUpdatedTime = currentTime;
 		} else {
 			System.out.println("cancelling timer....");
-			mouseMovement.cancel();
 			this.handleGameOver();
 		}
 	}
 	
 	private void handleGameOver() {
 		System.out.println("GAME IS OVER. Take Next Action....");
+		this.isGameRunning = false;
+		mouseMovement.cancel();
 		if(wingame() == true) {
 			program.add(crowin);
 			program.add(scene1);
@@ -365,6 +366,9 @@ public class MouseGame extends GraphicsPane implements ActionListener{
 					}
 					program.remove(g);
 					mouseList.remove(gm);
+					if(this.wingame()) {
+						this.handleGameOver();
+					}
 					break;
 				}
 			}
